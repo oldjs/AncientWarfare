@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="refresh" content="0; url=https://docs.qq.com/aio/DQVVjVlpYUlZqQ2JI">
+    <title id="dynamic-title">WorldBox AncientWarfare Mod 世界盒子春秋模组官网</title>
+    <meta name="description" id="dynamic-description" content="AncientWarfare Mod Document 世界盒子春秋模组官网 ">
+    <script>
+        function getQueryParam(param) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
+        }
+
+        document.addEventListener("DOMContentLoaded", function() {
+            const queryParam = getQueryParam('q');
+            if (queryParam) {
+                const titleElement = document.getElementById('dynamic-title');
+                const descriptionElement = document.getElementById('dynamic-description');
+                
+                titleElement.textContent = `关于 "${queryParam}" 的信息 - 欢迎访问Ancient Warfare mod`;
+                descriptionElement.setAttribute('content', `发现更多关于 "${queryParam}" 的相关信息，Ancient Warfare mod daily build is now available`);
+            }
+        });
+    </script>
+</head>
+<body>
+    <p>Ancient Warfare....</p>
+</body>
+</html>
