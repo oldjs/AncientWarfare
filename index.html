@@ -4,11 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="msvalidate.01" content="1D318605B178A64B63BD3C1F1D2D36C0" />
-    <meta http-equiv="refresh" content="3; url=https://docs.qq.com/aio/DQVVjVlpYUlZqQ2JI">
-    <title id="dynamic-title">WorldBox AncientWarfare Mod 世界盒子春秋王朝模组官网</title>
-    <meta name="description" id="dynamic-description" content="AncientWarfare Mod Document 世界盒子春秋模组官网">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <title>WorldBox AncientWarfare Mod 世界盒子春秋王朝模组官网</title>
     <style>
         body {
             font-family: 'Roboto', sans-serif;
@@ -29,22 +25,50 @@
             max-width: 90%;
             width: 300px;
         }
-        h1 {
-            color: #5C67F2;
-            font-size: 1.5em;
-        }
-        p {
-            font-size: 0.9em;
-            color: #666;
-            margin: 10px 0;
-        }
-        a {
-            color: #5C67F2;
+        .download-btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #5C67F2;
+            color: white;
             text-decoration: none;
+            border-radius: 5px;
+            margin-top: 20px;
+            cursor: pointer;
+        }
+        .hidden {
+            display: none;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 450px;
+            border-radius: 8px;
+        }
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
             font-weight: bold;
         }
-        a:hover {
-            text-decoration: underline;
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
         }
         @keyframes spin {
             0% { transform: rotate(0deg); }
@@ -59,41 +83,120 @@
             animation: spin 2s linear infinite;
             margin: 0 auto;
         }
+                .button {
+            display: inline-block;
+            padding: 10px 5px;
+            margin-top: 20px;
+            margin-right: 10px;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 16px;
+            color: #ffffff;
+            cursor: pointer;
+            outline: none;
+            position: relative;
+        }
+        .button-document {
+            background-color: #28a745;
+        }
+        .button-steam {
+            background-color: #4b5cc4;
+        }
+        .button-steam::before {
+            content: '';
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 20px;
+            height: 20px;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="%23ffffff" d="M11.979 11.977q2.318 0 3.965-1.647t1.647-3.965-1.647-3.965-3.965-1.647-3.965 1.647-1.647 3.965 1.647 3.965 3.965 1.647zM15.627 11.977q0-1.334-0.891-2.224t-2.224-0.891-2.224 0.891-0.891 2.224 0.891 2.224 2.224 0.891 2.224-0.891 0.891-2.224zM21.577 0q-1.667 0-3.302 0.651t-2.848 1.832-1.832 2.848-0.651 3.302 0.651 3.302 1.832 2.848 2.848 1.832 3.302 0.651 3.302-0.651 2.848-1.832 1.832-2.848 0.651-3.302-0.651-3.302-1.832-2.848-2.848-1.832-3.302-0.651zM22.577 8.577v15.046q0 0.797-0.563 1.359t-1.359 0.563h-15.046q-0.797 0-1.359-0.563t-0.563-1.359v-15.046q0-0.797 0.563-1.359t1.359-0.563h15.046q0.797 0 1.359 0.563t0.563 1.359z"/></svg>');
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+        /* 添加响应式样式 */
         @media (max-width: 600px) {
-            h1 {
-                font-size: 1.2em;
-            }
-            p {
-                font-size: 0.8em;
+            .button {
+                width: 100%;
+                margin-right: 0;
+                margin-bottom: 10px;
             }
         }
     </style>
-    <script>
-        function getQueryParam(param) {
-            const urlParams = new URLSearchParams(window.location.search);
-            return urlParams.get(param);
-        }
-
-        document.addEventListener("DOMContentLoaded", function() {
-            const queryParam = getQueryParam('q');
-            if (queryParam) {
-                const titleElement = document.getElementById('dynamic-title');
-                const descriptionElement = document.getElementById('dynamic-description');
-                
-                titleElement.textContent = `关于 "${queryParam}" 的信息 - 欢迎访问Ancient Warfare mod`;
-                descriptionElement.setAttribute('content', `发现更多关于 "${queryParam}" 的相关信息，Ancient Warfare mod daily build is now available`);
-            }
-        });
-    </script>
 </head>
 <body>
 <div class="container">
     <h1>WorldBox AncientWarfare Mod</h1>
-    <div class="loading-spinner"></div>
-    <p>Loading installation tutorial, please wait...</p>
-    <p>If your browser does not automatically jump, please click the following link to continue:</p>
-    <a href="https://docs.qq.com/aio/DQVVjVlpYUlZqQ2JI">Installation Tutorial Link</a>
+    <button class="download-btn" onclick="startDownload()">下载懒人包/Download AncientWarfare</button>
+        <a href="https://docs.qq.com/aio/DQVVjVlpYUlZqQ2JI?p=Dxr1PWzEFxA9mQnJ6U0lES" class="button button-document">春秋模组文档/AncientWarfare Document</a>
+    <a href="https://store.steampowered.com" class="button button-steam">Steam</a>
+    <div class="loading-spinner hidden"></div>
+    <p class="hidden">正在下载，请稍候...</p>
 </div>
+
+<!-- The Modal -->
+<div id="myModal" class="modal">
+    <!-- Modal content -->
+    <div class="modal-content">
+        <span class="close">&times;</span>
+         
+<p><strong><font color="red">必读声明</font></strong></p>
+ 
+        <p>解压后打开worldbox.exe 游戏设置打开“实验模式”</p>
+        <p>路径不能有中文 不然无法加载Mod</p>
+        <p>推荐路径：</p>
+        <p>D:Games/世界盒子</p>
+        <p>D:游戏/worldbox</p>
+        <p>D:Games/worldbox</p>
+        
+        <p>After extracting, open worldbox.exe and enable "Experimental Mode" in the game settings.</p>
+            <p>The path must not contain Chinese characters, otherwise the Mod cannot be loaded.</p>
+            <p>Recommended paths:</p>
+            <p>D:Games/World Box</p>
+            <p>D:Games/WorldBox</p>
+            <p>D:Games/WorldBox</p>
+    </div>
+</div>
+ 
+<script>
+    var modal = document.getElementById("myModal");
+    var span = document.getElementsByClassName("close")[0];
+
+    function startDownload() {
+        // 显示加载动画
+        document.querySelector('.loading-spinner').classList.remove('hidden');
+        document.querySelector('p').classList.remove('hidden');
+
+        // 创建一个临时的a元素来触发下载
+        var downloadLink = document.createElement('a');
+        downloadLink.href = 'https://cloud.wujiyan.cc/f/r6elsW/worldbox_AncientWarfare.zip';
+        downloadLink.download = ''; // 如果需要指定下载文件名，可以在这里设置
+        document.body.appendChild(downloadLink);
+        downloadLink.click(); // 模拟点击事件以触发下载
+        document.body.removeChild(downloadLink); // 移除a元素
+
+        // 假设下载需要3秒钟，之后隐藏加载动画并显示模态框
+        setTimeout(function() {
+            document.querySelector('.loading-spinner').classList.add('hidden');
+            document.querySelector('p').classList.add('hidden');
+            modal.style.display = "block";
+        }, 3000);
+    }
+
+    // 当用户点击关闭按钮时，关闭模态框
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    // 当用户点击模态框外部时，关闭模态框
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+</script>
+ 
 </body>
 </html>
  
