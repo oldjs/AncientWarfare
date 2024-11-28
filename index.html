@@ -134,13 +134,13 @@
         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* 更细腻的阴影 */
     }
     .update-title {
-        font-size: 1.8em; /* 更大的标题 */
+        font-size: 1.5em; /* 更大的标题 */
         font-weight: 300; /* 更细的字体 */
         margin-bottom: 20px;
         letter-spacing: 1px; /* 字间距 */
     }
     .update-info {
-        font-size: 1.2em; /* 更大的信息字体 */
+        font-size: 1em; /* 更大的信息字体 */
         margin-bottom: 20px;
         line-height: 1.6; /* 更好的行距 */
     }
@@ -164,7 +164,7 @@
 <body>
 <div class="container">
 <div class="update-box">
-        <div class="update-title">最近更新/UpdateLog</div>
+        <div class="update-title">Update</div>
         <div class="update-info" id="updateInfo">
             <!-- 更新信息将通过JavaScript动态填充 -->
         </div>
@@ -214,7 +214,7 @@ function fetchUpdateData() {
             const updateInfo = `Version: ${data.version}<br>${data.content}`;
             document.getElementById('updateInfo').innerHTML = updateInfo;
             document.getElementById('downloadLink').href = data.url;
-            document.getElementById('downloadLink').textContent = `Download ${data.version} / Download Version${data.version}`;
+            document.getElementById('downloadLink').textContent = `Download ${data.version}`;
         })
         .catch(error => console.error('Error fetching update data:', error));
 }
