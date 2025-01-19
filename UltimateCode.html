@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>终极密码猜数字小游戏 Ultimate Code Game</title>
+        <meta name="description" content="终极密码猜数字小游戏">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <style>
+        body {
+            font-family: 'Press Start 2P', sans-serif;
+            background: linear-gradient(135deg, #000000, #222222);
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        .container {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+            text-align: center;
+            width: 350px;
+            position: relative;
+        }
+
+        h1 {
+            font-size: 32px;
+            margin-bottom: 20px;
+            color: #ff6347;
+            text-shadow: 2px 2px 4px #000000;
+        }
+
+        p {
+            margin: 10px 0;
+            font-size: 16px;
+        }
+
+        .options {
+            display: flex;
+            justify-content: space-around;
+            margin: 30px 0;
+            position: relative;
+        }
+
+        .options button {
+            padding: 15px;
+            width: 22%;
+            background: linear-gradient(135deg, #ff6347, #ff8c00);
+            color: #ffffff;
+            border: 2px solid #ff6347;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            box-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            transition: background 0.3s ease, transform 0.3s ease, opacity 0.3s ease;
+        }
+
+        .options button:disabled {
+            background: #888;
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+
+        .options button:hover:not(:disabled) {
+            background: linear-gradient(135deg, #ff8c00, #ff6347);
+        }
+
+        .options button.fade-out {
+            opacity: 0;
+            transform: translate(20px, 20px);
+            pointer-events: none;
+        }
+
+        #result {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #ff6347;
+            text-shadow: 2px 2px 4px #000000;
+        }
+
+        .dialog {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0,0,0,0.8);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+            text-align: center;
+            color: #ffffff;
+            font-size: 18px;
+            text-shadow: 1px 1px 2px #000000;
+            animation: shake 0.5s ease;
+        }
+
+        .dialog p {
+            margin: 0;
+        }
+
+        @keyframes shake {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            25% { transform: translate(-50%, -50%) rotate(-5deg); }
+            50% { transform: translate(-50%, -50%) rotate(5deg); }
+            75% { transform: translate(-50%, -50%) rotate(-5deg); }
+            100% { transform: translate(-50%, -50%) rotate(0deg); }
+        }
+
+        .new-option-enter {
+            animation: drop-in 0.5s ease;
+        }
+
+        @keyframes drop-in {
+            from { transform: translateY(-100%); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        @keyframes fadeInOut {
+            0% { opacity: 0; transform: scale(0.8); }
+            10% { opacity: 1; transform: scale(1); }
+            90% { opacity: 1; transform: scale(1); }
+            100% { opacity: 0; transform: scale(0.8); }
+        }
+
+        .animate-fadeInOut {
+            animation: fadeInOut 2s ease-in-out;
+        }
+
+        .score {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 24px;
+            color: #ffd700;
+            text-shadow: 2px 2px 4px #000000;
+        }
+
+        .leaderboard {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.8);
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 5px 10px rgba(0,0,0,0.5);
+            width: 300px;
+            text-align: left;
+            transition: opacity 0.5s ease;
+        }
+
+        .leaderboard.hide {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .leaderboard h2 {
+            font-size: 18px;
+            margin: 0 0 10px 0;
+            color: #ff6347;
+            text-shadow: 1px 1px 2px #000000;
+        }
+
+        .leaderboard ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .leaderboard li {
+            font-size: 14px;
+            margin: 5px 0;
+            color: #ffffff;
+            text-shadow: 1px 1px 2px #000000;
+        }
+
+        .leaderboard li span {
+            color: #ffd700;
+        }
+    </style>
+</head>
+<body>
+    <div class="score" id="score">⭐x300</div>
+    <div class="container">
+        <h1>终极密码游戏</h1>
+        <p>当前范围: <span id="range">1 - 100</span></p>
+        <p>玩家剩余猜测次数: <span id="player-guesses-left">4</span></p>
+        <div class="options" id="options"></div>
+        <div id="result"></div>
+    </div>
+
+    <div class="leaderboard" id="leaderboard">
+        <h2>排行榜</h2>
+        <ul>
+            <li>1. 🇺🇸hydo <span>⭐x92660</span></li>
+            <li>2. 🇨🇳gamer123 <span>⭐x78452</span></li>
+            <li>3. 🇨🇳小叶我不菜 <span>⭐x75210</span></li>
+            <li>4. 🇯🇵mamad <span>⭐x72116</span></li>
+            <li>5. 🇨🇳掌盟人频道 <span>⭐x72060</span></li>
+        </ul>
+    </div>
+
+    <div id="dialog" class="dialog" style="display: none;">
+        <p id="dialog-text"></p>
+    </div>
+
+    <audio id="guess-sound" src="https://www.soundjay.com/button/button-3.mp3"></audio>
+    <audio id="win-sound" src="https://www.soundjay.com/misc/success-bell-01.mp3"></audio>
+    <audio id="lose-sound" src="https://www.soundjay.com/misc/fail-buzzer-01.mp3"></audio>
+    <audio id="bg-music" src="https://www.soundjay.com/misc/sci-fi-ambient-1.mp3" loop></audio>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            let min = 1;
+            let max = 100;
+            let playerGuessesLeft = 4;
+            let ultimatePassword = Math.floor(Math.random() * 100) + 1;
+            let players = ['玩家', '机器人1', '机器人2', '机器人3'];
+            let currentPlayerIndex = 0;
+            let isBotGuessing = false; // 标记机器人是否正在猜测
+
+            // 初始化得分
+            let score = localStorage.getItem('score') ? parseInt(localStorage.getItem('score')) : 300;
+            const scoreElement = document.getElementById('score');
+            scoreElement.textContent = `⭐x${score}`;
+
+            const rangeElement = document.getElementById('range');
+            const playerGuessesLeftElement = document.getElementById('player-guesses-left');
+            const optionsElement = document.getElementById('options');
+            const resultElement = document.getElementById('result');
+            const dialog = document.getElementById('dialog');
+            const dialogText = document.getElementById('dialog-text');
+            const guessSound = document.getElementById('guess-sound');
+            const winSound = document.getElementById('win-sound');
+            const loseSound = document.getElementById('lose-sound');
+            const bgMusic = document.getElementById('bg-music');
+            const leaderboard = document.getElementById('leaderboard');
+
+            // 播放背景音乐
+            bgMusic.play();
+
+            // 点击页面任意位置隐藏排行榜
+            document.addEventListener('click', () => {
+                leaderboard.classList.add('hide');
+            });
+
+            function updateGameState() {
+                rangeElement.textContent = `${min} - ${max}`;
+                playerGuessesLeftElement.textContent = playerGuessesLeft;
+            }
+
+            function updateScore(points) {
+                score += points;
+                if (score < 1) score = 1; // 最低1分
+                localStorage.setItem('score', score);
+                scoreElement.textContent = `⭐x${score}`;
+            }
+
+            function showDialog(message) {
+                dialogText.textContent = message;
+                dialog.style.display = 'block';
+                dialog.classList.add('animate-fadeInOut');
+                setTimeout(() => {
+                    dialog.style.display = 'none';
+                    dialog.classList.remove('animate-fadeInOut');
+                }, 1000);
+            }
+
+            function generateOptions() {
+                const options = [];
+                for (let i = 0; i < 4; i++) {
+                    const option = Math.floor(Math.random() * (max - min + 1)) + min;
+                    options.push(option);
+                }
+                return options;
+            }
+
+            function updateOptions() {
+                const newOptions = generateOptions();
+                const oldOptions = optionsElement.querySelectorAll('button');
+                oldOptions.forEach(button => {
+                    button.classList.add('fade-out');
+                    button.addEventListener('transitionend', () => {
+                        button.remove();
+                    });
+                });
+                setTimeout(() => {
+                    newOptions.forEach((option, index) => {
+                        const button = document.createElement('button');
+                        button.textContent = option;
+                        button.style.animation = 'drop-in 0.5s ease';
+                        button.addEventListener('click', () => handleGuess(option));
+                        optionsElement.appendChild(button);
+                    });
+                }, 300);
+            }
+
+            function checkGuess(guess, player) {
+                if (guess === ultimatePassword) {
+                    resultElement.textContent = `${player} 猜中了终极密码 ${ultimatePassword}，失败！`;
+                    if (player === '玩家') {
+                        loseSound.play();
+                        updateScore(-3); // 失败扣3分
+                        setTimeout(() => {
+                            alert('你失败了！请重新开始游戏。');
+                            resetGame();
+                        }, 1000);
+                    } else {
+                        winSound.play();
+                        updateScore(3); // 获胜加3分
+                        setTimeout(() => {
+                            alert('游戏结束，机器人失败！');
+                            resetGame();
+                        }, 1000);
+                    }
+                    return true;
+                } else {
+                    if (guess < ultimatePassword) {
+                        min = guess + 1;
+                    } else {
+                        max = guess - 1;
+                    }
+                    if (player === '玩家') {
+                        playerGuessesLeft--;
+                        updateScore(-1); // 猜错扣1分
+                    }
+                    updateGameState();
+                    if (playerGuessesLeft === 0) {
+                        resultElement.textContent = '玩家没有剩余猜测次数，游戏结束！';
+                        loseSound.play();
+                        updateScore(-3); // 失败扣3分
+                        setTimeout(() => {
+                            alert('游戏结束！');
+                            resetGame();
+                        }, 1000);
+                        return true;
+                    }
+                    return false;
+                }
+            }
+
+            function resetGame() {
+                min = 1;
+                max = 100;
+                playerGuessesLeft = 4;
+                ultimatePassword = Math.floor(Math.random() * 100) + 1;
+                currentPlayerIndex = 0;
+                updateGameState();
+                resultElement.textContent = '';
+                updateOptions();
+            }
+
+            function disableOptions() {
+                const buttons = optionsElement.querySelectorAll('button');
+                buttons.forEach(button => {
+                    button.disabled = true;
+                });
+            }
+
+            function enableOptions() {
+                const buttons = optionsElement.querySelectorAll('button');
+                buttons.forEach(button => {
+                    button.disabled = false;
+                });
+            }
+
+            function handleGuess(guess) {
+                if (isBotGuessing) return; // 如果机器人正在猜测，禁止玩家点击
+                guessSound.play();
+                showDialog(`玩家 猜测了 ${guess}`);
+                if (checkGuess(guess, '玩家')) {
+                    return;
+                }
+                currentPlayerIndex = 1; // 下一个为机器人1
+                disableOptions(); // 禁用待选项按钮
+                botRound();
+            }
+
+            function botRound() {
+                if (currentPlayerIndex < players.length) {
+                    isBotGuessing = true; // 标记机器人正在猜测
+                    setTimeout(() => {
+                        const botGuess = Math.floor(Math.random() * (max - min + 1)) + min;
+                        guessSound.play();
+                        showDialog(`${players[currentPlayerIndex]} 猜测了 ${botGuess}`);
+                        if (checkGuess(botGuess, players[currentPlayerIndex])) {
+                            isBotGuessing = false; // 重置标记
+                            return;
+                        }
+                        currentPlayerIndex++;
+                        botRound();
+                    }, 2500);
+                } else {
+                    currentPlayerIndex = 0;
+                    isBotGuessing = false; // 重置标记
+                    enableOptions(); // 启用待选项按钮
+                    updateOptions();
+                }
+            }
+
+            updateGameState();
+            updateOptions();
+        });
+    </script>
+</body>
+</html>
