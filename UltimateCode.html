@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>终极密码猜数字小游戏 Ultimate Code Game</title>
-        <meta name="description" content="终极密码猜数字小游戏">
+    <title>AI终极密码猜数字游戏 AI Ultimate Code Game</title>
+    <meta name="description" content="AI终极密码猜数字游戏 AI Ultimate Code Game">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <style>
         body {
@@ -18,7 +18,7 @@
             margin: 0;
             overflow: hidden;
         }
-                .overlay {
+        .overlay {
             display: none;
             position: fixed;
             top: 0;
@@ -30,7 +30,6 @@
             align-items: center;
             z-index: 9999999;
         }
-
         .popup {
             background-color: #000;
             color: #fff;
@@ -41,35 +40,30 @@
             animation: fadeIn 0.5s;
             max-width: 400px;
             width: 90%;
-            z-index: 9999999; 
+            z-index: 9999999;
         }
-
         .popup h2 {
             margin-top: 0;
             font-size: 24px;
-             z-index: 9999999; 
+            z-index: 9999999;
         }
-
         .popup p {
             font-size: 18px;
             line-height: 1.6;
-                        z-index: 9999999; 
+            z-index: 9999999;
         }
-
         .popup .note {
             font-size: 16px;
             color: #ffcc00;
             margin-top: 15px;
         }
-
         .popup .buttons {
             display: flex;
             justify-content: center;
             gap: 10px;
             margin-top: 20px;
-                        z-index: 9999999; 
+            z-index: 9999999;
         }
-
         .popup button {
             background-color: #ffcc00;
             border: none;
@@ -80,30 +74,24 @@
             cursor: pointer;
             transition: background-color 0.3s ease;
         }
-
         .popup button:hover {
             background-color: #e6b800;
         }
-
         .popup button.secondary {
             background-color: #444;
             color: #fff;
         }
-
         .popup button.secondary:hover {
             background-color: #555;
         }
-
         @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
         }
-
         @keyframes fadeOut {
             from { opacity: 1; }
             to { opacity: 0; }
         }
-
         .fade-out {
             animation: fadeOut 0.5s;
         }
@@ -116,26 +104,22 @@
             width: 350px;
             position: relative;
         }
-
         h1 {
             font-size: 32px;
             margin-bottom: 20px;
             color: #ff6347;
             text-shadow: 2px 2px 4px #000000;
         }
-
         p {
             margin: 10px 0;
             font-size: 16px;
         }
-
         .options {
             display: flex;
             justify-content: space-around;
             margin: 30px 0;
             position: relative;
         }
-
         .options button {
             padding: 15px;
             width: 22%;
@@ -148,23 +132,19 @@
             box-shadow: 2px 2px 4px rgba(0,0,0,0.5);
             transition: background 0.3s ease, transform 0.3s ease, opacity 0.3s ease;
         }
-
         .options button:disabled {
             background: #888;
             cursor: not-allowed;
             opacity: 0.6;
         }
-
         .options button:hover:not(:disabled) {
             background: linear-gradient(135deg, #ff8c00, #ff6347);
         }
-
         .options button.fade-out {
             opacity: 0;
             transform: translate(20px, 20px);
             pointer-events: none;
         }
-
         #result {
             margin-top: 20px;
             font-size: 18px;
@@ -172,7 +152,6 @@
             color: #ff6347;
             text-shadow: 2px 2px 4px #000000;
         }
-
         .dialog {
             position: fixed;
             top: 50%;
@@ -188,11 +167,9 @@
             text-shadow: 1px 1px 2px #000000;
             animation: shake 0.5s ease;
         }
-
         .dialog p {
             margin: 0;
         }
-
         @keyframes shake {
             0% { transform: translate(-50%, -50%) rotate(0deg); }
             25% { transform: translate(-50%, -50%) rotate(-5deg); }
@@ -200,27 +177,22 @@
             75% { transform: translate(-50%, -50%) rotate(-5deg); }
             100% { transform: translate(-50%, -50%) rotate(0deg); }
         }
-
         .new-option-enter {
             animation: drop-in 0.5s ease;
         }
-
         @keyframes drop-in {
             from { transform: translateY(-100%); opacity: 0; }
             to { transform: translateY(0); opacity: 1; }
         }
-
         @keyframes fadeInOut {
             0% { opacity: 0; transform: scale(0.8); }
             10% { opacity: 1; transform: scale(1); }
             90% { opacity: 1; transform: scale(1); }
             100% { opacity: 0; transform: scale(0.8); }
         }
-
         .animate-fadeInOut {
             animation: fadeInOut 2s ease-in-out;
         }
-
         .score {
             position: absolute;
             top: 20px;
@@ -229,7 +201,6 @@
             color: #ffd700;
             text-shadow: 2px 2px 4px #000000;
         }
-
         .leaderboard {
             position: absolute;
             bottom: 20px;
@@ -243,39 +214,89 @@
             text-align: left;
             transition: opacity 0.5s ease;
         }
-
         .leaderboard.hide {
             opacity: 0;
             pointer-events: none;
         }
-
         .leaderboard h2 {
             font-size: 18px;
             margin: 0 0 10px 0;
             color: #ff6347;
             text-shadow: 1px 1px 2px #000000;
         }
-
         .leaderboard ul {
             list-style: none;
             padding: 0;
             margin: 0;
         }
-
         .leaderboard li {
             font-size: 14px;
             margin: 5px 0;
             color: #ffffff;
             text-shadow: 1px 1px 2px #000000;
         }
-
         .leaderboard li span {
             color: #ffd700;
+        }
+        
+        .guess-results {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 10px;
+            border-radius: 5px;
+            color: #00ff00; /* 绿色字体 */
+            font-size: 16px;
+            text-align: left;
+            z-index: 1000;
+            max-height: 1000px;
+            overflow-y: auto;
+        }
+        .guess-results ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .guess-results li {
+            margin: 5px 0;
+            animation: slideUp 0.5s ease;
+        }
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+       
+        .custom-alert {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            color: #fff;
+            text-align: center;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+            z-index: 9999999;
+            animation: fadeIn 0.5s;
+        }
+        .custom-alert button {
+            background-color: #ffcc00;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            color: #000;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .custom-alert button:hover {
+            background-color: #e6b800;
         }
     </style>
 </head>
 <body>
-
     <div class="overlay" id="overlay">
         <div class="popup" id="popup">
             <h2>温馨提示</h2>
@@ -302,250 +323,35 @@
     </div>
     <div class="score" id="score">⭐x300</div>
     <div class="container">
-        <h1>终极密码游戏</h1>
+        <h1>AI终极密码游戏</h1>
         <p>当前范围: <span id="range">1 - 100</span></p>
         <p>玩家剩余猜测次数: <span id="player-guesses-left">4</span></p>
         <div class="options" id="options"></div>
         <div id="result"></div>
     </div>
-
     <div class="leaderboard" id="leaderboard">
         <h2>排行榜</h2>
         <ul>
-            <li>1. 🇺🇸hydo <span>⭐x92660</span></li>
-            <li>2. 🇨🇳gamer123 <span>⭐x78452</span></li>
-            <li>3. 🇨🇳小叶我不菜 <span>⭐x75210</span></li>
-            <li>4. 🇯🇵mamad <span>⭐x72116</span></li>
-            <li>5. 🇨🇳掌盟人频道 <span>⭐x72060</span></li>
+            <li>1. 🇺🇸hydo <span>⭐x92985</span></li>
+            <li>2. 🇨🇳小叶我不菜 <span>⭐x78489</span></li>
+            <li>3. 🇨🇳bilibili掌盟人频道 <span>⭐x75286</span></li>
+            <li>4. 🇯🇵mamad <span>⭐x71120</span></li>
+            <li>5. 🇺🇾23T <span>⭐x56950</span></li>
         </ul>
     </div>
-
     <div id="dialog" class="dialog" style="display: none;">
         <p id="dialog-text"></p>
     </div>
-
+    <!-- 新增：猜测结果显示区域 -->
+    <div id="guess-results" class="guess-results">
+        <ul id="guess-list"></ul>
+    </div>
     <audio id="guess-sound" src="https://www.soundjay.com/button/button-3.mp3"></audio>
     <audio id="win-sound" src="https://www.soundjay.com/misc/success-bell-01.mp3"></audio>
     <audio id="lose-sound" src="https://www.soundjay.com/misc/fail-buzzer-01.mp3"></audio>
     <audio id="bg-music" src="https://www.soundjay.com/misc/sci-fi-ambient-1.mp3" loop></audio>
-
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            let min = 1;
-            let max = 100;
-            let playerGuessesLeft = 4;
-            let ultimatePassword = Math.floor(Math.random() * 100) + 1;
-            let players = ['玩家', '机器人1', '机器人2', '机器人3'];
-            let currentPlayerIndex = 0;
-            let isBotGuessing = false; // 标记机器人是否正在猜测
-
-            // 初始化得分
-            let score = localStorage.getItem('score') ? parseInt(localStorage.getItem('score')) : 300;
-            const scoreElement = document.getElementById('score');
-            scoreElement.textContent = `⭐x${score}`;
-
-            const rangeElement = document.getElementById('range');
-            const playerGuessesLeftElement = document.getElementById('player-guesses-left');
-            const optionsElement = document.getElementById('options');
-            const resultElement = document.getElementById('result');
-            const dialog = document.getElementById('dialog');
-            const dialogText = document.getElementById('dialog-text');
-            const guessSound = document.getElementById('guess-sound');
-            const winSound = document.getElementById('win-sound');
-            const loseSound = document.getElementById('lose-sound');
-            const bgMusic = document.getElementById('bg-music');
-            const leaderboard = document.getElementById('leaderboard');
-
-            // 播放背景音乐
-            bgMusic.play();
-
-            // 点击页面任意位置隐藏排行榜
-            document.addEventListener('click', () => {
-              //  leaderboard.classList.add('hide');
-            });
-
-            function updateGameState() {
-                rangeElement.textContent = `${min} - ${max}`;
-                playerGuessesLeftElement.textContent = playerGuessesLeft;
-            }
-
-            function updateScore(points) {
-                score += points;
-                if (score < 1) score = 1; // 最低1分
-                localStorage.setItem('score', score);
-                scoreElement.textContent = `⭐x${score}`;
-            }
-
-            function showDialog(message) {
-                dialogText.textContent = message;
-                dialog.style.display = 'block';
-                dialog.classList.add('animate-fadeInOut');
-                setTimeout(() => {
-                    dialog.style.display = 'none';
-                    dialog.classList.remove('animate-fadeInOut');
-                }, 1000);
-            }
-
-            function generateOptions() {
-                const options = [];
-                for (let i = 0; i < 4; i++) {
-                    const option = Math.floor(Math.random() * (max - min + 1)) + min;
-                    options.push(option);
-                }
-                return options;
-            }
-
-            function updateOptions() {
-                const newOptions = generateOptions();
-                const oldOptions = optionsElement.querySelectorAll('button');
-                oldOptions.forEach(button => {
-                    button.classList.add('fade-out');
-                    button.addEventListener('transitionend', () => {
-                        button.remove();
-                    });
-                });
-                setTimeout(() => {
-                    newOptions.forEach((option, index) => {
-                        const button = document.createElement('button');
-                        button.textContent = option;
-                        button.style.animation = 'drop-in 0.5s ease';
-                        button.addEventListener('click', () => handleGuess(option));
-                        optionsElement.appendChild(button);
-                    });
-                    
-                }, 300);
-            }
-
-            function checkGuess(guess, player) {
-                if (guess === ultimatePassword) {
-                    resultElement.textContent = `${player} 猜中了终极密码 ${ultimatePassword}，失败！`;
-                    if (player === '玩家') {
-                        loseSound.play();
-                        updateScore(-3); // 失败扣3分
-                        setTimeout(() => {
-                            alert('你失败了！请重新开始游戏。');
-                            resetGame();
-                        }, 1000);
-                    } else {
-                        winSound.play();
-                        updateScore(3); // 获胜加3分
-                        setTimeout(() => {
-                            alert('游戏结束，机器人失败！');
-                            resetGame();
-                        }, 1000);
-                    }
-                    return true;
-                } else {
-                    if (guess < ultimatePassword) {
-                        min = guess + 1;
-                    } else {
-                        max = guess - 1;
-                    }
-                    if (player === '玩家') {
-                        playerGuessesLeft--;
-                        updateScore(-1); // 猜错扣1分
-                    }
-                    updateGameState();
-                    if (playerGuessesLeft === 0) {
-                        resultElement.textContent = '玩家没有剩余猜测次数，游戏结束！';
-                        loseSound.play();
-                        updateScore(-3); // 失败扣3分
-                        setTimeout(() => {
-                            alert('游戏结束！');
-                            resetGame();
-                        }, 1000);
-                        return true;
-                    }
-                    return false;
-                }
-            }
-
-            function resetGame() {
-                min = 1;
-                max = 100;
-                playerGuessesLeft = 4;
-                ultimatePassword = Math.floor(Math.random() * 100) + 1;
-                currentPlayerIndex = 0;
-                updateGameState();
-                resultElement.textContent = '';
-                updateOptions();
-            }
-
-            function disableOptions() {
-                const buttons = optionsElement.querySelectorAll('button');
-                buttons.forEach(button => {
-                    button.disabled = true;
-                });
-            }
-
-            function enableOptions() {
-                const buttons = optionsElement.querySelectorAll('button');
-                buttons.forEach(button => {
-                    button.disabled = false;
-                });
-            }
-
-            function handleGuess(guess) {
-                if (isBotGuessing) return; // 如果机器人正在猜测，禁止玩家点击
-                guessSound.play();
-                showDialog(`玩家 猜测了 ${guess}`);
-                if (checkGuess(guess, '玩家')) {
-                    return;
-                }
-                currentPlayerIndex = 1; // 下一个为机器人1
-                disableOptions(); // 禁用待选项按钮
-                botRound();
-                leaderboard.classList.add('hide');
-            }
-
-            function botRound() {
-                if (currentPlayerIndex < players.length) {
-                    isBotGuessing = true; // 标记机器人正在猜测
-                    setTimeout(() => {
-                        const botGuess = Math.floor(Math.random() * (max - min + 1)) + min;
-                        guessSound.play();
-                        showDialog(`${players[currentPlayerIndex]} 猜测了 ${botGuess}`);
-                        if (checkGuess(botGuess, players[currentPlayerIndex])) {
-                            isBotGuessing = false; // 重置标记
-                            return;
-                        }
-                        currentPlayerIndex++;
-                        botRound();
-                    }, 2500);
-                } else {
-                    currentPlayerIndex = 0;
-                    isBotGuessing = false; // 重置标记
-                    enableOptions(); // 启用待选项按钮
-                    updateOptions();
-                }
-            }
-function showPopup() {
-            const overlay = document.getElementById('overlay');
-            const popup = document.getElementById('popup');
-            overlay.style.display = 'flex';
-            popup.classList.remove('fade-out');
-        }
-
-        
-        showPopup();
-        updateGameState();
-        updateOptions();
-        });
-        function closePopup() {
-            const overlay = document.getElementById('overlay');
-            const popup = document.getElementById('popup');
-            popup.classList.add('fade-out');
-            setTimeout(() => {
-                overlay.style.display = 'none';
-                
-            }, 500); // 淡出动画时间为0.5秒
-            
-            
-        }
-
-        function visitInternational() {
-            window.open('https://www.who.int', '_blank'); // 替换为国际智联的实际链接
-        }
+        const _0xd83e1f=_0x5746;(function(_0x39a95e,_0x4f3f5b){const _0x5c6b2b=_0x5746,_0x1db1e9=_0x39a95e();while(!![]){try{const _0x144644=-parseInt(_0x5c6b2b(0x14f))/0x1+-parseInt(_0x5c6b2b(0x12c))/0x2+parseInt(_0x5c6b2b(0x135))/0x3*(parseInt(_0x5c6b2b(0x160))/0x4)+-parseInt(_0x5c6b2b(0x12f))/0x5*(parseInt(_0x5c6b2b(0x13e))/0x6)+-parseInt(_0x5c6b2b(0x166))/0x7+-parseInt(_0x5c6b2b(0x159))/0x8+parseInt(_0x5c6b2b(0x147))/0x9*(parseInt(_0x5c6b2b(0x155))/0xa);if(_0x144644===_0x4f3f5b)break;else _0x1db1e9['push'](_0x1db1e9['shift']());}catch(_0x532285){_0x1db1e9['push'](_0x1db1e9['shift']());}}}(_0x436e,0x8b441),document[_0xd83e1f(0x13a)](_0xd83e1f(0x125),()=>{const _0x5d44de=_0xd83e1f;let _0x202d6d=0x1,_0x2e59aa=0x64,_0x9ec32e=0x4,_0x43c645=Math['floor'](Math[_0x5d44de(0x13d)]()*0x64)+0x1,_0x2ca954=['玩家','ChatGPT1o',_0x5d44de(0x12b),'Claude3.5'],_0x33c37a=0x0,_0x12439b=![],_0x279289=0x0,_0x591761=localStorage[_0x5d44de(0x162)](_0x5d44de(0x130))?parseInt(localStorage[_0x5d44de(0x162)](_0x5d44de(0x130))):0x12c;const _0x4d608c=document[_0x5d44de(0x131)](_0x5d44de(0x130));_0x4d608c[_0x5d44de(0x123)]='⭐x'+_0x591761;const _0x36e805=document['getElementById'](_0x5d44de(0x15f)),_0xc74415=document[_0x5d44de(0x131)]('player-guesses-left'),_0x4ba6b8=document['getElementById'](_0x5d44de(0x157)),_0x303742=document[_0x5d44de(0x131)]('result'),_0x21079f=document[_0x5d44de(0x131)](_0x5d44de(0x126)),_0x5d1f8c=document[_0x5d44de(0x131)](_0x5d44de(0x138)),_0x987012=document[_0x5d44de(0x131)](_0x5d44de(0x139)),_0x5d0c82=document[_0x5d44de(0x131)](_0x5d44de(0x13c)),_0x4d1f8b=document[_0x5d44de(0x131)](_0x5d44de(0x12e)),_0x4dcf11=document[_0x5d44de(0x131)]('bg-music'),_0x5b58ed=document[_0x5d44de(0x131)](_0x5d44de(0x14e)),_0x190ef0=document[_0x5d44de(0x131)](_0x5d44de(0x154));_0x4dcf11['play']();function _0x3d4a37(){const _0x365d99=_0x5d44de;_0x36e805[_0x365d99(0x123)]=_0x202d6d+'\x20-\x20'+_0x2e59aa,_0xc74415[_0x365d99(0x123)]=_0x9ec32e;}function _0x5dba04(_0xd7d5da){const _0x1a8043=_0x5d44de;_0x591761+=_0xd7d5da;if(_0x591761<0x1)_0x591761=0x1;localStorage[_0x1a8043(0x150)]('score',_0x591761),_0x4d608c[_0x1a8043(0x123)]='⭐x'+_0x591761;}function _0x481ade(_0x31d2d6){const _0x1d7bee=_0x5d44de;_0x5d1f8c[_0x1d7bee(0x123)]=_0x31d2d6,_0x21079f['style'][_0x1d7bee(0x127)]=_0x1d7bee(0x128),_0x21079f[_0x1d7bee(0x14a)][_0x1d7bee(0x146)](_0x1d7bee(0x129)),setTimeout(()=>{const _0x4bd5ec=_0x1d7bee;_0x21079f[_0x4bd5ec(0x12d)]['display']=_0x4bd5ec(0x15a),_0x21079f[_0x4bd5ec(0x14a)][_0x4bd5ec(0x158)]('animate-fadeInOut');},0x3e8);}function _0x2ec366(_0x82ab35,_0x229b28){const _0x3b0e11=_0x5d44de,_0x334c13=document[_0x3b0e11(0x122)]('li');_0x334c13['textContent']=_0x82ab35+_0x3b0e11(0x167)+_0x229b28,_0x190ef0['appendChild'](_0x334c13),setTimeout(()=>{const _0x470ff9=_0x3b0e11;_0x334c13[_0x470ff9(0x14a)]['add'](_0x470ff9(0x133));},0xa);}function _0x51d203(){const _0x1887e4=_0x5d44de,_0x1ac6b3=[];for(let _0x37f49f=0x0;_0x37f49f<0x4;_0x37f49f++){const _0x3edad7=Math[_0x1887e4(0x15b)](Math['random']()*(_0x2e59aa-_0x202d6d+0x1))+_0x202d6d;_0x1ac6b3[_0x1887e4(0x145)](_0x3edad7);}return _0x1ac6b3;}function _0x174247(){const _0xb56a77=_0x5d44de,_0x1ad0bd=_0x51d203(),_0x208926=_0x4ba6b8['querySelectorAll'](_0xb56a77(0x140));_0x208926['forEach'](_0x270bca=>{const _0x509533=_0xb56a77;_0x270bca['classList'][_0x509533(0x146)](_0x509533(0x132)),_0x270bca[_0x509533(0x13a)](_0x509533(0x12a),()=>{const _0x67d49c=_0x509533;_0x270bca[_0x67d49c(0x158)]();});}),setTimeout(()=>{const _0x251e6e=_0xb56a77;_0x1ad0bd[_0x251e6e(0x165)]((_0x5449e5,_0x4cf743)=>{const _0x229163=_0x251e6e,_0x10e25c=document[_0x229163(0x122)](_0x229163(0x140));_0x10e25c[_0x229163(0x123)]=_0x5449e5,_0x10e25c[_0x229163(0x12d)][_0x229163(0x13b)]=_0x229163(0x143),_0x10e25c['addEventListener']('click',()=>_0x3ea84b(_0x5449e5)),_0x4ba6b8['appendChild'](_0x10e25c);});},0x12c);}function _0x185faa(_0x2c6418,_0x54a3c7){const _0x14e1b2=_0x5d44de;return _0x2c6418===_0x43c645?(_0x303742[_0x14e1b2(0x123)]=_0x54a3c7+_0x14e1b2(0x137)+_0x43c645+'，失败！',_0x54a3c7==='玩家'?(_0x4d1f8b[_0x14e1b2(0x148)](),_0x5dba04(-0x3),_0x279289=0x0,_0x264aa5(_0x14e1b2(0x15c),_0x2c9da2)):(_0x5d0c82[_0x14e1b2(0x148)](),_0x5dba04(0x3),_0x279289++,_0x279289>=0x3&&(_0x5dba04(0xa),_0x264aa5('恭喜你获得\x20'+_0x279289+_0x14e1b2(0x156))),_0x264aa5('游戏结束，AI失败！',_0x2c9da2)),!![]):(_0x2c6418<_0x43c645?_0x202d6d=_0x2c6418+0x1:_0x2e59aa=_0x2c6418-0x1,_0x54a3c7==='玩家'&&(_0x9ec32e--,_0x5dba04(-0x1)),_0x3d4a37(),_0x9ec32e===0x0&&(_0x303742[_0x14e1b2(0x123)]=_0x14e1b2(0x153),_0x4d1f8b[_0x14e1b2(0x148)](),_0x5dba04(-0x3),_0x279289=0x0,_0x264aa5(_0x14e1b2(0x13f),_0x2c9da2)),![]);_0x5b58ed[_0x14e1b2(0x14a)][_0x14e1b2(0x146)](_0x14e1b2(0x15e));}function _0x2c9da2(){const _0x24ab34=_0x5d44de;_0x202d6d=0x1,_0x2e59aa=0x64,_0x9ec32e=0x4,_0x43c645=Math[_0x24ab34(0x15b)](Math[_0x24ab34(0x13d)]()*0x64)+0x1,_0x33c37a=0x0,_0x3d4a37(),_0x303742['textContent']='',_0x174247(),_0x190ef0['innerHTML']='';}function _0x1777b5(){const _0x53c486=_0x5d44de,_0x5be5de=_0x4ba6b8[_0x53c486(0x141)](_0x53c486(0x140));_0x5be5de[_0x53c486(0x165)](_0x319f1d=>{const _0x562572=_0x53c486;_0x319f1d[_0x562572(0x152)]=!![];});}function _0xf4e895(){const _0x87143b=_0x5d44de,_0x1d29e6=_0x4ba6b8[_0x87143b(0x141)](_0x87143b(0x140));_0x1d29e6[_0x87143b(0x165)](_0xeea8a1=>{const _0x1d529a=_0x87143b;_0xeea8a1[_0x1d529a(0x152)]=![];});}function _0x3ea84b(_0x63c746){const _0x35e8de=_0x5d44de;if(_0x12439b)return;_0x987012[_0x35e8de(0x148)](),_0x2ec366('玩家',_0x63c746);if(_0x185faa(_0x63c746,'玩家'))return;_0x33c37a=0x1,_0x1777b5(),_0x3f3451(),_0x5b58ed['classList']['add'](_0x35e8de(0x15e));}function _0x3f3451(){const _0x3c64ac=_0x5d44de;if(_0x33c37a<_0x2ca954[_0x3c64ac(0x134)]){_0x12439b=!![];const _0x45eb81=Math['floor'](Math['random']()*(0xfa0-0x3e8+0x1))+0x3e8;setTimeout(()=>{const _0x41e92d=_0x3c64ac,_0x350fd2=Math[_0x41e92d(0x15b)](Math['random']()*(_0x2e59aa-_0x202d6d+0x1))+_0x202d6d;_0x987012['play'](),_0x2ec366(_0x2ca954[_0x33c37a],_0x350fd2);if(_0x185faa(_0x350fd2,_0x2ca954[_0x33c37a])){_0x12439b=![];return;}_0x33c37a++,_0x3f3451();},_0x45eb81);}else _0x33c37a=0x0,_0x12439b=![],_0xf4e895(),_0x174247();}function _0x3ab8df(){const _0x4899b5=_0x5d44de,_0x1a94cb=document[_0x4899b5(0x131)](_0x4899b5(0x161)),_0x284d58=document[_0x4899b5(0x131)](_0x4899b5(0x149));_0x1a94cb[_0x4899b5(0x12d)][_0x4899b5(0x127)]=_0x4899b5(0x144),_0x284d58[_0x4899b5(0x14a)][_0x4899b5(0x158)](_0x4899b5(0x132));}function _0x264aa5(_0x5868ef,_0x1c71ab){const _0x123677=_0x5d44de,_0x199831=document[_0x123677(0x122)](_0x123677(0x142));_0x199831['className']='custom-alert',_0x199831[_0x123677(0x14d)]=_0x123677(0x136)+_0x5868ef+_0x123677(0x151),document[_0x123677(0x14c)][_0x123677(0x164)](_0x199831),_0x1c71ab&&_0x199831[_0x123677(0x15d)](_0x123677(0x140))[_0x123677(0x13a)](_0x123677(0x14b),_0x1c71ab);}_0x3ab8df(),_0x3d4a37(),_0x174247();}));function _0x5746(_0x23a0ad,_0x25438e){const _0x436e10=_0x436e();return _0x5746=function(_0x5746e0,_0x554aa1){_0x5746e0=_0x5746e0-0x122;let _0x5a5920=_0x436e10[_0x5746e0];return _0x5a5920;},_0x5746(_0x23a0ad,_0x25438e);}function _0x436e(){const _0x4d1390=['floor','你失败了！请重新开始游戏。','querySelector','hide','range','996292LZSvfa','overlay','getItem','https://www.who.int','appendChild','forEach','4537694fBZeZN','\x20猜测了\x20','createElement','textContent','open','DOMContentLoaded','dialog','display','block','animate-fadeInOut','transitionend','DeepSeek3','744790gOBuGJ','style','lose-sound','5uJbJbV','score','getElementById','fade-out','slideUp','length','6HQNzdk','\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<p>','\x20猜中了终极密码\x20','dialog-text','guess-sound','addEventListener','animation','win-sound','random','1159068fTOYdt','游戏结束！','button','querySelectorAll','div','drop-in\x200.5s\x20ease','flex','push','add','90Ubrzsh','play','popup','classList','click','body','innerHTML','leaderboard','81914lkdYvp','setItem','</p>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<button\x20onclick=\x22this.parentElement.remove()\x22>确定</button>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20','disabled','玩家没有剩余猜测次数，游戏结束！','guess-list','2500380proBrx','\x20连胜，额外奖励\x2010\x20分！','options','remove','9058912lmAgRE','none'];_0x436e=function(){return _0x4d1390;};return _0x436e();}function closePopup(){const _0x593089=_0xd83e1f,_0x29907d=document[_0x593089(0x131)](_0x593089(0x161)),_0x5078af=document[_0x593089(0x131)](_0x593089(0x149));_0x5078af['classList'][_0x593089(0x146)]('fade-out'),setTimeout(()=>{const _0x330d01=_0x593089;_0x29907d[_0x330d01(0x12d)][_0x330d01(0x127)]=_0x330d01(0x15a);},0x1f4);}function visitInternational(){const _0x42953b=_0xd83e1f;window[_0x42953b(0x124)](_0x42953b(0x163),'_blank');}
     </script>
 </body>
 </html>
