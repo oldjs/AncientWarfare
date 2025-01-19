@@ -18,7 +18,95 @@
             margin: 0;
             overflow: hidden;
         }
+                .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            justify-content: center;
+            align-items: center;
+            z-index: 9999999;
+        }
 
+        .popup {
+            background-color: #000;
+            color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+            animation: fadeIn 0.5s;
+            max-width: 400px;
+            width: 90%;
+            z-index: 9999999; 
+        }
+
+        .popup h2 {
+            margin-top: 0;
+            font-size: 24px;
+             z-index: 9999999; 
+        }
+
+        .popup p {
+            font-size: 18px;
+            line-height: 1.6;
+                        z-index: 9999999; 
+        }
+
+        .popup .note {
+            font-size: 16px;
+            color: #ffcc00;
+            margin-top: 15px;
+        }
+
+        .popup .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+                        z-index: 9999999; 
+        }
+
+        .popup button {
+            background-color: #ffcc00;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            color: #000;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .popup button:hover {
+            background-color: #e6b800;
+        }
+
+        .popup button.secondary {
+            background-color: #444;
+            color: #fff;
+        }
+
+        .popup button.secondary:hover {
+            background-color: #555;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeOut {
+            from { opacity: 1; }
+            to { opacity: 0; }
+        }
+
+        .fade-out {
+            animation: fadeOut 0.5s;
+        }
         .container {
             background: rgba(0, 0, 0, 0.8);
             padding: 30px;
@@ -187,6 +275,31 @@
     </style>
 </head>
 <body>
+
+    <div class="overlay" id="overlay">
+        <div class="popup" id="popup">
+            <h2>温馨提示</h2>
+            <p>
+                本游戏与您的智力匹配：<br>
+                0⭐（极重度弱智）<br>
+                50⭐（智力障碍）<br>
+                100⭐（蠢）<br>
+                200⭐（白痴）<br>
+                300⭐（智力低下）<br>
+                500⭐（正常人）<br>
+                800⭐（聪明人）<br>
+                1000⭐（天才）<br>
+                2000⭐（超天才）
+            </p>
+            <p class="note">
+                如果您出现智力低下等问题，可以 <a href="https://cn.bing.com/search?q=%E6%88%91%E6%99%BA%E5%8A%9B%E5%A4%AA%E4%BD%8E%E4%BA%86%E6%80%8E%E4%B9%88%E5%8A%9E%E5%95%8A&qs=n&form=QBRE&sp=-1&lq=0&pq=%E6%88%91%E6%99%BA%E5%8A%9B%E5%A4%AA%E4%BD%8E%E4%BA%86%E6%80%8E%E4%B9%88%E5%8A%9E&sc=9-9&sk=&cvid=B8A508217C674FC2B94A14BFD676D1F5&ghsh=0&ghacc=0&ghpl=" target="_blank" style="color: #ffcc00; text-decoration: underline;">点这里</a> 寻求帮助。
+            </p>
+            <div class="buttons">
+                <button onclick="closePopup()">我知道了</button>
+                <button class="secondary" onclick="visitInternational()">国际智联</button>
+            </div>
+        </div>
+    </div>
     <div class="score" id="score">⭐x300</div>
     <div class="container">
         <h1>终极密码游戏</h1>
@@ -248,7 +361,7 @@
 
             // 点击页面任意位置隐藏排行榜
             document.addEventListener('click', () => {
-                leaderboard.classList.add('hide');
+              //  leaderboard.classList.add('hide');
             });
 
             function updateGameState() {
@@ -404,10 +517,33 @@
                     updateOptions();
                 }
             }
+function showPopup() {
+            const overlay = document.getElementById('overlay');
+            const popup = document.getElementById('popup');
+            overlay.style.display = 'flex';
+            popup.classList.remove('fade-out');
+        }
 
-            updateGameState();
-            updateOptions();
+        
+        showPopup();
+        updateGameState();
+        updateOptions();
         });
+        function closePopup() {
+            const overlay = document.getElementById('overlay');
+            const popup = document.getElementById('popup');
+            popup.classList.add('fade-out');
+            setTimeout(() => {
+                overlay.style.display = 'none';
+                
+            }, 500); // 淡出动画时间为0.5秒
+            
+            
+        }
+
+        function visitInternational() {
+            window.open('https://www.who.int', '_blank'); // 替换为国际智联的实际链接
+        }
     </script>
 </body>
 </html>
