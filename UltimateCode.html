@@ -412,6 +412,7 @@
                         button.addEventListener('click', () => handleGuess(option));
                         optionsElement.appendChild(button);
                     });
+                    
                 }, 300);
             }
 
@@ -494,6 +495,7 @@
                 currentPlayerIndex = 1; // 下一个为机器人1
                 disableOptions(); // 禁用待选项按钮
                 botRound();
+                leaderboard.classList.add('hide');
             }
 
             function botRound() {
