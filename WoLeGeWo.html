@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>我勒个我 - Wo Le Ge Wo</title>
+    <meta name="description" content="我勒个我 (Wo Le Ge Wo) 是一款类似羊了个羊的趣味小游戏，挑战你的反应速度和策略思维，快来体验吧！Wo Le Ge Wo is a fun mini-game similar to 'Sheep a Sheep', challenging your reaction speed and strategic thinking. Come and try it out!">
+    <style>
+        /* 全局样式 */
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #fffacd; /* 浅黄色背景 */
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            touch-action: none; /* 禁止默认触摸行为 */
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* 游戏板 */
+        #game-board {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* 方块样式 */
+        .tile {
+            position: absolute;
+            background-color: #ffcc99;
+            border: 2px solid #ff9966;
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 16px; /* 字体大小 */
+            cursor: pointer;
+            user-select: none;
+            transition: transform 0.2s, background-color 0.3s;
+        }
+
+        .tile:hover {
+            transform: scale(1.05);
+        }
+
+        .tile.selected {
+            background-color: #ffcc66;
+            border-color: #ff6600;
+        }
+
+        .tile.matched {
+            animation: fadeOut 0.5s forwards; /* 渐隐动画 */
+        }
+
+        @keyframes fadeOut {
+            0% { opacity: 1; transform: scale(1); }
+            100% { opacity: 0; transform: scale(0.5); }
+        }
+
+        .tile.hint {
+            animation: hintGlow 1s infinite;
+        }
+
+        @keyframes hintGlow {
+            0% { box-shadow: 0 0 10px #ff6600; }
+            50% { box-shadow: 0 0 20px #ff9966; }
+            100% { box-shadow: 0 0 10px #ff6600; }
+        }
+
+        /* 连线样式 */
+        #line {
+            position: absolute;
+            height: 4px;
+            background: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet);
+            transform-origin: left;
+            pointer-events: none;
+            border-radius: 3px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+        }
+
+        /* 分数和回合数 */
+        #score-panel {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            font-size: 18px;
+            color: #ff6600;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        /* 生命值 */
+        #lives {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 18px;
+            color: #ff6600;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        /* 提示按钮 */
+        #hint-button {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            padding: 8px 16px;
+            font-size: 14px;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            color: #fff;
+            background-color: #ff9966;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: opacity 0.3s;
+        }
+
+        #hint-button.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        /* 难度提示 */
+        #difficulty-alert {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 24px;
+            color: #ff0000;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            animation: zoomIn 1s forwards;
+            display: none;
+        }
+
+        @keyframes zoomIn {
+            0% { transform: translate(-50%, -50%) scale(0); }
+            100% { transform: translate(-50%, -50%) scale(1); }
+        }
+    </style>
+</head>
+<body>
+    <div id="score-panel">
+        分数: <span id="score">0</span> | 回合: <span id="round">1</span>
+    </div>
+    <div id="lives">❤️❤️❤️❤️❤️❤️</div>
+    <div id="game-board"></div>
+    <button id="hint-button">💡x3</button>
+    <div id="line"></div>
+    <div id="difficulty-alert">难度飙升！</div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const board = document.getElementById('game-board');
+            const line = document.getElementById('line');
+            const scorePanel = document.getElementById('score');
+            const roundPanel = document.getElementById('round');
+            const livesPanel = document.getElementById('lives');
+            const hintButton = document.getElementById('hint-button');
+            const difficultyAlert = document.getElementById('difficulty-alert');
+            let tiles = [];
+            let firstTile = null;
+            let isDragging = false;
+            let startX = 0, startY = 0;
+            let score = 0;
+            let round = 1;
+            let lives = 6; // 初始生命值
+            let hintCount = 3; // 提示次数
+            const basePairs = [
+                '😠', '😔', '😱', '😨', '😑', '😬', '😲', '😊', '😭', '😔',
+                '🤭', '🤣', '🤥', '🤪', '🥺', '🤧', '🥵', '🥴', '😵', '😬',
+                '😫', '🤗', '🤔', '😋', '🤡', '🤫', '🙄', '🤔', '😤', '😡',
+                '😘', '😍', '👿', '😏', '😰', '😶', '🥰', '🤩', '🤤', '🤮',
+                '🥵', '💩', '😇', '😆', '😅', '😀', '🖕🏻', '👉🏻', '☝🏻️', '👈🏻',
+                '👇🏻', '🇨🇳', '🇺🇸', '🇷🇺', '👎🏻', '👍🏻', '👂🏻', '🤜', '🤛', '🙏🏻',
+                '❤️', '🇯🇵', '🇰🇷', '🇬🇧', '🇨🇦', '🦙', '🐐', '🦌', '🐕', '🐩',
+                '🦮', '🐕‍🦺', '🐈', '🐈‍⬛', '🦤', '🦢', '🦜', '🦩', '🦚', '🦉',
+                '🦅', '🦆', '🐓', '🦃', '🦤', '🦦', '🦨', '🦡', '🦥', '🦫',
+                '🐁', '🐀', '🐿', '🦔', '🐾', '🦎', '🐉', '🦕', '🦖', '🐲',
+                '🌵', '🎄', '🌲', '🌳', '🌴', '🌱', '🌿', '☘️', '🍀', '🎍',
+                '🎋', '🍃', '🍂', '🍁', '🍄', '🌾', '💐', '🌷', '🌹', '🥀',
+                '🌺', '🌸', '🌼', '🌻', '🌞', '🌝', '🌛', '🌜', '🌚', '🌕',
+                '🌖', '🌗', '🌘', '🌑', '🌒', '🌓', '🌔', '🌙', '🌎', '🌍',
+                '🌏', '🪐', '💫', '⭐️', '🌟', '✨', '⚡️', '☄️', '💥', '🔥',
+                '🌪', '🌈', '☁️', '⛅️', '🌤', '🌥', '🌦', '🌧', '⛈', '🌩',
+                '🌨', '❄️', '☃️', '⛄️', '🌬', '💨', '💧', '💦', '☔️', '☂️',
+                '🌊', '🌫', '🍏', '🍎', '🍐', '🍊', '🍋', '🍌', '🍉', '🍇',
+                '🍓', '🍈', '🍒', '🍑', '🥭', '🍍', '🥥', '🥝', '🍅', '🍆',
+                '🥑', '🥦', '🥬', '🥒', '🌶', '🌽', '🥕', '🧄', '🧅', '🥔',
+                '🍠', '🥐', '🥯', '🍞', '🥖', '🥨', '🧀', '🥚', '🍳', '🧈',
+                '🥞', '🧇', '🥓', '🥩', '🍗', '🍖', '🦴', '🌭', '🍔', '🍟',
+                '🍕', '🥪', '🥙', '🧆', '🌮', '🌯', '🥗', '🥘', '🥫', '🍝',
+                '🍜', '🍲', '🍛', '🍣', '🍱', '🥟', '🍤', '🍙', '🍚', '🍘',
+                '🍥', '🥠', '🥮', '🍢', '🍡', '🍧', '🍨', '🍦', '🥧', '🧁',
+                '🍰', '🎂', '🍮', '🍭', '🍬', '🍫', '🍿', '🍩', '🍪', '🌰',
+                '🥜', '🍯', '🥛', '🍼', '☕️', '🍵', '🧃', '🥤', '🍶', '🍺',
+                '🍻', '🥂', '🍷', '🥃', '🍸', '🍹', '🧉', '🍾', '🧊', '🥄',
+                '🍴', '🍽', '🥣', '🥡', '🥢', '🧂', '⚽️', '🏀', '🏈', '⚾️',
+                '🥎', '🎾', '🏐', '🏉', '🥏', '🎱', '🪀', '🏓', '🏸', '🏒',
+                '🏑', '🥍', '🏏', '🪃', '🥅', '⛳️', '🪁', '🏹', '🎣', '🤿',
+                '🥊', '🥋', '🎽', '🛹', '🛷', '⛸', '🥌', '🎿', '⛷', '🏂',
+                '🪂', '🏋️‍♀️', '🏋️‍♂️', '🤼‍♀️', '🤼‍♂️', '🤸‍♀️', '🤸‍♂️', '⛹️‍♀️', '⛹️‍♂️', '🤺',
+                '🤾‍♀️', '🤾‍♂️', '🏌️‍♀️', '🏌️‍♂️', '🏇', '🧘‍♀️', '🧘‍♂️', '🏄‍♀️', '🏄‍♂️', '🏊‍♀️',
+                '🏊‍♂️', '🤽‍♀️', '🤽‍♂️', '🚣‍♀️', '🚣‍♂️', '🧗‍♀️', '🧗‍♂️', '🚵‍♀️', '🚵‍♂️', '🚴‍♀️',
+                '🚴‍♂️', '🛀', '🛌', '🧑‍🤝‍🧑', '👭', '👫', '👬', '💏', '💑', '👪',
+                '👨‍👩‍👦', '👨‍👩‍👧', '👨‍👩‍👧‍👦', '👨‍👩‍👦‍👦', '👨‍👩‍👧‍👧', '👨‍👨‍👦', '👨‍👨‍👧', '👨‍👨‍👧‍👦', '👨‍👨‍👦‍👦', '👨‍👨‍👧‍👧',
+                '👩‍👩‍👦', '👩‍👩‍👧', '👩‍👩‍👧‍👦', '👩‍👩‍👦‍👦', '👩‍👩‍👧‍👧', '👨‍👦', '👨‍👦‍👦', '👨‍👧', '👨‍👧‍👦', '👨‍👧‍👧',
+                '👩‍👦', '👩‍👦‍👦', '👩‍👧', '👩‍👧‍👦', '👩‍👧‍👧', '🗣', '👤', '👥', '👣', '🧳',
+                '🌂', '☂️', '🧵', '🧶', '👓', '🕶', '🥽', '🥼', '🦺', '👔',
+                '👕', '👖', '🧣', '🧤', '🧥', '🧦', '👗', '👘', '🥻', '🩱',
+                '🩲', '🩳', '👙', '👚', '👛', '👜', '👝', '🛍', '🎒', '👞',
+                '👟', '🥾', '🥿', '👠', '👡', '🩰', '👢', '👑', '👒', '🎩',
+                '🎓', '🧢', '⛑', '📿', '💄', '💍', '💎', '🐵', '🦍', '🦧',
+                '🐶', '🐕', '🦮', '🐕‍🦺', '🐩', '🐺', '🦊', '🦝', '🐱', '🐈',
+                '🐈‍⬛', '🦁', '🐯', '🐅', '🐆', '🐴', '🐎', '🦄', '🦓', '🦌',
+                '🐮', '🐂', '🐃', '🐄', '🐷', '🐖', '🐗', '🐽', '🐏', '🐑',
+                '🐐', '🐪', '🐫', '🦙', '🦒', '🐘', '🦏', '🦛', '🐭', '🐁',
+                '🐀', '🐹', '🐰', '🐇', '🐿', '🦔', '🦇', '🐻', '🐨', '🐼',
+                '🦥', '🦦', '🦨', '🦘', '🦡', '🐾', '🦃', '🐔', '🐓', '🐣',
+                '🐤', '🐥', '🐦', '🦅', '🦆', '🦢', '🦉', '🦩', '🦚', '🦜',
+                '🐸', '🐊', '🐢', '🦎', '🐍', '🐲', '🐉', '🦕', '🦖', '🐳',
+                '🐋', '🐬', '🐟', '🐠', '🐡', '🦈', '🐙', '🐚', '🦀', '🦞',
+                '🦐', '🦑', '🦪', '🐌', '🦋', '🐛', '🐜', '🐝', '🐞', '🦗',
+                '🕷', '🕸', '🦂', '🦟', '🦠', '💐', '🌸', '💮', '🏵', '🌹',
+                '🥀', '🌺', '🌻', '🌼', '🌷', '🌱', '🌲', '🌳', '🌴', '🌵',
+                '🌾', '🌿', '☘️', '🍀', '🍁', '🍂', '🍃', '🍇', '🍈', '🍉',
+                '🍊', '🍋', '🍌', '🍍', '🍎', '🍏', '🍐', '🍑', '🍒', '🍓',
+                '🥝', '🍅', '🥥', '🥑', '🍆', '🥔', '🥕', '🌽', '🌶', '🥒',
+                '🥬', '🥦', '🧄', '🧅', '🍄', '🥜', '🌰', '🍞', '🥐', '🥖',
+                '🥨', '🥯', '🥞', '🧇', '🧀', '🍖', '🍗', '🥩', '🥓', '🍔',
+                '🍟', '🍕', '🌭', '🥪', '🌮', '🌯', '🥙', '🧆', '🥚', '🍳',
+                '🥘', '🍲', '🥣', '🥗', '🍿', '🧈', '🧂', '🥫', '🍱', '🍘',
+                '🍙', '🍚', '🍛', '🍜', '🍝', '🍠', '🍢', '🍣', '🍤', '🍥',
+                '🥮', '🍡', '🥟', '🥠', '🥡', '🦀', '🦞', '🦐', '🦑', '🦪',
+                '🍦', '🍧', '🍨', '🍩', '🍪', '🎂', '🍰', '🧁', '🥧', '🍫',
+                '🍬', '🍭', '🍮', '🍯', '🍼', '🥛', '☕️', '🍵', '🍶', '🍾',
+                '🍷', '🍸', '🍹', '🍺', '🍻', '🥂', '🥃', '🥄', '🍴', '🍽',
+                '🥣', '🥡', '🥢', '🧂', '⚽️', '🏀', '🏈', '⚾️', '🥎', '🎾',
+                '🏐', '🏉', '🥏', '🎱', '🪀', '🏓', '🏸', '🏒', '🏑', '🥍',
+                '🏏', '🪃', '🥅', '⛳️', '🪁', '🏹', '🎣', '🤿', '🥊', '🥋',
+                '🎽', '🛹', '🛷', '⛸', '🥌', '🎿', '⛷', '🏂', '🪂', '🏋️‍♀️',
+                '🏋️‍♂️', '🤼‍♀️', '🤼‍♂️', '🤸‍♀️', '🤸‍♂️', '⛹️‍♀️', '⛹️‍♂️', '🤺', '🤾‍♀️', '🤾‍♂️',
+                '🏌️‍♀️', '🏌️‍♂️', '🏇', '🧘‍♀️', '🧘‍♂️', '🏄‍♀️', '🏄‍♂️', '🏊‍♀️', '🏊‍♂️', '🤽‍♀️',
+                '🤽‍♂️', '🚣‍♀️', '🚣‍♂️', '🧗‍♀️', '🧗‍♂️', '🚵‍♀️', '🚵‍♂️', '🚴‍♀️', '🚴‍♂️', '🛀',
+                '🛌', '🧑‍🤝‍🧑', '👭', '👫', '👬', '💏', '💑', '👪', '👨‍👩‍👦', '👨‍👩‍👧',
+                '👨‍👩‍👧‍👦', '👨‍👩‍👦‍👦', '👨‍👩‍👧‍👧', '👨‍👨‍👦', '👨‍👨‍👧', '👨‍👨‍👧‍👦', '👨‍👨‍👦‍👦', '👨‍👨‍👧‍👧', '👩‍👩‍👦', '👩‍👩‍👧',
+                '👩‍👩‍👧‍👦', '👩‍👩‍👦‍👦', '👩‍👩‍👧‍👧', '👨‍👦', '👨‍👦‍👦', '👨‍👧', '👨‍👧‍👦', '👨‍👧‍👧', '👩‍👦', '👩‍👦‍👦',
+                '👩‍👧', '👩‍👧‍👦', '👩‍👧‍👧', '🗣', '👤', '👥', '👣', '🧳', '🌂', '☂️',
+                '🧵', '🧶', '👓', '🕶', '🥽', '🥼', '🦺', '👔', '👕', '👖',
+                '🧣', '🧤', '🧥', '🧦', '👗', '👘', '🥻', '🩱', '🩲', '🩳',
+                '👙', '👚', '👛', '👜', '👝', '🛍', '🎒', '👞', '👟', '🥾',
+                '🥿', '👠', '👡', '🩰', '👢', '👑', '👒', '🎩', '🎓', '🧢',
+                '⛑', '📿', '💄', '💍', '💎', '🐵', '🦍', '🦧', '🐶', '🐕',
+                '🦮', '🐕‍🦺', '🐩', '🐺', '🦊', '🦝', '🐱', '🐈', '🐈‍⬛', '🦁',
+                '🐯', '🐅', '🐆', '🐴', '🐎', '🦄', '🦓', '🦌', '🐮', '🐂',
+                '🐃', '🐄', '🐷', '🐖', '🐗', '🐽', '🐏', '🐑', '🐐', '🐪',
+                '🐫', '🦙', '🦒', '🐘', '🦏', '🦛', '🐭', '🐁', '🐀', '🐹',
+                '🐰', '🐇', '🐿', '🦔', '🦇', '🐻', '🐨', '🐼', '🦥', '🦦',
+                '🦨', '🦘', '🦡', '🐾', '🦃', '🐔', '🐓', '🐣', '🐤', '🐥',
+                '🐦', '🦅', '🦆', '🦢', '🦉', '🦩', '🦚', '🦜', '🐸', '🐊',
+                '🐢', '🦎', '🐍', '🐲', '🐉', '🦕', '🦖', '🐳', '🐋', '🐬',
+                '🐟', '🐠', '🐡', '🦈', '🐙', '🐚', '🦀', '🦞', '🦐', '🦑',
+                '🦪', '🐌', '🦋', '🐛', '🐜', '🐝', '🐞', '🦗', '🕷', '🕸',
+                '🦂', '🦟', '🦠', '💐', '🌸', '💮', '🏵', '🌹', '🥀', '🌺',
+                '🌻', '🌼', '🌷', '🌱', '🌲', '🌳', '🌴', '🌵', '🌾', '🌿',
+                '☘️', '🍀', '🍁', '🍂', '🍃', '🍇', '🍈', '🍉', '🍊', '🍋',
+                '🍌', '🍍', '🍎', '🍏', '🍐', '🍑', '🍒', '🍓', '🥝', '🍅',
+                '🥥', '🥑', '🍆', '🥔', '🥕', '🌽', '🌶', '🥒', '🥬', '🥦',
+                '🧄', '🧅', '🍄', '🥜', '🌰', '🍞', '🥐', '🥖', '🥨', '🥯',
+                '🥞', '🧇', '🧀', '🍖', '🍗', '🥩', '🥓', '🍔', '🍟', '🍕',
+                '🌭', '🥪', '🌮', '🌯', '🥙', '🧆', '🥚', '🍳', '🥘', '🍲',
+                '🥣', '🥗', '🍿', '🧈', '🧂', '🥫', '🍱', '🍘', '🍙', '🍚',
+                '🍛', '🍜', '🍝', '🍠', '🍢', '🍣', '🍤', '🍥', '🥮', '🍡',
+                '🥟', '🥠', '🥡', '🦀', '🦞', '🦐', '🦑', '🦪', '🍦', '🍧',
+                '🍨', '🍩', '🍪', '🎂', '🍰', '🧁', '🥧', '🍫', '🍬', '🍭',
+                '🍮', '🍯', '🍼', '🥛', '☕️', '🍵', '🍶', '🍾', '🍷', '🍸',
+                '🍹', '🍺', '🍻', '🥂', '🥃', '🥄', '🍴', '🍽', '🥣', '🥡',
+                '🥢', '🧂', '⚽️', '🏀', '🏈', '⚾️', '🥎', '🎾', '🏐', '🏉',
+                '🥏', '🎱', '🪀', '🏓', '🏸', '🏒', '🏑', '🥍', '🏏', '🪃',
+                '🥅', '⛳️', '🪁', '🏹', '🎣', '🤿', '🥊', '🥋', '🎽', '🛹',
+                '🛷', '⛸', '🥌', '🎿', '⛷', '🏂', '🪂', '🏋️‍♀️', '🏋️‍♂️', '🤼‍♀️',
+                '🤼‍♂️', '🤸‍♀️', '🤸‍♂️', '⛹️‍♀️', '⛹️‍♂️', '🤺', '🤾‍♀️', '🤾‍♂️', '🏌️‍♀️', '🏌️‍♂️',
+                '🏇', '🧘‍♀️', '🧘‍♂️', '🏄‍♀️', '🏄‍♂️', '🏊‍♀️', '🏊‍♂️', '🤽‍♀️', '🤽‍♂️', '🚣‍♀️',
+                '🚣‍♂️', '🧗‍♀️', '🧗‍♂️', '🚵‍♀️', '🚵‍♂️', '🚴‍♀️', '🚴‍♂️', '🛀', '🛌', '🧑‍🤝‍🧑',
+                '👭', '👫', '👬', '💏', '💑', '👪', '👨‍👩‍👦', '👨‍👩‍👧', '👨‍👩‍👧‍👦', '👨‍👩‍👦‍👦',
+                '👨‍👩‍👧‍👧', '👨‍👨‍👦', '👨‍👨‍👧', '👨‍👨‍👧‍👦', '👨‍👨‍👦‍👦', '👨‍👨‍👧‍👧', '👩‍👩‍👦', '👩‍👩‍👧', '👩‍👩‍👧‍👦', '👩‍👩‍👦‍👦',
+                '👩‍👩‍👧‍👧', '👨‍👦', '👨‍👦‍👦', '👨‍👧', '👨‍👧‍👦', '👨‍👧‍👧', '👩‍👦', '👩‍👦‍👦', '👩‍👧', '👩‍👧‍👦',
+                '👩‍👧‍👧', '🗣', '👤', '👥', '👣', '🧳', '🌂', '☂️', '🧵', '🧶',
+                '👓', '🕶', '🥽', '🥼', '🦺', '👔', '👕', '👖', '🧣', '🧤',
+                '🧥', '🧦', '👗', '👘', '🥻', '🩱', '🩲', '🩳', '👙', '👚',
+                '👛', '👜', '👝', '🛍', '🎒', '👞', '👟', '🥾', '🥿', '👠',
+                '👡', '🩰', '👢', '👑', '👒', '🎩', '🎓', '🧢', '⛑', '📿',
+                '💄', '💍', '💎'
+            ];
+
+            // 初始化游戏
+            const initGame = () => {
+                board.innerHTML = '';
+                tiles = [];
+                firstTile = null;
+                isDragging = false;
+                lives = 6; // 每回合重置生命值
+                livesPanel.textContent = '❤️'.repeat(lives);
+                createTiles();
+
+                // 第三回合提示
+                if (round === 3) {
+                    difficultyAlert.style.display = 'block';
+                    setTimeout(() => {
+                        difficultyAlert.style.display = 'none';
+                    }, 2000);
+                }
+            };
+
+            // 创建方块
+            const createTiles = () => {
+                const pairs = round < 3 ? basePairs.slice(0, 5) : basePairs.slice(0, 5 + (round - 2) * 60);
+                const tileValues = [...pairs, ...pairs].sort(() => Math.random() - 0.5);
+
+                // 根据回合数调整方块大小
+                const tileSize =  round < 3 ? 60 : 30; // 方块大小固定为 30px
+                const padding =round < 3 ? 10 : 2; // 方块之间的最小间距
+
+                tileValues.forEach((value, index) => {
+                    const tile = document.createElement('div');
+                    tile.classList.add('tile');
+                    tile.textContent = value;
+                    tile.dataset.index = index;
+                    tile.style.width = `${tileSize}px`;
+                    tile.style.height = `${tileSize}px`;
+
+                    // 随机放置方块，确保不与非游戏区域重叠
+                    placeTileRandomly(tile, tileSize);
+
+                    tile.addEventListener('touchstart', (e) => handleTouchStart(e, tile));
+                    tile.addEventListener('touchmove', handleTouchMove);
+                    tile.addEventListener('touchend', handleTouchEnd);
+
+                    board.appendChild(tile);
+                    tiles.push(tile);
+                });
+            };
+
+// 随机放置方块
+const placeTileRandomly = (tile, tileSize) => {
+    const maxAttempts = 100; // 最大尝试次数
+    let placed = false;
+    let attempts = 0;
+
+    // 获取非游戏区域的范围
+    const scorePanelRect = scorePanel.getBoundingClientRect();
+    const hintButtonRect = hintButton.getBoundingClientRect();
+
+    // 定义安全区的高度
+    const safeAreaTop = 100; // 顶部安全区高度
+    const safeAreaBottom = 100; // 底部安全区高度
+
+    while (!placed && attempts < maxAttempts) {
+        // 生成随机位置，排除顶部和底部的安全区
+        const x = Math.random() * (window.innerWidth - tileSize);
+        const y = safeAreaTop + Math.random() * (window.innerHeight - tileSize - safeAreaTop - safeAreaBottom);
+
+        tile.style.left = `${x}px`;
+        tile.style.top = `${y}px`;
+
+        // 检查是否与非游戏区域重叠
+        const tileRect = tile.getBoundingClientRect();
+        const overlapWithScorePanel = checkRectOverlap(tileRect, scorePanelRect);
+        const overlapWithHintButton = checkRectOverlap(tileRect, hintButtonRect);
+
+        if (overlapWithScorePanel || overlapWithHintButton) {
+            attempts++;
+            continue;
+        }
+
+        // 从第二回合开始，允许格子之间有 60% 的重叠概率
+        if (round > 1 && Math.random() < 0.6) {
+            placed = true;
+        } else {
+            // 检查是否与其他方块重叠
+            let overlapWithTiles = false;
+            for (const otherTile of tiles) {
+                if (checkOverlap(tile, otherTile, 0)) {
+                    overlapWithTiles = true;
+                    break;
+                }
+            }
+
+            if (!overlapWithTiles) {
+                placed = true;
+            }
+        }
+
+        attempts++;
+    }
+};
+            // 检查两个矩形是否重叠
+            const checkRectOverlap = (rect1, rect2) => {
+                return !(
+                    rect1.right < rect2.left ||
+                    rect1.left > rect2.right ||
+                    rect1.bottom < rect2.top ||
+                    rect1.top > rect2.bottom
+                );
+            };
+
+            // 检查两个方块是否重叠
+            const checkOverlap = (tile1, tile2, padding) => {
+                const rect1 = tile1.getBoundingClientRect();
+                const rect2 = tile2.getBoundingClientRect();
+
+                return !(
+                    rect1.right + padding < rect2.left ||
+                    rect1.left - padding > rect2.right ||
+                    rect1.bottom + padding < rect2.top ||
+                    rect1.top - padding > rect2.bottom
+                );
+            };
+
+            // 处理触摸开始
+            const handleTouchStart = (e, tile) => {
+                e.preventDefault();
+                if (tile.classList.contains('matched')) return;
+
+                firstTile = tile;
+                tile.classList.add('selected');
+                isDragging = true;
+
+                const touch = e.touches[0];
+                startX = touch.clientX;
+                startY = touch.clientY;
+
+                line.style.display = 'block';
+                line.style.left = `${startX}px`;
+                line.style.top = `${startY}px`;
+                line.style.width = '0';
+            };
+
+            // 处理触摸移动
+            const handleTouchMove = (e) => {
+                if (!isDragging) return;
+                e.preventDefault();
+
+                const touch = e.touches[0];
+                const endX = touch.clientX;
+                const endY = touch.clientY;
+
+                const dx = endX - startX;
+                const dy = endY - startY;
+                const length = Math.sqrt(dx * dx + dy * dy);
+                const angle = Math.atan2(dy, dx) * (180 / Math.PI);
+
+                line.style.width = `${length}px`;
+                line.style.transform = `rotate(${angle}deg)`;
+            };
+
+            // 处理触摸结束
+            const handleTouchEnd = (e) => {
+                if (!isDragging) return;
+                e.preventDefault();
+
+                const touch = e.changedTouches[0];
+                const endX = touch.clientX;
+                const endY = touch.clientY;
+
+                const endTile = document.elementFromPoint(endX, endY);
+                if (endTile && endTile.classList.contains('tile') && endTile !== firstTile) {
+                    checkMatch(firstTile, endTile);
+                }
+
+                firstTile.classList.remove('selected');
+                firstTile = null;
+                isDragging = false;
+                line.style.display = 'none';
+            };
+
+            // 检查是否匹配
+            const checkMatch = (tile1, tile2) => {
+                if (tile1.textContent === tile2.textContent) {
+                    tile1.classList.add('matched');
+                    tile2.classList.add('matched');
+                    score += 10;
+                    scorePanel.textContent = score;
+
+                    // 动画结束后移除方块
+                    setTimeout(() => {
+                        tile1.remove();
+                        tile2.remove();
+                    }, 500);
+
+                    if (tiles.every(tile => tile.classList.contains('matched'))) {
+                        setTimeout(() => {
+                            round++;
+                            roundPanel.textContent = round;
+                            initGame();
+                        }, 1000);
+                    }
+                } else {
+                    lives--;
+                    livesPanel.textContent = '❤️'.repeat(lives);
+                    if (lives === 0) {
+                        alert('游戏结束！');
+                        resetGame();
+                    } else {
+                        setTimeout(() => {
+                            tile1.classList.remove('selected');
+                            tile2.classList.remove('selected');
+                        }, 500);
+                    }
+                }
+            };
+
+            // 重置游戏
+            const resetGame = () => {
+                score = 0;
+                round = 1;
+                lives = 6;
+                hintCount = 3;
+                scorePanel.textContent = score;
+                roundPanel.textContent = round;
+                livesPanel.textContent = '❤️'.repeat(lives);
+                hintButton.textContent = `💡x${hintCount}`;
+                hintButton.classList.remove('hidden');
+                initGame();
+            };
+
+            // 提示功能
+            hintButton.addEventListener('click', () => {
+                if (hintCount <= 0) return;
+
+                const unmatchedTiles = tiles.filter(tile => !tile.classList.contains('matched'));
+                let found = false;
+
+                for (let i = 0; i < unmatchedTiles.length && !found; i++) {
+                    for (let j = i + 1; j < unmatchedTiles.length && !found; j++) {
+                        if (unmatchedTiles[i].textContent === unmatchedTiles[j].textContent) {
+                            unmatchedTiles[i].classList.add('hint');
+                            unmatchedTiles[j].classList.add('hint');
+                            setTimeout(() => {
+                                unmatchedTiles[i].classList.remove('hint');
+                                unmatchedTiles[j].classList.remove('hint');
+                            }, 1000);
+                            found = true;
+                        }
+                    }
+                }
+
+                hintCount--;
+                hintButton.textContent = `💡x${hintCount}`;
+
+                if (hintCount === 0) {
+                    hintButton.classList.add('hidden');
+                }
+            });
+
+            // 初始化游戏
+            initGame();
+        });
+    </script>
+</body>
+</html>
