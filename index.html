@@ -10,6 +10,13 @@
     <meta name="keywords" content="世界盒子,春秋mod,王朝模组,历史爱好者,策略游戏,春秋时期,政治斗争,军事冲突,文化发展">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
+    html {
+	-webkit-text-size-adjust: 100%
+}
+body{
+	-webkit-tap-highlight-color: transparent;/*把高亮颜色设置为透明，也可以使用rgba的形式*/
+}
+
         :root {
             --primary-color: #1a2a27;
             --secondary-color: #d4af37;
@@ -50,7 +57,9 @@
             position: relative;
             z-index: 2;
         }
-
+button:focus {
+    outline: none;
+  }
         .main-content {
             border: 3px solid;
             border-image: 
@@ -133,6 +142,8 @@
             gap: 1.5rem;
             justify-content: center;
             padding: 3rem 0;
+            outline:none;
+            
         }
 
         .btn {
@@ -153,6 +164,7 @@
             justify-content: center;
             opacity: 0;
             animation: btnFadeIn 0.8s ease forwards 0.9s;
+            outline:none;
         }
 
         @keyframes btnFadeIn {
@@ -166,6 +178,7 @@
                 var(--secondary-color) 100%);
             color: #fff;
             box-shadow: 0 4px 20px rgba(197,61,19,0.3);
+            outline: none;
         }
 
         .btn-docs {
@@ -179,6 +192,7 @@
                 btnFadeIn 0.8s ease forwards 0.9s !important;
             display: flex !important;
             opacity: 1 !important;
+            outline: none;
         }
 
         @keyframes docPulse {
@@ -199,15 +213,18 @@
                 rgba(255,255,255,0.1) 50%,
                 transparent 70%);
             transform: rotate(45deg);
+            outline: none;
             transition: all 0.5s;
         }
 
         .btn:hover::after {
             left: 150%;
+            outline: none;
         }
 
         .btn-docs:hover {
             animation: docHover 0.5s ease forwards;
+            outline: none;
         }
 
         @keyframes docHover {
@@ -221,6 +238,7 @@
 
         .btn-docs i {
             animation: iconSwing 2s ease-in-out infinite;
+            outline: none;
         }
 
         @keyframes iconSwing {
@@ -234,6 +252,7 @@
             position: absolute;
             top: -8px;
             right: -8px;
+            outline: none;
             background: #c53d13;
             color: white;
             font-size: 0.7rem;
@@ -255,11 +274,13 @@
                 max-width: 90%;
                 padding: 1rem 1.5rem;
                 font-size: 1rem;
+                outline: none;
             }
         }
 
         .btn:active {
             transform: scale(0.98);
+            outline: none;
         }
 
         .health-notice {
