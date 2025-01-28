@@ -1,280 +1,402 @@
- 
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="favicon.ico" type="image/x-icon">
     <title>世界盒子春秋mod王朝模组官网 | WorldBox AncientWarfare Mod</title>
     <meta name="description" content="想要继承制？族谱？君主世系？天命？国家历史？内阁？想看死掉的小人？转生？前世？时代？国策？看海还是扮演国家？谥号？庙号？更多风味包？自定义剧本？自定义国家名字小人名字中文名？想看已经亡了国家的历史？还想要一大堆辅助功能？想禁用原版不合理的机制？想让装备像宝物一样一直传下去？传家宝？想要AI生成的称号传记以及小人一生评价？想要让你的世界盒子变成欧陆风云+十字军之王+钢铁雄心混合体吗？春秋模组适合你~春秋模组已改名王朝模组!无论你想看海国家兴衰还是氏族兴衰还是扮演某个国家还是观察小人一生春秋都可能满足你！还有历史人物功能，非常非常多的彩蛋！还有更多...Want to inherit a system? Genealogy? Monarchal lineage? Mandate of Heaven? National history? Cabinet? Want to see dead villains? Reincarnation? Past lives? Era? National policies? To watch the sea or play as a nation? Posthumous titles? Temple names? More flavor packs? Customized scripts? Customized names for nations and characters in Chinese? Want to see the history of a nation that has already perished? Want a bunch of auxiliary features? Want to disable the unreasonable mechanics of the original version? Want equipment to be passed down like treasures? Heirlooms? Want AI-generated titles, biographies, and life evaluations for characters? Want to turn your world into a mix of Europa Universalis + Crusader Kings + Hearts of Iron? The Spring and Autumn mod is for you~ The Spring and Autumn mod has been renamed to the Dynasty mod! Whether you want to watch the rise and fall of nations or clans, play as a certain country, or observe the life of a character, the Spring and Autumn mod can satisfy you! There's also a historical figures feature, very many Easter eggs! And more...">
     <meta name="keywords" content="世界盒子,春秋mod,王朝模组,历史爱好者,策略游戏,春秋时期,政治斗争,军事冲突,文化发展">
-    
-    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        body {
-            font-family: 'Roboto', sans-serif;
-            background-color: #f4f4f4;
-            color: #333;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
+        :root {
+            --primary-color: #1a2a27;
+            --secondary-color: #d4af37;
+            --accent-color: #c53d13;
+            --text-glow: rgba(212,175,55,0.5);
+        }
+
+        * {
             margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-        .container {
-            text-align: center;
-            background: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            max-width: 90%;
-            width: 300px;
-        }
-        .download-btn {
-            display: inline-block;
-            padding: 10px 20px;
-            background-color: #5C67F2;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-            margin-top: 20px;
-            cursor: pointer;
-        }
-        .hidden {
-            display: none;
-        }
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(0,0,0,0.4);
-        }
-        .modal-content {
-            background-color: #fefefe;
-            margin: 15% auto;
-            padding: 20px;
-            border: 1px solid #888;
-            width: 80%;
-            max-width: 450px;
-            border-radius: 8px;
-        }
-        .close {
-            color: #aaa;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-        }
-        .close:hover,
-        .close:focus {
-            color: black;
-            text-decoration: none;
-            cursor: pointer;
-        }
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        .loading-spinner {
-            border: 2px solid #f3f3f3;
-            border-top: 2px solid #5C67F2;
-            border-radius: 50%;
-            width: 20px;
-            height: 20px;
-            animation: spin 2s linear infinite;
-            margin: 0 auto;
-        }
-                .button {
-            display: inline-block;
-            padding: 10px 3px;
-            margin-top: 20px;
-            margin-right: 10px;
-            border: none;
-            border-radius: 5px;
-            text-decoration: none;
-            font-size: 16px;
-            color: #ffffff;
-            cursor: pointer;
-            outline: none;
+
+        body {
+            font-family: 'Microsoft YaHei', system-ui, sans-serif;
+            background: 
+                radial-gradient(circle at 50% 50%, 
+                    rgba(26,42,39,0.9) 0%,
+                    rgba(10,18,15,0.95) 100%),
+                url('data:image/svg+xml,<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><text x="-10" y="60" font-size="30" fill="%2317352f" transform="rotate(-45)">卐</text></svg>');
+            color: #e4dcc7;
+            min-height: 100vh;
             position: relative;
+            overflow-x: hidden;
+            opacity: 0;
+            animation: pageFadeIn 1s ease forwards;
         }
-        .button-document {
-            background-color: #28a745;
+
+        @keyframes pageFadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
-        .button-steam {
-            background-color: #4b5cc4;
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+            position: relative;
+            z-index: 2;
         }
-        .button-steam::before {
+
+        .main-content {
+            border: 3px solid;
+            border-image: 
+                linear-gradient(160deg, 
+                    var(--secondary-color) 20%,
+                    var(--primary-color) 60%,
+                    #3a2e1d 100%) 1;
+            border-radius: 8px;
+            background: rgba(10,18,15,0.85);
+            box-shadow: 0 0 40px rgba(212,175,55,0.1);
+            position: relative;
+            overflow: hidden;
+            animation: borderFlow 6s linear infinite;
+        }
+
+        @keyframes borderFlow {
+            0% { border-image-slice: 1; }
+            50% { border-image-slice: 2; }
+            100% { border-image-slice: 1; }
+        }
+
+        .particles::before {
             content: '';
             position: absolute;
-            left: 10px;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 20px;
-            height: 20px;
-            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="%23ffffff" d="M11.979 11.977q2.318 0 3.965-1.647t1.647-3.965-1.647-3.965-3.965-1.647-3.965 1.647-1.647 3.965 1.647 3.965 3.965 1.647zM15.627 11.977q0-1.334-0.891-2.224t-2.224-0.891-2.224 0.891-0.891 2.224 0.891 2.224 2.224 0.891 2.224-0.891 0.891-2.224zM21.577 0q-1.667 0-3.302 0.651t-2.848 1.832-1.832 2.848-0.651 3.302 0.651 3.302 1.832 2.848 2.848 1.832 3.302 0.651 3.302-0.651 2.848-1.832 1.832-2.848 0.651-3.302-0.651-3.302-1.832-2.848-2.848-1.832-3.302-0.651zM22.577 8.577v15.046q0 0.797-0.563 1.359t-1.359 0.563h-15.046q-0.797 0-1.359-0.563t-0.563-1.359v-15.046q0-0.797 0.563-1.359t1.359-0.563h15.046q0.797 0 1.359 0.563t0.563 1.359z"/></svg>');
-            background-size: cover;
-            background-repeat: no-repeat;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><circle cx="50" cy="50" r="1.2" fill="%23d4af37"/></svg>');
+            animation: particleMove 20s linear infinite;
+            opacity: 0.3;
         }
-        /* 添加响应式样式 */
-        @media (max-width: 600px) {
-            .button {
-                width: 100%;
-                margin-right: 0;
-                margin-bottom: 10px;
+
+        .header {
+            text-align: center;
+            padding: 3rem 1rem;
+            position: relative;
+            transform: translateY(30px);
+            animation: headerSlide 1s ease forwards;
+        }
+
+        @keyframes headerSlide {
+            to { transform: translateY(0); }
+        }
+
+        .title {
+            font-size: 2.5rem;
+            color: var(--secondary-color);
+            text-shadow: 0 0 15px var(--text-glow);
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            opacity: 0;
+            animation: titleFadeIn 0.8s ease forwards 0.3s;
+        }
+
+        @keyframes titleFadeIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: #c5b798;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+            opacity: 0;
+            animation: textFadeIn 0.8s ease forwards 0.6s;
+        }
+
+        @keyframes textFadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .button-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            justify-content: center;
+            padding: 3rem 0;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            position: relative;
+            overflow: hidden;
+            max-width: 240px;
+            width: 100%;
+            justify-content: center;
+            opacity: 0;
+            animation: btnFadeIn 0.8s ease forwards 0.9s;
+        }
+
+        @keyframes btnFadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .btn-download {
+            background: linear-gradient(135deg, 
+                var(--accent-color) 0%,
+                var(--secondary-color) 100%);
+            color: #fff;
+            box-shadow: 0 4px 20px rgba(197,61,19,0.3);
+        }
+
+        .btn-docs {
+            background: linear-gradient(135deg, 
+                #2c4a42 0%,
+                #3a665d 100%);
+            color: var(--secondary-color);
+            box-shadow: 0 4px 20px rgba(42,85,75,0.3);
+            animation: 
+                docPulse 2s ease-in-out infinite 1.5s,
+                btnFadeIn 0.8s ease forwards 0.9s !important;
+            display: flex !important;
+            opacity: 1 !important;
+        }
+
+        @keyframes docPulse {
+            0% { transform: scale(1); box-shadow: 0 4px 20px rgba(42,85,75,0.3); }
+            50% { transform: scale(1.02); box-shadow: 0 6px 25px rgba(42,85,75,0.5); }
+            100% { transform: scale(1); box-shadow: 0 4px 20px rgba(42,85,75,0.3); }
+        }
+
+        .btn::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, 
+                transparent 30%,
+                rgba(255,255,255,0.1) 50%,
+                transparent 70%);
+            transform: rotate(45deg);
+            transition: all 0.5s;
+        }
+
+        .btn:hover::after {
+            left: 150%;
+        }
+
+        .btn-docs:hover {
+            animation: docHover 0.5s ease forwards;
+        }
+
+        @keyframes docHover {
+            to {
+                transform: rotate(-2deg) scale(1.05);
+                background: linear-gradient(135deg, 
+                    #3a665d 0%,
+                    #2c4a42 100%);
             }
         }
 
+        .btn-docs i {
+            animation: iconSwing 2s ease-in-out infinite;
+        }
 
-.update-box {
-        background-color: #1a1a1a; /* 深灰色背景 */
-        color: #f4f4f4; /* 浅灰色文字 */
-        padding: 30px;
-        margin-top: 30px;
-        border-radius: 10px;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* 更细腻的阴影 */
-    }
-    .update-title {
-        font-size: 1.5em; /* 更大的标题 */
-        font-weight: 300; /* 更细的字体 */
-        margin-bottom: 20px;
-        letter-spacing: 1px; /* 字间距 */
-    }
-    .update-info {
-        font-size: 1em; /* 更大的信息字体 */
-        margin-bottom: 20px;
-        line-height: 1.6; /* 更好的行距 */
-    }
-    .update-link {
-        display: inline-block;
-        padding: 10px 20px;
-        background-color: #0056b3; /* 更深的蓝色背景 */
-        color: #fff; /* 白色文字 */
-        text-decoration: none;
-        border-radius: 5px;
-        transition: background-color 0.3s ease; /* 平滑的背景颜色过渡 */
-    }
-    .update-link:hover {
-        background-color: #003d82; /* 悬停时颜色加深 */
-    }
-    #title {
-      display: block;
-      }
-    </style>
+        @keyframes iconSwing {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(5deg); }
+            75% { transform: rotate(-5deg); }
+        }
+
+        .btn-docs::before {
+            content: 'NEW';
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: #c53d13;
+            color: white;
+            font-size: 0.7rem;
+            padding: 2px 8px;
+            border-radius: 10px;
+            transform: rotate(10deg);
+            animation: newBlink 1.5s ease-in-out infinite;
+        }
+
+        @keyframes newBlink {
+            0%, 100% { opacity: 0.9; transform: rotate(10deg) scale(1); }
+            50% { opacity: 1; transform: rotate(10deg) scale(1.1); }
+        }
+
+        @media (max-width: 768px) {
+            .title { font-size: 2rem; }
+            .subtitle { font-size: 1rem; }
+            .btn { 
+                max-width: 90%;
+                padding: 1rem 1.5rem;
+                font-size: 1rem;
+            }
+        }
+
+        .btn:active {
+            transform: scale(0.98);
+        }
+
+        .health-notice {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(10,18,15,0.95);
+            padding: 1rem;
+            text-align: center;
+            border-top: 2px solid var(--accent-color);
+            z-index: 999;
+            transform: translateY(100%);
+            animation: noticeSlide 1s ease forwards 2s;
+        }
+
+        @keyframes noticeSlide {
+            to { transform: translateY(0); }
+        }
+
+        .splash-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.95);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            animation: splashFade 1.5s ease forwards;
+        }
+
+        @keyframes splashFade {
+            0% { opacity: 0; }
+            20%,80% { opacity: 1; }
+            100% { opacity: 0; visibility: hidden; }
+        }
+
+        .splash-content {
+            background: linear-gradient(45deg, var(--primary-color), #12201d);
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+            max-width: 400px;
+            animation: splashScale 1.5s ease;
+        }
+
+        @keyframes splashScale {
+            from { transform: scale(0.9); }
+            to { transform: scale(1); }
+        }
+
+        .copyright {
+            text-align: center;
+            padding: 2rem 0;
+            color: #c5b798;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        @keyframes particleMove {
+            from { background-position: 0 0; }
+            to { background-position: 100px 100px; }
+        }
     </style>
 </head>
-
-
 <body>
-<h1 id="title">世界盒子mod 春秋mod 世界盒子春秋春秋mod修改版本历史mod中国历史春秋时期诸侯国世界盒子mod是什么？春秋mod有哪些特点？世界盒子mod如何安装？有没有春秋mod的更新？世界盒子mod社区活跃吗？春秋mod与原游戏相比如何？世界盒子mod支持哪些游戏？春秋mod有没有兼容性问题？世界盒子mod如何自定义？春秋mod有没有BUG？世界盒子mod的最新版本是什么？春秋mod的发行日期是什么时候？mod的系统要求是什么？世界盒子mod的开发者是谁？春秋mod的故事情节是什么？mod的游戏时间有多长？世界盒子mod的用户界面怎么样？春秋mod的图形效果如何？mod的音效质量如何？世界盒子mod的社区评分是多少？世界盒子mod的Reddit在哪里？春秋mod的Steam页面是什么？mod的YouTube频道叫什么？世界盒子mod的Twitter账号是什么？春秋mod的Facebook群组在哪里？mod的Discord服务器地址是什么？世界盒子mod的GitHub仓库在哪里？春秋mod的WordPress博客是什么？mod的Tumblr页面叫什么？世界盒子mod的LinkedIn资料在哪里？世界盒子mod的单位有哪些？春秋mod的建筑有哪些？mod的科技树是什么样的？世界盒子mod的地形如何？春秋mod的气候系统如何？mod的AI行为如何？世界盒子mod的多人游戏模式有哪些？春秋mod的单人战役设计如何？mod的moddingtools功能如何？世界盒子mod的自定义场景创建方法是什么？世界盒子mod的开发日志在哪里？春秋mod的测试阶段有哪些？mod的alpha版本什么时候出？世界盒子mod的beta测试如何参与？春秋mod的发行计划是什么？mod的销售策略如何？世界盒子mod的版权问题如何处理？春秋mod的法律问题有哪些？mod的道德考虑是什么？世界盒子mod的环境影响如何？世界盒子mod的LetSplay系列在哪里？春秋mod的直播在哪里看？mod的cosplay活动在哪里？世界盒子mod的同人艺术在哪里？春秋mod的fanfiction在哪里？mod的音乐在哪里下载？世界盒子mod的舞蹈视频在哪里？春秋mod的电影改编消息？mod的书籍推荐？世界盒子mod的展览信息？世界盒子mod的单位平衡如何？春秋mod的建筑优化有哪些？mod的科技树扩展如何？世界盒子mod的地形编辑功能？春秋mod的气候模拟效果？mod的AI优化情况？世界盒子mod的多人游戏模式优化？春秋mod的单人战役设计优化？mod的moddingtools更新日志？世界盒子mod的自定义场景创建教程？世界盒子mod的更新日志在哪里？春秋mod的玩家反馈如何？mod的未来更新计划是什么？世界盒子mod的用户协议是什么？春秋mod的安装教程在哪里？mod的兼容性问题解决方案？世界盒子mod的设置选项有哪些？春秋mod的故事情节扩展包？mod的社区活动有哪些？世界盒子mod的推广活动？世界盒子mod的制作工具叫什么？春秋mod的自定义内容创建方法？mod的图形编辑器功能？世界盒子mod的音效编辑器？春秋mod的动画制作工具？mod的界面自定义选项？世界盒子mod的网络对战模式？春秋mod的联机合作模式？mod的社区投票活动？世界盒子mod的用户反馈渠道？世界盒子修仙 世界盒子修仙mod mod的故事情节扩展有哪些？春秋mod的单位平衡更新日志？世界盒子mod的建筑优化日志？春秋mod的科技树更新内容？世界盒子mod的地形优化改进？春秋mod的气候系统更新日志？世界盒子mod的AI优化改进？春秋mod的多人游戏模式更新？世界盒子mod的单人战役设计改进？春秋mod的moddingtools更新日志？世界盒子mod的玩家反馈收集在哪里？春秋mod的社区投票结果？世界盒子mod的用户协议更新日志？春秋mod的安装问题解决方案？世界盒子mod的兼容性问题汇总？春秋mod的BUG报告提交地址？世界盒子mod的更新计划表？春秋mod的未来路线图？世界盒子mod的社区活动日程？春秋mod的推广活动安排？世界盒子mod的单位平衡优化？春秋mod的建筑优化改进？世界盒子mod的科技树扩展？春秋mod的地形编辑器优化？世界盒子mod的气候模拟优化？春秋mod的AI行为优化？世界盒子mod的多人游戏模式优化？春秋mod的单人战役设计优化？世界盒子mod的moddingtools功能增强？春秋mod的自定义场景创建优化？世界盒子mod的Reddit讨论区在哪里？春秋mod的Steam社区页面？世界盒子mod的YouTube频道更新？春秋mod的Twitter最新动态？世界盒子mod的Facebook最新消息？春秋mod的Discord服务器最新活动？世界盒子mod的GitHub最新提交？春秋mod的WordPress最新博客？世界盒子mod的Tumblr最新帖子？春秋mod的LinkedIn最新动态？世界盒子mod的制作团队介绍？春秋mod的设计师访谈？世界盒子mod的音效设计师是谁？春秋mod的图形设计师团队？世界盒子mod的程序开发者？春秋mod的故事情节编写者？世界盒子mod的测试团队？春秋mod的社区管理团队？世界盒子mod的营销团队？春秋mod的法律顾问团队？古代战争mod   古代战争游戏mod   世界盒子古代战争mod   世界盒子mod古代战争   古代战争mod下载？世界盒子mod 古代战争下载   古代战争mod安装   世界盒子mod古代战争安装   古代战争mod更新   世界盒子mod古代战争更新   WhatistheancientwarfaremodforWorldBox?   HowdoIinstalltheancientwarfaremodinWorldBox?   Arethereupdatesavailablefortheancientwarfaremod?   Whatarethesystemrequirementsfortheancientwarfaremod?   Whoarethedevelopersbehindtheancientwarfaremod?   Whatisthestorylineoftheancientwarfaremod?   Howlongisthegameplayfortheancientwarfaremod?   Whatistheuserinterfacelikeintheancientwarfaremod?   WhatgraphicscanIexpectfromtheancientwarfaremod?   Whatsoundeffectsdoestheancientwarfaremodoffer?   古代战争mod的单位   世界盒子mod古代战争的建筑   古代战争mod的科技树   世界盒子mod古代战争的地形   古代战争mod的气候系统   古代战争mod的AI行为   世界盒子mod古代战争的多人游戏模式   古代战争mod的单人战役   古代战争mod的moddingtools   世界盒子mod古代战争的自定义场景   古代战争mod的Reddit   世界盒子mod古代战争的Steampage   古代战争mod的YouTubechannel   世界盒子mod古代战争的Twitter   古代战争mod的Facebookgroup   世界盒子mod古代战争的Discordserver   古代战争mod的GitHub   世界盒子mod古代战争的WordPressblog   古代战争mod的Tumblr   世界盒子mod古代战争的LinkedIn   古代战争mod的更新日志   世界盒子mod古代战争的玩家反馈   古代战争mod的未来更新计划   世界盒子mod古代战争的用户协议   古代战争mod的安装教程   古代战争mod的兼容性问题   世界盒子mod古代战争的设置选项   古代战争mod的故事情节扩展   古代战争mod的社区活动   世界盒子mod古代战争的推广活动   世界盒子mod古代战争的单位平衡   世界盒子mod古代战争的建筑优化   古代战争mod的科技树扩展   世界盒子mod古代战争的地形编辑   古代战争mod的气候模拟   古代战争mod的AI优化   世界盒子mod古代战争的多人游戏优化   古代战争mod的单人战役设计   古代战争mod的moddingtools功能   世界盒子mod古代战争的自定义场景创建   世界盒子mod古代战争的制作团队   古代战争mod的设计师访谈   世界盒子mod古代战争的音效设计师   古代战争mod的图形设计师团队   世界盒子mod古代战争的程序开发者   古代战争mod的故事情节编写者   世界盒子mod古代战争的测试团队   古代战争mod的社区管理团队   世界盒子mod古代战争的营销团队   古代战争mod的法律顾问团队   古代战争mod的推广策略   世界盒子mod古代战争的用户反馈   古代战争mod的市场分析   世界盒子mod古代战争的销售策略   古代战争mod的版权问题   世界盒子mod古代战争的法律问题   古代战争mod的道德考虑   世界盒子mod古代战争的环境影响   古代战争mod的社区投票   世界盒子mod古代战争的BUG报告 世界盒子下载 世界盒子模组站 世界盒子百科 想要继承制？族谱？君主世系？天命？国家历史？内阁？想看死掉的小人？转生？前世？时代？国策？看海还是扮演国家？谥号？庙号？更多风味包？自定义剧本？自定义国家名字小人名字中文名？想看已经亡了国家的历史？还想要一大堆辅助功能？想禁用原版不合理的机制？想让装备像宝物一样一直传下去？传家宝？想要AI生成的称号传记以及小人一生评价？想要让你的世界盒子变成欧陆风云+十字军之王+钢铁雄心混合体吗？春秋模组适合你~春秋模组已改名王朝模组!无论你想看海国家兴衰还是氏族兴衰还是扮演某个国家还是观察小人一生春秋都可能满足你！还有历史人物功能，非常非常多的彩蛋！还有更多...Want to inherit a system? Genealogy? Monarchal lineage? Mandate of Heaven? National history? Cabinet? Want to see dead villains? Reincarnation? Past lives? Era? National policies? To watch the sea or play as a nation? Posthumous titles? Temple names? More flavor packs? Customized scripts? Customized names for nations and characters in Chinese? Want to see the history of a nation that has already perished? Want a bunch of auxiliary features? Want to disable the unreasonable mechanics of the original version? Want equipment to be passed down like treasures? Heirlooms? Want AI-generated titles, biographies, and life evaluations for characters? Want to turn your world into a mix of Europa Universalis + Crusader Kings + Hearts of Iron? The Spring and Autumn mod is for you~ The Spring and Autumn mod has been renamed to the Dynasty mod! Whether you want to watch the rise and fall of nations or clans, play as a certain country, or observe the life of a character, the Spring and Autumn mod can satisfy you! There's also a historical figures feature, very many Easter eggs! And more...
-</h1>
-<div class="container">
-
-<div class="update-box">
-        <div class="update-title">Update</div>
-        <div class="update-info" id="updateInfo">
-            <!-- 更新信息将通过JavaScript动态填充 -->
+    <div class="splash-screen">
+        <div class="splash-content">
+            <h3 style="color:var(--secondary-color);margin-bottom:1rem;">⚠️ 健康游戏提示</h3>
+            <p style="color:#c5b798;line-height:1.6;">适度游戏益脑，沉迷游戏伤身<br>合理安排时间，享受健康生活</p>
+            <button onclick="this.parentElement.parentElement.remove()" 
+                    style="margin-top:1.5rem;padding:0.5rem 2rem;background:var(--accent-color);border:none;color:white;border-radius:20px;cursor:pointer;">
+                朕知道了
+            </button>
         </div>
-        <a href="" id="downloadLink" class="update-link">下载链接/Download Link</a>
     </div>
 
-    <button class="download-btn" onclick="startDownload()">下载懒人包/Download AncientWarfare</button>
-        <a href="https://docs.qq.com/aio/DQVVjVlpYUlZqQ2JI?p=Dxr1PWzEFxA9mQnJ6U0lES" class="button button-document">春秋模组文档/AncientWarfare Document</a>
-    <a href="https://store.steampowered.com" class="button button-steam">Steam</a>
-    <div class="loading-spinner hidden"></div>
-    <p class="hidden">正在下载，请稍候...</p>
-    
-    <!-- 更新内容框框 -->
+    <div class="particles">
+        <div class="container">
+            <div class="main-content">
+                <header class="header">
+                    <h1 class="title">世界盒子·王朝模组</h1>
+                    <p class="subtitle">
+                        新春特别版震撼上线！体验全新王朝模组<br>
+                        解锁上古神话与史诗的全新玩法
+                    </p>
+                </header>
 
+<div class="button-group">
+    <button onclick="window.location.href='https://cloud.wujiyan.cc/f/r6elsW/worldbox_AncientWarfare.zip'" class="btn btn-download">
+        <i class="fas fa-download"></i>
+        立即下载 (v2.3.1)
+    </button>
+    <button onclick="window.location.href='https://docs.qq.com/aio/DQVVjVlpYUlZqQ2JI?p=Dxr1PWzEFxA9mQnJ6U0lES'" class="btn btn-docs">
+        <i class="fas fa-scroll"></i>
+        模组文档·新人必读
+    </button>
 </div>
 
-<!-- The Modal -->
-<div id="myModal" class="modal">
+                <div class="copyright">
+                    🔒模组作者@大日<br>
+                    <span style="font-size:0.8em;">本模组与WorldBox官方无关</span>
+                </div>
+            </div>
+        </div>
+    </div>
 
-    <!-- Modal content -->
-    <div class="modal-content">
-        <span class="close">&times;</span>
-         
-<p><strong><font color="red">必读声明</font></strong></p>
- 
-        <p>解压后打开worldbox.exe 游戏设置打开“实验模式”</p>
-        <p>路径不能有中文 不然无法加载Mod</p>
-        <p>推荐路径：</p>
-        <p>D:Games/世界盒子</p>
-        <p>D:游戏/worldbox</p>
-        <p>D:Games/worldbox</p>
+    <div class="health-notice">
+        <span style="color:var(--secondary-color);">⚖️</span> 
+        健康游戏提示：建议每60分钟休息5-10分钟，合理安排游戏时间
+        <button onclick="this.parentElement.style.display='none'" 
+                style="margin-left:1rem;padding:0.2rem 0.8rem;background:transparent;border:1px solid var(--secondary-color);color:var(--secondary-color);border-radius:15px;cursor:pointer;">
+            关闭
+        </button>
+    </div>
+
+    <script>
+        document.querySelector('.btn-docs').addEventListener('mouseover', function() {
+            this.style.animation = 'docHover 0.5s ease forwards, docPulse 2s ease-in-out infinite';
+        });
         
-        <p>After extracting, open worldbox.exe and enable "Experimental Mode" in the game settings.</p>
-            <p>The path must not contain Chinese characters, otherwise the Mod cannot be loaded.</p>
-            <p>Recommended paths:</p>
-            <p>D:Games/World Box</p>
-            <p>D:Games/WorldBox</p>
-            <p>D:Games/WorldBox</p>
-    </div>
+        document.querySelector('.btn-docs').addEventListener('mouseout', function() {
+            this.style.animation = 'docPulse 2s ease-in-out infinite';
+        });
 
-</div>
- 
-<script>
-    var modal = document.getElementById("myModal");
-    var span = document.getElementsByClassName("close")[0];
-function fetchUpdateData() {
-    var seoTitle = document.getElementById('title');
-      if (seoTitle) {
-        seoTitle.style.display = 'none';
-      }
-  
-    fetch('https://raw.githubusercontent.com/0010skn/AncientWarfare/main/update.json')
-        .then(response => response.json())
-        .then(data => {
-            const updateInfo = `想要继承制？族谱？君主世系？天命？国家历史？内阁？想看死掉的小人？转生？前世？时代？国策？看海还是扮演国家？谥号？庙号？更多风味包？自定义剧本？自定义国家名字小人名字中文名？想看已经亡了国家的历史？还想要一大堆辅助功能？想禁用原版不合理的机制？想让装备像宝物一样一直传下去？传家宝？想要AI生成的称号传记以及小人一生评价？想要让你的世界盒子变成欧陆风云+十字军之王+钢铁雄心混合体吗？春秋模组适合你~春秋模组已改名王朝模组!无论你想看海国家兴衰还是氏族兴衰还是扮演某个国家还是观察小人一生春秋都可能满足你！还有历史人物功能，非常非常多的彩蛋！还有更多...`;
-            document.getElementById('updateInfo').innerHTML = updateInfo;
-            document.getElementById('downloadLink').href = data.url;
-            document.getElementById('downloadLink').textContent = `Download ${data.version}`;
-        })
-        .catch(error => console.error('Error fetching update data:', error));
-}
-
-
-// 页面加载完成后获取更新内容
-window.onload = fetchUpdateData;
-    function startDownload() {
-        // 显示加载动画
-        document.querySelector('.loading-spinner').classList.remove('hidden');
-        document.querySelector('p').classList.remove('hidden');
-
-        // 创建一个临时的a元素来触发下载
-        var downloadLink = document.createElement('a');
-        downloadLink.href = 'https://cloud.wujiyan.cc/f/r6elsW/worldbox_AncientWarfare.zip';
-        downloadLink.download = ''; // 如果需要指定下载文件名，可以在这里设置
-        document.body.appendChild(downloadLink);
-        downloadLink.click(); // 模拟点击事件以触发下载
-        document.body.removeChild(downloadLink); // 移除a元素
-
-        // 假设下载需要3秒钟，之后隐藏加载动画并显示模态框
-        setTimeout(function() {
-            document.querySelector('.loading-spinner').classList.add('hidden');
-            document.querySelector('p').classList.add('hidden');
-            modal.style.display = "block";
-        }, 3000);
-    }
-
-    // 当用户点击关闭按钮时，关闭模态框
-    span.onclick = function() {
-        modal.style.display = "none";
-    }
-
-    // 当用户点击模态框外部时，关闭模态框
-    window.onclick = function(event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
-        }
-    }
-</script>
- 
+        document.querySelectorAll('.btn').forEach(btn => {
+            btn.addEventListener('touchstart', () => {
+                btn.style.transform = 'scale(0.98)';
+            });
+            btn.addEventListener('touchend', () => {
+                btn.style.transform = 'scale(1)';
+            });
+        });
+    </script>
 </body>
 </html>
- 
