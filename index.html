@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="favicon.ico" type="image/x-icon">
-    <title>世界盒子春秋mod王朝模组官网 | WorldBox AncientWarfare Mod</title>
+    <title data-i18n="title">世界盒子春秋mod王朝模组官网 | WorldBox AncientWarfare Mod</title>
     <meta name="description" content="想要继承制？族谱？君主世系？天命？国家历史？内阁？想看死掉的小人？转生？前世？时代？国策？看海还是扮演国家？谥号？庙号？更多风味包？自定义剧本？自定义国家名字小人名字中文名？想看已经亡了国家的历史？还想要一大堆辅助功能？想禁用原版不合理的机制？想让装备像宝物一样一直传下去？传家宝？想要AI生成的称号传记以及小人一生评价？想要让你的世界盒子变成欧陆风云+十字军之王+钢铁雄心混合体吗？春秋模组适合你~春秋模组已改名王朝模组!无论你想看海国家兴衰还是氏族兴衰还是扮演某个国家还是观察小人一生春秋都可能满足你！还有历史人物功能，非常非常多的彩蛋！还有更多...Want to inherit a system? Genealogy? Monarchal lineage? Mandate of Heaven? National history? Cabinet? Want to see dead villains? Reincarnation? Past lives? Era? National policies? To watch the sea or play as a nation? Posthumous titles? Temple names? More flavor packs? Customized scripts? Customized names for nations and characters in Chinese? Want to see the history of a nation that has already perished? Want a bunch of auxiliary features? Want to disable the unreasonable mechanics of the original version? Want equipment to be passed down like treasures? Heirlooms? Want AI-generated titles, biographies, and life evaluations for characters? Want to turn your world into a mix of Europa Universalis + Crusader Kings + Hearts of Iron? The Spring and Autumn mod is for you~ The Spring and Autumn mod has been renamed to the Dynasty mod! Whether you want to watch the rise and fall of nations or clans, play as a certain country, or observe the life of a character, the Spring and Autumn mod can satisfy you! There's also a historical figures feature, very many Easter eggs! And more...">
     <meta name="keywords" content="世界盒子,春秋mod,王朝模组,历史爱好者,策略游戏,春秋时期,政治斗争,军事冲突,文化发展">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -16,7 +15,23 @@
 body{
 	-webkit-tap-highlight-color: transparent;/*把高亮颜色设置为透明，也可以使用rgba的形式*/
 }
-
+.language-switcher {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            z-index: 1000;
+            background: rgba(10,18,15,0.9);
+            border: 1px solid var(--secondary-color);
+            border-radius: 20px;
+            padding: 5px 10px;
+        }
+        .language-switcher select {
+            background: transparent;
+            color: var(--secondary-color);
+            border: none;
+            outline: none;
+            cursor: pointer;
+        }
         :root {
             --primary-color: #1a2a27;
             --secondary-color: #d4af37;
@@ -366,57 +381,66 @@ button:focus {
     </style>
 </head>
 <body>
+<div class="language-switcher">
+        <select id="languageSelect">
+            <option value="zh">中文</option>
+            <option value="en">English</option>
+        </select>
+    </div>
+<!-- 修改后的闪屏内容 -->
     <div class="splash-screen">
         <div class="splash-content">
-            <h3 style="color:var(--secondary-color);margin-bottom:1rem;">⚠️ 健康游戏提示</h3>
-            <p style="color:#c5b798;line-height:1.6;">适度游戏益脑，沉迷游戏伤身<br>合理安排时间，享受健康生活</p>
+            <h3 data-i18n="splash.title" style="color:var(--secondary-color);margin-bottom:1rem;"></h3>
+            <p data-i18n="splash.content" style="color:#c5b798;line-height:1.6;"></p>
             <button onclick="this.parentElement.parentElement.remove()" 
-                    style="margin-top:1.5rem;padding:0.5rem 2rem;background:var(--accent-color);border:none;color:white;border-radius:20px;cursor:pointer;">
-                朕知道了
+                    style="margin-top:1.5rem;padding:0.5rem 2rem;background:var(--accent-color);border:none;color:white;border-radius:20px;cursor:pointer;"
+                    data-i18n="splash.button">
             </button>
         </div>
     </div>
 
+    <!-- 修改后的主要内容 -->
     <div class="particles">
         <div class="container">
             <div class="main-content">
                 <header class="header">
-                    <h1 class="title">世界盒子·王朝模组</h1>
-                    <p class="subtitle">
-                        新春特别版震撼上线！体验全新王朝模组<br>
-                        解锁上古神话与史诗的全新玩法
-                    </p>
+                    <h1 class="title" data-i18n="header.title"></h1>
+                    <p class="subtitle" data-i18n="header.subtitle"></p>
                 </header>
 
-<div class="button-group">
-    <button onclick="window.location.href='https://cloud.wujiyan.cc/f/r6elsW/worldbox_AncientWarfare.zip'" class="btn btn-download">
-        <i class="fas fa-download"></i>
-        立即下载 (v2.3.1)
-    </button>
-    <button onclick="window.location.href='http://afdian.com/a/chunqiu_worldbox'" class="btn btn-sponsor">
-        <i class="fas fa-hand-holding-heart"></i>
-        赞助作者
-    </button>
-    <button onclick="window.location.href='https://docs.qq.com/aio/DQVVjVlpYUlZqQ2JI?p=Dxr1PWzEFxA9mQnJ6U0lES'" class="btn btn-docs">
-        <i class="fas fa-scroll"></i>
-        模组文档·新人必读
-    </button>
-</div>
+                <div class="button-group">
+                    <button onclick="window.location.href='https://cloud.wujiyan.cc/f/r6elsW/worldbox_AncientWarfare.zip'" 
+                            class="btn btn-download"
+                            data-i18n="buttons.download">
+                        <i class="fas fa-download"></i>
+                    </button>
+                    <button onclick="window.location.href='http://afdian.com/a/chunqiu_worldbox'" 
+                            class="btn btn-sponsor"
+                            data-i18n="buttons.sponsor">
+                        <i class="fas fa-hand-holding-heart"></i>
+                    </button>
+                    <button onclick="window.location.href='https://docs.qq.com/aio/DQVVjVlpYUlZqQ2JI?p=Dxr1PWzEFxA9mQnJ6U0lES'" 
+                            class="btn btn-docs"
+                            data-i18n="buttons.docs">
+                        <i class="fas fa-scroll"></i>
+                    </button>
+                </div>
 
                 <div class="copyright">
-                    🔒模组作者@大日<br>
-                    <span style="font-size:0.8em;">本模组与WorldBox官方无关</span>
+                    <span data-i18n="footer.copyright"></span><br>
+                    <span data-i18n="footer.disclaimer" style="font-size:0.8em;"></span>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- 修改后的健康提示 -->
     <div class="health-notice">
         <span style="color:var(--secondary-color);">⚖️</span> 
-        健康游戏提示：建议每60分钟休息5-10分钟，合理安排游戏时间
+        <span data-i18n="notice.message"></span>
         <button onclick="this.parentElement.style.display='none'" 
-                style="margin-left:1rem;padding:0.2rem 0.8rem;background:transparent;border:1px solid var(--secondary-color);color:var(--secondary-color);border-radius:15px;cursor:pointer;">
-            关闭
+                style="margin-left:1rem;padding:0.2rem 0.8rem;background:transparent;border:1px solid var(--secondary-color);color:var(--secondary-color);border-radius:15px;cursor:pointer;"
+                data-i18n="notice.close">
         </button>
     </div>
 
@@ -436,6 +460,66 @@ button:focus {
             btn.addEventListener('touchend', () => {
                 btn.style.transform = 'scale(1)';
             });
+        });
+        
+        const translations = {
+            zh: {
+                "title": "世界盒子春秋mod王朝模组官网 | WorldBox AncientWarfare Mod",
+                "splash.title": "⚠️ 健康游戏提示",
+                "splash.content": "适度游戏益脑，沉迷游戏伤身<br>合理安排时间，享受健康生活",
+                "splash.button": "朕知道了",
+                "header.title": "世界盒子·王朝模组",
+                "header.subtitle": "新春特别版震撼上线！体验全新王朝模组<br>解锁上古神话与史诗的全新玩法",
+                "buttons.download": "立即下载 (v2.3.1)",
+                "buttons.sponsor": "赞助作者",
+                "buttons.docs": "模组文档·新人必读",
+                "footer.copyright": "🔒模组作者@大日",
+                "footer.disclaimer": "本模组与WorldBox官方无关",
+                "notice.message": "健康游戏提示：建议每60分钟休息5-10分钟，合理安排游戏时间",
+                "notice.close": "关闭"
+            },
+            en: {
+                "title": "WorldBox Dynasty Mod Official | AncientWarfare Mod",
+                "splash.title": "⚠️ Game Health Reminder",
+                "splash.content": "Play in moderation, avoid addiction<br>Balance your time, enjoy healthy life",
+                "splash.button": "I Understand",
+                "header.title": "WorldBox Dynasty Mod",
+                "header.subtitle": "New Spring Edition Released! Experience the all-new Dynasty Mod<br>Unlock mythical and epic gameplay features",
+                "buttons.download": "Download Now (v2.3.1)",
+                "buttons.sponsor": "Sponsor Author",
+                "buttons.docs": "Documentation·Must Read",
+                "footer.copyright": "🔒Mod Author@Dari",
+                "footer.disclaimer": "This mod is not affiliated with WorldBox official",
+                "notice.message": "Health Reminder: Take 5-10 minutes break every 60 minutes",
+                "notice.close": "Close"
+            }
+        };
+
+        // 语言切换功能
+        let currentLang = localStorage.getItem('lang') || navigator.language.slice(0,2) || 'zh';
+        document.getElementById('languageSelect').value = currentLang;
+
+        function updateContent() {
+            document.querySelectorAll('[data-i18n]').forEach(element => {
+                const key = element.getAttribute('data-i18n');
+                const translation = translations[currentLang][key];
+                if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
+                    element.placeholder = translation;
+                } else {
+                    element.innerHTML = translation;
+                }
+            });
+            document.documentElement.lang = currentLang;
+        }
+
+        // 初始化语言
+        updateContent();
+
+        // 语言切换事件
+        document.getElementById('languageSelect').addEventListener('change', (e) => {
+            currentLang = e.target.value;
+            localStorage.setItem('lang', currentLang);
+            updateContent();
         });
     </script>
 </body>
