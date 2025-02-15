@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>哔哩哔哩纯净搜索 - 去除热搜的B站搜索工具</title>
+<meta name="description" content="提供无热搜干扰的B站内嵌搜索服务，支持移动端适配的简洁搜索体验">
+<meta name="keywords" content="哔哩哔哩搜索,B站去热搜,简洁搜索,内嵌搜索工具">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell;
+        }
+
+        body {
+            background: #F4F4F4;
+            min-height: 100vh;
+        }
+
+        .search-container {
+            max-width: 600px;
+            margin: 20px auto 0;
+            padding: 0 15px;
+            position: sticky;
+            top: 0;
+            background: #F4F4F4;
+            z-index: 100;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .search-box {
+            background: #f5f5f5;
+            border-radius: 12px;
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+        }
+
+        .search-icon {
+            width: 20px;
+            height: 20px;
+            margin-right: 12px;
+            fill: #FF6699;
+        }
+
+        #searchInput {
+            flex: 1;
+            border: none;
+            outline: none;
+            font-size: 16px;
+            color: #333;
+            padding: 8px 0;
+            background: transparent;
+            padding-right: 40px; 
+        }
+        
+.clear-icon {
+    position: absolute;
+    right: 12px;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    fill: #999;
+    transition: opacity 0.2s;
+}
+.clear-icon:hover {
+    fill: #666;
+}
+        #searchInput::placeholder {
+            color: #999;
+        }
+
+        #resultFrame {
+            width: 100%;
+            height: calc(100vh - 100px);
+            border: none;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body><div class="search-container">
+    <div class="search-box">
+        <svg class="search-icon" viewBox="0 0 24 24">
+            <path d="M15.5 14h-.79l-.28-.27a6.5 6.5 0 1 0-.7.7l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0A4.5 4.5 0 1 1 14 9.5 4.494 4.494 0 0 1 9.5 14z"/>
+        </svg>
+        <input type="text" id="searchInput" placeholder="搜索哔哩哔哩" autofocus>
+        <svg class="clear-icon" viewBox="0 0 24 24" style="display: none;">
+            <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+        </svg>
+    </div>
+</div>
+<iframe id="resultFrame" src="about:blank"></iframe>
+
+<script>
+    const input = document.getElementById('searchInput');
+    const frame = document.getElementById('resultFrame');
+    const clearIcon = document.querySelector('.clear-icon');
+    // 随机选择搜索词
+    const keywords = ['世界盒子春秋', '掌盟人频道'];
+    const randomKeyword = keywords[Math.random() < 0.5 ? 0 : 1];
+
+    function doSearch() {
+        const keyword = encodeURIComponent(input.value.trim());
+        if (keyword) {
+            frame.src = `https://m.bilibili.com/search?keyword=${keyword}`;
+        }
+    }
+
+    // 页面加载完成后自动搜索
+    document.addEventListener('DOMContentLoaded', () => {
+        input.value = randomKeyword;
+        doSearch();
+        input.value = ''
+    });
+
+    input.addEventListener('input', doSearch);
+    
+    // 初始加载空白页时隐藏iframe
+    frame.style.display = 'none';
+    frame.addEventListener('load', () => {
+        frame.style.display = 'block';
+    });
+</script>
