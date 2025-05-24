@@ -1,96 +1,145 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN" class=""> <!-- class="dark" will be added by JS -->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <link rel="icon" href="favicon.ico" type="image/x-icon">
     <title data-i18n="title">世界盒子春秋mod王朝模组官网 | WorldBox AncientWarfare Mod</title>
+    <meta name="msvalidate.01" content="1D318605B178A64B63BD3C1F1D2D36C0" />
     <meta name="description" content="想要继承制？族谱？君主世系？天命？国家历史？内阁？想看死掉的小人？转生？前世？时代？国策？看海还是扮演国家？谥号？庙号？更多风味包？自定义剧本？自定义国家名字小人名字中文名？想看已经亡了国家的历史？还想要一大堆辅助功能？想禁用原版不合理的机制？想让装备像宝物一样一直传下去？传家宝？想要AI生成的称号传记以及小人一生评价？想要让你的世界盒子变成欧陆风云+十字军之王+钢铁雄心混合体吗？春秋模组适合你~春秋模组已改名王朝模组!无论你想看海国家兴衰还是氏族兴衰还是扮演某个国家还是观察小人一生春秋都可能满足你！还有历史人物功能，非常非常多的彩蛋！还有更多...Want to inherit a system? Genealogy? Monarchal lineage? Mandate of Heaven? National history? Cabinet? Want to see dead villains? Reincarnation? Past lives? Era? National policies? To watch the sea or play as a nation? Posthumous titles? Temple names? More flavor packs? Customized scripts? Customized names for nations and characters in Chinese? Want to see the history of a nation that has already perished? Want a bunch of auxiliary features? Want to disable the unreasonable mechanics of the original version? Want equipment to be passed down like treasures? Heirlooms? Want AI-generated titles, biographies, and life evaluations for characters? Want to turn your world into a mix of Europa Universalis + Crusader Kings + Hearts of Iron? The Spring and Autumn mod is for you~ The Spring and Autumn mod has been renamed to the Dynasty mod! Whether you want to watch the rise and fall of nations or clans, play as a certain country, or observe the life of a character, the Spring and Autumn mod can satisfy you! There's also a historical figures feature, very many Easter eggs! And more...">
     <meta name="keywords" content="世界盒子,春秋mod,王朝模组,历史爱好者,策略游戏,春秋时期,政治斗争,军事冲突,文化发展">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class', // Enable class-based dark mode
+            theme: {
+                extend: {
+                    colors: {
+
+                        'brand-primary': '#1a2a27',      // Dark background
+                        'brand-secondary': '#d4af37',     // Gold accent
+                        'brand-accent': '#c53d13',       // Red/Orange CTA accent
+                        'brand-text': '#e4dcc7',         // Light text for dark bg
+                        'brand-subtext': '#c5b798',      // Subtler light text
+                        'brand-bg-translucent': 'rgba(10,18,15,0.85)', // Main content bg (dark)
+                        'brand-bg-dark-translucent': 'rgba(10,18,15,0.95)', // Popups bg (dark)
+                        'brand-purple-start': '#800080',
+                        'brand-purple-end': '#6a006a',
+                        'brand-docs-start': '#2c4a42',    // Docs button dark
+                        'brand-docs-end': '#3a665d',      // Docs button dark
+
+                       
+                        'light-bg': '#f8fafc', // Tailwind slate-50
+                        'light-surface': 'rgba(255, 255, 255, 0.9)', // White with opacity for content
+                        'light-text-primary': '#1e293b', // Tailwind slate-800
+                        'light-text-secondary': '#475569', // Tailwind slate-600
+                        'light-accent-primary': '#d4af37', // Gold - can work on light too
+                        'light-accent-cta': '#c53d13',  // Red/Orange - for consistency
+                        'light-docs-start': '#0e7490', // Tailwind cyan-600
+                        'light-docs-end': '#0891b2',   // Tailwind cyan-500
+                        'light-border': '#cbd5e1', // Tailwind slate-300
+                    },
+                    textShadow: {
+                        'glow-dark': '0 0 15px rgba(212,175,55,0.5)', // Only for dark theme title
+                    },
+                    boxShadow: {
+                        // Dark theme shadows
+                        'glow-soft-dark': '0 0 40px rgba(212,175,55,0.1)',
+                        'accent-glow-dark': '0 4px 20px rgba(197,61,19,0.3)',
+                        'purple-glow-dark': '0 4px 20px rgba(128, 0, 128, 0.3)',
+                        'docs-glow-dark': '0 4px 20px rgba(42,85,75,0.3)',
+                        // Light theme shadows (using Tailwind defaults often better, but can define here)
+                        'surface-light': '0 10px 15px -3px rgb(0 0 0 / 0.07), 0 4px 6px -4px rgb(0 0 0 / 0.07)',
+                        'button-light': '0 4px 14px 0 rgba(0, 118, 255, 0.39)', // Example for a blue button
+                    },
+                    fontFamily: {
+                        'sans': ['Microsoft YaHei', 'system-ui', 'sans-serif'],
+                    },
+                    animation: { // Animations remain largely the same
+                        'pageFadeIn': 'pageFadeIn 1s ease forwards',
+                        'headerSlide': 'headerSlide 1s ease forwards',
+                        'titleFadeIn': 'titleFadeIn 0.8s ease forwards 0.3s',
+                        'textFadeIn': 'textFadeIn 0.8s ease forwards 0.6s',
+                        'btnFadeIn': 'btnFadeIn 0.8s ease forwards 0.9s',
+                        'noticeSlide': 'noticeSlide 1s ease forwards 2s',
+                        'splashFade': 'splashFade 1.5s ease forwards',
+                        'splashScale': 'splashScale 1.5s ease',
+                        'docPulse': 'docPulse 2s ease-in-out infinite 1.5s', // This one might need theme adjustments
+                        'iconSwing': 'iconSwing 2s ease-in-out infinite',
+                        'newBlink': 'newBlink 1.5s ease-in-out infinite',
+                    },
+                    keyframes: { // Keyframes also remain
+                        pageFadeIn: { from: { opacity: '0', transform: 'translateY(20px)' }, to: { opacity: '1', transform: 'translateY(0)' } },
+                        headerSlide: { to: { transform: 'translateY(0)' } },
+                        titleFadeIn: { from: { opacity: '0', transform: 'scale(0.9)' }, to: { opacity: '1', transform: 'scale(1)' } },
+                        textFadeIn: { from: { opacity: '0', transform: 'translateY(10px)' }, to: { opacity: '1', transform: 'translateY(0)' } },
+                        btnFadeIn: { from: { opacity: '0', transform: 'translateY(20px)' }, to: { opacity: '1', transform: 'translateY(0)' } },
+                        noticeSlide: { to: { transform: 'translateY(0)' } },
+                        splashFade: { '0%': { opacity: '0' }, '20%,80%': { opacity: '1' }, '100%': { opacity: '0', visibility: 'hidden' } },
+                        splashScale: { from: { transform: 'scale(0.9)' }, to: { transform: 'scale(1)' } },
+                        docPulse: { // Base pulse, colors will be handled by button classes
+                            '0%, 100%': { transform: 'scale(1)'},
+                            '50%': { transform: 'scale(1.02)'},
+                        },
+                        iconSwing: { '0%, 100%': { transform: 'rotate(0deg)' }, '25%': { transform: 'rotate(5deg)' }, '75%': { transform: 'rotate(-5deg)' } },
+                        newBlink: { '0%, 100%': { opacity: '0.9', transform: 'rotate(10deg) scale(1)' }, '50%': { opacity: '1', transform: 'rotate(10deg) scale(1.1)' } }
+                    }
+                }
+            },
+            plugins: [
+                function ({ addUtilities, theme }) {
+                  const newUtilities = {
+                    '.text-shadow-glow-dark': { // Specific for dark theme
+                      textShadow: theme('textShadow.glow-dark'),
+                    },
+                  }
+                  addUtilities(newUtilities, ['dark']) // Apply only in dark mode
+                }
+            ],
+        }
+    </script>
     <style>
-    html {
-	-webkit-text-size-adjust: 100%
-}
-body{
-	-webkit-tap-highlight-color: transparent;/*把高亮颜色设置为透明，也可以使用rgba的形式*/
-}
-.language-switcher {
-            position: fixed;
-            top: 15px;
-            right: 15px;
-            z-index: 1000;
-            background: rgba(10,18,15,0.9);
-            border: 1px solid var(--secondary-color);
-            border-radius: 20px;
-            padding: 5px 10px;
-        }
-        .language-switcher select {
-            background: transparent;
-            color: var(--secondary-color);
-            border: none;
-            outline: none;
-            cursor: pointer;
-        }
         :root {
-            --primary-color: #1a2a27;
-            --secondary-color: #d4af37;
-            --accent-color: #c53d13;
-            --text-glow: rgba(212,175,55,0.5);
+            /* CSS Variables for deep customization, defaults are for LIGHT theme */
+            --body-bg-radial-start: rgba(230, 235, 240, 0.6); /* Light, subtle */
+            --body-bg-radial-end: rgba(245, 248, 250, 0.8);   /* Light, subtle */
+            --body-bg-svg-fill: '%23A0AEC0';
+            --main-border-image-val: linear-gradient(160deg, #d4af37 10%, #fde68a 50%, #e5e7eb 90%) 1; /* Gold to light gray for light */
+            --particle-fill-val: '%23A0AEC0'; /* Slate-400 for light particles */
+            --splash-bg-from: #e2e8f0; /* slate-200 */
+            --splash-bg-to: #f1f5f9; /* slate-100 */
+            --new-badge-bg: #c53d13; /* brand-accent, consistent */
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        .dark:root {
+            /* Dark theme overrides for CSS Variables */
+            --body-bg-radial-start: rgba(26,42,39,0.9);
+            --body-bg-radial-end: rgba(10,18,15,0.95);
+            --body-bg-svg-fill: '%2317352f';
+            --main-border-image-val: linear-gradient(160deg, #d4af37 20%, #1a2a27 60%, #3a2e1d 100%) 1;
+            --particle-fill-val: '%23d4af37'; /* Gold for dark particles */
+            --splash-bg-from: #1a2a27; /* brand-primary */
+            --splash-bg-to: #12201d;
         }
 
+        html { -webkit-text-size-adjust: 100%; }
+        body { -webkit-tap-highlight-color: transparent; }
+
+        /* Dynamic background using CSS Variables */
         body {
-            font-family: 'Microsoft YaHei', system-ui, sans-serif;
             background: 
                 radial-gradient(circle at 50% 50%, 
-                    rgba(26,42,39,0.9) 0%,
-                    rgba(10,18,15,0.95) 100%),
-                url('data:image/svg+xml,<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><text x="-10" y="60" font-size="30" fill="%2317352f" transform="rotate(-45)">卐</text></svg>');
-            color: #e4dcc7;
-            min-height: 100vh;
-            position: relative;
-            overflow-x: hidden;
-            opacity: 0;
-            animation: pageFadeIn 1s ease forwards;
+                    var(--body-bg-radial-start) 0%,
+                    var(--body-bg-radial-end) 100%),
+                url('data:image/svg+xml,<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><text x="-10" y="60" font-size="30" fill="var(--body-bg-svg-fill)" transform="rotate(-45)">日</text></svg>');
         }
-
-        @keyframes pageFadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem 1rem;
-            position: relative;
-            z-index: 2;
-        }
-button:focus {
-    outline: none;
-  }
-        .main-content {
-            border: 3px solid;
-            border-image: 
-                linear-gradient(160deg, 
-                    var(--secondary-color) 20%,
-                    var(--primary-color) 60%,
-                    #3a2e1d 100%) 1;
-            border-radius: 8px;
-            background: rgba(10,18,15,0.85);
-            box-shadow: 0 0 40px rgba(212,175,55,0.1);
-            position: relative;
-            overflow: hidden;
+        .main-content-bordered { /* For the animated border */
+            border: 3px solid; /* Fallback */
+            border-image: var(--main-border-image-val);
             animation: borderFlow 6s linear infinite;
         }
-
-        @keyframes borderFlow {
+        @keyframes borderFlow { /* Animation remains, colors change via CSS var */
             0% { border-image-slice: 1; }
             50% { border-image-slice: 2; }
             100% { border-image-slice: 1; }
@@ -103,360 +152,170 @@ button:focus {
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><circle cx="50" cy="50" r="1.2" fill="%23d4af37"/></svg>');
+            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><circle cx="50" cy="50" r="1.2" fill="var(--particle-fill-val)"/></svg>');
             animation: particleMove 20s linear infinite;
-            opacity: 0.3;
+            opacity: 0.3; /* Could also be a CSS var if needed */
+            z-index: -1; 
         }
-
-        .header {
-            text-align: center;
-            padding: 3rem 1rem;
-            position: relative;
-            transform: translateY(30px);
-            animation: headerSlide 1s ease forwards;
-        }
-
-        @keyframes headerSlide {
-            to { transform: translateY(0); }
-        }
-
-        .title {
-            font-size: 2.5rem;
-            color: var(--secondary-color);
-            text-shadow: 0 0 15px var(--text-glow);
-            margin-bottom: 1.5rem;
-            font-weight: 700;
-            letter-spacing: 2px;
-            opacity: 0;
-            animation: titleFadeIn 0.8s ease forwards 0.3s;
-        }
-
-        @keyframes titleFadeIn {
-            from { opacity: 0; transform: scale(0.9); }
-            to { opacity: 1; transform: scale(1); }
-        }
-
-        .subtitle {
-            font-size: 1.2rem;
-            color: #c5b798;
-            max-width: 600px;
-            margin: 0 auto;
-            line-height: 1.6;
-            opacity: 0;
-            animation: textFadeIn 0.8s ease forwards 0.6s;
-        }
-
-        @keyframes textFadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .button-group {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1.5rem;
-            justify-content: center;
-            padding: 3rem 0;
-            outline:none;
-            
-        }
-
-        .btn {
-            padding: 1rem 2rem;
-            border: none;
-            border-radius: 50px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-            position: relative;
-            overflow: hidden;
-            max-width: 240px;
-            width: 100%;
-            justify-content: center;
-            opacity: 0;
-            animation: btnFadeIn 0.8s ease forwards 0.9s;
-            outline:none;
-        }
-
-        @keyframes btnFadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .btn-download {
-            background: linear-gradient(135deg, 
-                var(--accent-color) 0%,
-                var(--secondary-color) 100%);
-            color: #fff;
-            box-shadow: 0 4px 20px rgba(197,61,19,0.3);
-            outline: none;
-        }
-        .btn-sponsor {
-    background: linear-gradient(135deg, 
-        #800080 0%,
-        #6a006a 100%);
-    color: #fff;
-    box-shadow: 0 4px 20px rgba(128, 0, 128, 0.3);
-    animation: btnFadeIn 0.8s ease forwards 0.9s;
-}
-
-.btn-sponsor:hover {
-    background: linear-gradient(135deg, 
-        #6a006a 0%,
-        #800080 100%);
-    box-shadow: 0 6px 25px rgba(128, 0, 128, 0.5);
-}
-
-        .btn-docs {
-            background: linear-gradient(135deg, 
-                #2c4a42 0%,
-                #3a665d 100%);
-            color: var(--secondary-color);
-            box-shadow: 0 4px 20px rgba(42,85,75,0.3);
-            animation: 
-                docPulse 2s ease-in-out infinite 1.5s,
-                btnFadeIn 0.8s ease forwards 0.9s !important;
-            display: flex !important;
-            opacity: 1 !important;
-            outline: none;
-        }
-
-        @keyframes docPulse {
-            0% { transform: scale(1); box-shadow: 0 4px 20px rgba(42,85,75,0.3); }
-            50% { transform: scale(1.02); box-shadow: 0 6px 25px rgba(42,85,75,0.5); }
-            100% { transform: scale(1); box-shadow: 0 4px 20px rgba(42,85,75,0.3); }
-        }
-
-        .btn::after {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(45deg, 
-                transparent 30%,
-                rgba(255,255,255,0.1) 50%,
-                transparent 70%);
-            transform: rotate(45deg);
-            outline: none;
-            transition: all 0.5s;
-        }
-
-        .btn:hover::after {
-            left: 150%;
-            outline: none;
-        }
-
-        .btn-docs:hover {
-            animation: docHover 0.5s ease forwards;
-            outline: none;
-        }
-
-        @keyframes docHover {
-            to {
-                transform: rotate(-2deg) scale(1.05);
-                background: linear-gradient(135deg, 
-                    #3a665d 0%,
-                    #2c4a42 100%);
-            }
-        }
-
-        .btn-docs i {
-            animation: iconSwing 2s ease-in-out infinite;
-            outline: none;
-        }
-
-        @keyframes iconSwing {
-            0%, 100% { transform: rotate(0deg); }
-            25% { transform: rotate(5deg); }
-            75% { transform: rotate(-5deg); }
-        }
-
-        .btn-docs::before {
-            content: 'NEW';
-            position: absolute;
-            top: -8px;
-            right: -8px;
-            outline: none;
-            background: #c53d13;
-            color: white;
-            font-size: 0.7rem;
-            padding: 2px 8px;
-            border-radius: 10px;
-            transform: rotate(10deg);
-            animation: newBlink 1.5s ease-in-out infinite;
-        }
-
-        @keyframes newBlink {
-            0%, 100% { opacity: 0.9; transform: rotate(10deg) scale(1); }
-            50% { opacity: 1; transform: rotate(10deg) scale(1.1); }
-        }
-
-        @media (max-width: 768px) {
-            .title { font-size: 2rem; }
-            .subtitle { font-size: 1rem; }
-            .btn { 
-                max-width: 90%;
-                padding: 1rem 1.5rem;
-                font-size: 1rem;
-                outline: none;
-            }
-        }
-
-        .btn:active {
-            transform: scale(0.98);
-            outline: none;
-        }
-
-        .health-notice {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: rgba(10,18,15,0.95);
-            padding: 1rem;
-            text-align: center;
-            border-top: 2px solid var(--accent-color);
-            z-index: 999;
-            transform: translateY(100%);
-            animation: noticeSlide 1s ease forwards 2s;
-        }
-
-        @keyframes noticeSlide {
-            to { transform: translateY(0); }
-        }
-
-        .splash-screen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0,0,0,0.95);
-            z-index: 9999;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            animation: splashFade 1.5s ease forwards;
-        }
-
-        @keyframes splashFade {
-            0% { opacity: 0; }
-            20%,80% { opacity: 1; }
-            100% { opacity: 0; visibility: hidden; }
-        }
-
-        .splash-content {
-            background: linear-gradient(45deg, var(--primary-color), #12201d);
-            padding: 2rem;
-            border-radius: 10px;
-            text-align: center;
-            max-width: 400px;
-            animation: splashScale 1.5s ease;
-        }
-
-        @keyframes splashScale {
-            from { transform: scale(0.9); }
-            to { transform: scale(1); }
-        }
-
-        .copyright {
-            text-align: center;
-            padding: 2rem 0;
-            color: #c5b798;
-            font-size: 0.9rem;
-            opacity: 0.8;
-        }
-
         @keyframes particleMove {
             from { background-position: 0 0; }
             to { background-position: 100px 100px; }
         }
+
+        .btn-shine::after { 
+            content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
+            background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.1) 50%, transparent 70%);
+            transform: rotate(45deg); transition: all 0.5s; pointer-events: none;
+        }
+        .btn-shine:hover::after { left: 150%; }
+
+        .btn-docs-new::before { 
+            content: 'NEW'; position: absolute; top: -8px; right: -8px;
+            background: var(--new-badge-bg); /* Use CSS var for badge bg */
+            color: white; font-size: 0.7rem; padding: 2px 8px; border-radius: 10px;
+            transform: rotate(10deg); animation: newBlink 1.5s ease-in-out infinite;
+        }
     </style>
 </head>
-<body>
-<div class="language-switcher">
-        <select id="languageSelect">
-            <option value="zh">中文</option>
-            <option value="en">English</option>
-        </select>
+<body class="font-sans bg-light-bg text-light-text-primary dark:bg-brand-primary dark:text-brand-text min-h-screen relative overflow-x-hidden opacity-0 animate-pageFadeIn">
+
+    <div class="fixed top-4 right-4 z-50 flex items-center space-x-3">
+        <button id="theme-toggle" type="button" class="p-2 rounded-md text-light-text-secondary hover:text-light-accent-primary dark:text-brand-subtext dark:hover:text-brand-secondary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-light-accent-primary dark:focus:ring-brand-secondary">
+            <i id="theme-icon-light" class="fas fa-sun text-lg"></i> <!-- Hidden by default in JS -->
+            <i id="theme-icon-dark" class="fas fa-moon text-lg"></i> <!-- Shown by default in JS -->
+        </button>
+        <div class="bg-light-surface/80 dark:bg-brand-bg-dark-translucent backdrop-blur-sm border border-light-border dark:border-brand-secondary rounded-[20px] px-2.5 py-1.5">
+            <select id="languageSelect" class="bg-transparent text-light-text-secondary dark:text-brand-secondary border-none outline-none cursor-pointer text-sm focus:ring-0">
+                <option value="zh">中文</option>
+                <option value="en">English</option>
+            </select>
+        </div>
     </div>
-<!-- 修改后的闪屏内容 -->
-    <div class="splash-screen">
-        <div class="splash-content">
-            <h3 data-i18n="splash.title" style="color:var(--secondary-color);margin-bottom:1rem;"></h3>
-            <p data-i18n="splash.content" style="color:#c5b798;line-height:1.6;"></p>
-            <button onclick="this.parentElement.parentElement.remove()" 
-                    style="margin-top:1.5rem;padding:0.5rem 2rem;background:var(--accent-color);border:none;color:white;border-radius:20px;cursor:pointer;"
+
+    <div class="splash-screen fixed inset-0 z-[9999] flex items-center justify-center bg-black/80 dark:bg-black/95 opacity-0 animate-splashFade">
+        <!-- Splash content uses CSS vars for gradient -->
+        <div class="splash-content p-6 sm:p-8 rounded-lg text-center max-w-sm sm:max-w-md mx-4 animate-splashScale"
+             style="background: linear-gradient(45deg, var(--splash-bg-from), var(--splash-bg-to));">
+            <h3 data-i18n="splash.title" class="text-xl sm:text-2xl mb-3 sm:mb-4 font-semibold text-light-accent-primary dark:text-brand-secondary"></h3>
+            <p data-i18n="splash.content" class="leading-relaxed text-sm sm:text-base text-light-text-secondary dark:text-brand-subtext"></p>
+            <button onclick="this.parentElement.parentElement.style.display='none'" 
+                    class="mt-5 sm:mt-6 py-2 px-6 sm:px-8 bg-light-accent-cta dark:bg-brand-accent text-white rounded-full cursor-pointer hover:opacity-90 transition-opacity duration-200 text-sm sm:text-base"
                     data-i18n="splash.button">
             </button>
         </div>
     </div>
 
-    <!-- 修改后的主要内容 -->
-    <div class="particles">
-        <div class="container">
-            <div class="main-content">
-                <header class="header">
-                    <h1 class="title" data-i18n="header.title"></h1>
-                    <p class="subtitle" data-i18n="header.subtitle"></p>
+    <div class="particles relative min-h-screen">
+        <div class="container mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 py-12 sm:py-20 relative z-10">
+            <div class="main-content-bordered bg-light-surface/90 dark:bg-brand-bg-translucent backdrop-blur-sm shadow-surface-light dark:shadow-glow-soft-dark rounded-lg overflow-hidden">
+                <header class="text-center py-10 sm:py-16 px-4 sm:px-6 transform translate-y-[30px] animate-headerSlide">
+                    <h1 class="title text-3xl sm:text-4xl lg:text-5xl font-bold text-light-accent-primary dark:text-brand-secondary mb-4 sm:mb-6 tracking-wider dark:text-shadow-glow-dark animate-titleFadeIn" data-i18n="header.title"></h1>
+                    <p class="subtitle text-base sm:text-lg text-light-text-secondary dark:text-brand-subtext max-w-xl lg:max-w-2xl mx-auto leading-relaxed animate-textFadeIn" data-i18n="header.subtitle"></p>
                 </header>
 
-                <div class="button-group">
+                <div class="button-group flex flex-col sm:flex-row flex-wrap items-center justify-center gap-6 sm:gap-8 py-10 sm:py-12 px-4">
+                    <!-- Download Button -->
                     <button onclick="window.location.href='http://afdian.com/item/bcba6730e42a11efb4eb5254001e7c00'" 
-                            class="btn btn-download"
+                            class="btn-shine relative overflow-hidden flex items-center justify-center gap-2 sm:gap-3 py-3 px-6 sm:py-4 sm:px-8 w-full max-w-[260px] sm:w-auto
+                                   bg-gradient-to-br from-light-accent-cta to-orange-500 text-white 
+                                   dark:from-brand-accent dark:to-brand-secondary 
+                                   rounded-full text-base sm:text-lg font-semibold cursor-pointer 
+                                   shadow-lg dark:shadow-accent-glow-dark 
+                                   hover:from-orange-500 hover:to-light-accent-cta dark:hover:from-brand-secondary dark:hover:to-brand-accent
+                                   transition-all duration-300 ease-in-out transform hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-light-accent-cta/70 dark:focus:ring-brand-secondary/70 animate-btnFadeIn"
                             data-i18n="buttons.download">
                         <i class="fas fa-download"></i>
                     </button>
+                    <!-- Sponsor Button -->
                     <button onclick="window.location.href='http://afdian.com/a/chunqiu_worldbox'" 
-                            class="btn btn-sponsor"
+                            class="btn-shine relative overflow-hidden flex items-center justify-center gap-2 sm:gap-3 py-3 px-6 sm:py-4 sm:px-8 w-full max-w-[260px] sm:w-auto
+                                   bg-gradient-to-br from-purple-600 to-purple-700 text-white 
+                                   dark:from-brand-purple-start dark:to-brand-purple-end 
+                                   rounded-full text-base sm:text-lg font-semibold cursor-pointer 
+                                   shadow-lg dark:shadow-purple-glow-dark
+                                   hover:from-purple-700 hover:to-purple-600 dark:hover:from-brand-purple-end dark:hover:to-brand-purple-start
+                                   transition-all duration-300 ease-in-out transform hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-purple-500/70 animate-btnFadeIn"
                             data-i18n="buttons.sponsor">
                         <i class="fas fa-hand-holding-heart"></i>
                     </button>
+                    <!-- Docs Button -->
                     <button onclick="window.location.href='https://docs.qq.com/aio/DQVVjVlpYUlZqQ2JI?p=Dxr1PWzEFxA9mQnJ6U0lES'" 
-                            class="btn btn-docs"
-                            data-i18n="buttons.docs">
-                        <i class="fas fa-scroll"></i>
+                            class="btn-docs-new btn-shine relative overflow-hidden flex items-center justify-center gap-2 sm:gap-3 py-3 px-6 sm:py-4 sm:px-8 w-full max-w-[260px] sm:w-auto
+                                   bg-gradient-to-br from-light-docs-start to-light-docs-end text-white
+                                   dark:from-brand-docs-start dark:to-brand-docs-end dark:text-brand-secondary 
+                                   rounded-full text-base sm:text-lg font-semibold cursor-pointer 
+                                   shadow-lg dark:shadow-docs-glow-dark 
+                                   transition-all duration-300 ease-in-out 
+                                   focus:outline-none focus:ring-2 focus:ring-light-docs-start/70 dark:focus:ring-brand-secondary/70 
+                                   animate-btnFadeIn custom-doc-animation animate-docPulse" 
+                                   data-i18n="buttons.docs">
+                        <i class="fas fa-scroll animate-iconSwing"></i>
                     </button>
                 </div>
 
-                <div class="copyright">
+                <div class="copyright text-center py-6 sm:py-8 text-light-text-secondary dark:text-brand-subtext text-sm opacity-80 px-4">
                     <span data-i18n="footer.copyright"></span><br>
-                    <span data-i18n="footer.disclaimer" style="font-size:0.8em;"></span>
+                    <span data-i18n="footer.disclaimer" class="text-xs"></span>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- 修改后的健康提示 -->
-    <div class="health-notice">
-        <span style="color:var(--secondary-color);">⚖️</span> 
-        <span data-i18n="notice.message"></span>
+    <div class="health-notice fixed bottom-0 left-0 right-0 bg-white/95 dark:bg-brand-bg-dark-translucent backdrop-blur-sm p-3 sm:p-4 text-center border-t-2 border-light-accent-cta dark:border-brand-accent z-[999] transform translate-y-full animate-noticeSlide">
+        <span class="text-light-accent-primary dark:text-brand-secondary text-lg">⚖️</span> 
+        <span data-i18n="notice.message" class="text-sm sm:text-base text-light-text-primary dark:text-brand-text"></span>
         <button onclick="this.parentElement.style.display='none'" 
-                style="margin-left:1rem;padding:0.2rem 0.8rem;background:transparent;border:1px solid var(--secondary-color);color:var(--secondary-color);border-radius:15px;cursor:pointer;"
+                class="ml-2 sm:ml-4 py-1 px-2 sm:px-3 bg-transparent border border-light-accent-primary dark:border-brand-secondary text-light-accent-primary dark:text-brand-secondary rounded-2xl cursor-pointer hover:bg-light-accent-primary/10 dark:hover:bg-brand-secondary/10 transition-colors duration-200 text-xs sm:text-sm focus:outline-none focus:ring-1 focus:ring-light-accent-primary dark:focus:ring-brand-secondary"
                 data-i18n="notice.close">
         </button>
     </div>
 
     <script>
-        document.querySelector('.btn-docs').addEventListener('mouseover', function() {
-            this.style.animation = 'docHover 0.5s ease forwards, docPulse 2s ease-in-out infinite';
-        });
-        
-        document.querySelector('.btn-docs').addEventListener('mouseout', function() {
-            this.style.animation = 'docPulse 2s ease-in-out infinite';
+        const themeToggleButton = document.getElementById('theme-toggle');
+        const themeIconLight = document.getElementById('theme-icon-light');
+        const themeIconDark = document.getElementById('theme-icon-dark');
+        const htmlElement = document.documentElement;
+
+        function applyTheme(theme) {
+            if (theme === 'dark') {
+                htmlElement.classList.add('dark');
+                themeIconLight.style.display = 'inline-block';
+                themeIconDark.style.display = 'none';
+            } else {
+                htmlElement.classList.remove('dark');
+                themeIconLight.style.display = 'none';
+                themeIconDark.style.display = 'inline-block';
+            }
+            localStorage.setItem('theme', theme);
+        }
+
+        themeToggleButton.addEventListener('click', () => {
+            const currentTheme = htmlElement.classList.contains('dark') ? 'dark' : 'light';
+            applyTheme(currentTheme === 'dark' ? 'light' : 'dark');
         });
 
-        document.querySelectorAll('.btn').forEach(btn => {
-            btn.addEventListener('touchstart', () => {
-                btn.style.transform = 'scale(0.98)';
+        // Initialize theme
+        const preferredTheme = localStorage.getItem('theme') || 
+                               (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        applyTheme(preferredTheme); // Apply initial theme
+
+        // Doc button animation handling (example, could be more sophisticated)
+        const btnDocs = document.querySelector('.custom-doc-animation'); // Class for easier selection
+        if (btnDocs) {
+            btnDocs.addEventListener('mouseover', function() {
+                this.classList.remove('animate-docPulse');
+                // You might want a specific hover animation class if 'docHover' was more complex
+                // For now, just removing pulse might be enough or use Tailwind's hover:scale-105 etc.
             });
+            btnDocs.addEventListener('mouseout', function() {
+                this.classList.add('animate-docPulse');
+            });
+        }
+        
+        document.querySelectorAll('.btn-shine, .btn-docs-new').forEach(btn => {
+            btn.addEventListener('touchstart', (e) => {
+                btn.style.transform = 'scale(0.95)';
+            }, { passive: true });
             btn.addEventListener('touchend', () => {
                 btn.style.transform = 'scale(1)';
             });
@@ -464,7 +323,7 @@ button:focus {
         
         const translations = {
             zh: {
-                "title": "世界盒子春秋mod王朝模组官网 | WorldBox AncientWarfare Mod",
+                "title": "世界盒子王朝模组官网 | WorldBox AncientWarfare Mod",
                 "splash.title": "⚠️ 健康游戏提示",
                 "splash.content": "适度游戏益脑，沉迷游戏伤身<br>合理安排时间，享受健康生活",
                 "splash.button": "朕知道了",
@@ -495,27 +354,29 @@ button:focus {
             }
         };
 
-        // 语言切换功能
-        let currentLang = localStorage.getItem('lang') || navigator.language.slice(0,2) || 'zh';
+        let currentLang = localStorage.getItem('lang') || (navigator.language.slice(0,2) === 'zh' ? 'zh' : 'en');
         document.getElementById('languageSelect').value = currentLang;
 
         function updateContent() {
             document.querySelectorAll('[data-i18n]').forEach(element => {
                 const key = element.getAttribute('data-i18n');
-                const translation = translations[currentLang][key];
-                if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
-                    element.placeholder = translation;
-                } else {
-                    element.innerHTML = translation;
+                const translation = translations[currentLang]?.[key] || translations['en']?.[key]; 
+                if (translation) {
+                    if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
+                        element.placeholder = translation;
+                    } else if (element.tagName === 'TITLE') {
+                        document.title = translation;
+                    }
+                    else {
+                        element.innerHTML = translation;
+                    }
                 }
             });
-            document.documentElement.lang = currentLang;
+            document.documentElement.lang = currentLang === 'zh' ? 'zh-CN' : 'en';
         }
 
-        // 初始化语言
         updateContent();
 
-        // 语言切换事件
         document.getElementById('languageSelect').addEventListener('change', (e) => {
             currentLang = e.target.value;
             localStorage.setItem('lang', currentLang);
