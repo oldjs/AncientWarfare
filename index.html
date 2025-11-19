@@ -1,392 +1,388 @@
 <!DOCTYPE html>
-<html lang="zh-CN" class=""> <!-- class="dark" will be added by JS -->
+<html lang="zh-CN" class="">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <link rel="icon" href="favicon.ico" type="image/x-icon">
-    <title data-i18n="title">世界盒子春秋mod王朝模组官网 | WorldBox AncientWarfare Mod</title>
-    <meta name="msvalidate.01" content="1D318605B178A64B63BD3C1F1D2D36C0" />
-    <meta name="description" content="想要继承制？族谱？君主世系？天命？国家历史？内阁？想看死掉的小人？转生？前世？时代？国策？看海还是扮演国家？谥号？庙号？更多风味包？自定义剧本？自定义国家名字小人名字中文名？想看已经亡了国家的历史？还想要一大堆辅助功能？想禁用原版不合理的机制？想让装备像宝物一样一直传下去？传家宝？想要AI生成的称号传记以及小人一生评价？想要让你的世界盒子变成欧陆风云+十字军之王+钢铁雄心混合体吗？春秋模组适合你~春秋模组已改名王朝模组!无论你想看海国家兴衰还是氏族兴衰还是扮演某个国家还是观察小人一生春秋都可能满足你！还有历史人物功能，非常非常多的彩蛋！还有更多...Want to inherit a system? Genealogy? Monarchal lineage? Mandate of Heaven? National history? Cabinet? Want to see dead villains? Reincarnation? Past lives? Era? National policies? To watch the sea or play as a nation? Posthumous titles? Temple names? More flavor packs? Customized scripts? Customized names for nations and characters in Chinese? Want to see the history of a nation that has already perished? Want a bunch of auxiliary features? Want to disable the unreasonable mechanics of the original version? Want equipment to be passed down like treasures? Heirlooms? Want AI-generated titles, biographies, and life evaluations for characters? Want to turn your world into a mix of Europa Universalis + Crusader Kings + Hearts of Iron? The Spring and Autumn mod is for you~ The Spring and Autumn mod has been renamed to the Dynasty mod! Whether you want to watch the rise and fall of nations or clans, play as a certain country, or observe the life of a character, the Spring and Autumn mod can satisfy you! There's also a historical figures feature, very many Easter eggs! And more...">
-    <meta name="keywords" content="世界盒子,春秋mod,王朝模组,历史爱好者,策略游戏,春秋时期,政治斗争,军事冲突,文化发展">
+    <title data-i18n="title">世界盒子王朝模组官网 | WorldBox Dynasty Mod</title>
+    <meta name="description" content="WorldBox Dynasty Mod - 体验深度的国家兴衰与历史模拟。Experience deep national rise and fall history simulation.">
+    <meta name="keywords" content="世界盒子,王朝模组,WorldBox Mod,策略游戏">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
-            darkMode: 'class', // Enable class-based dark mode
+            darkMode: 'class',
             theme: {
                 extend: {
                     colors: {
-
-                        'brand-primary': '#1a2a27',      // Dark background
-                        'brand-secondary': '#d4af37',     // Gold accent
-                        'brand-accent': '#c53d13',       // Red/Orange CTA accent
-                        'brand-text': '#e4dcc7',         // Light text for dark bg
-                        'brand-subtext': '#c5b798',      // Subtler light text
-                        'brand-bg-translucent': 'rgba(10,18,15,0.85)', // Main content bg (dark)
-                        'brand-bg-dark-translucent': 'rgba(10,18,15,0.95)', // Popups bg (dark)
-                        'brand-purple-start': '#800080',
-                        'brand-purple-end': '#6a006a',
-                        'brand-docs-start': '#2c4a42',    // Docs button dark
-                        'brand-docs-end': '#3a665d',      // Docs button dark
-
-                       
-                        'light-bg': '#f8fafc', // Tailwind slate-50
-                        'light-surface': 'rgba(255, 255, 255, 0.9)', // White with opacity for content
-                        'light-text-primary': '#1e293b', // Tailwind slate-800
-                        'light-text-secondary': '#475569', // Tailwind slate-600
-                        'light-accent-primary': '#d4af37', // Gold - can work on light too
-                        'light-accent-cta': '#c53d13',  // Red/Orange - for consistency
-                        'light-docs-start': '#0e7490', // Tailwind cyan-600
-                        'light-docs-end': '#0891b2',   // Tailwind cyan-500
-                        'light-border': '#cbd5e1', // Tailwind slate-300
-                    },
-                    textShadow: {
-                        'glow-dark': '0 0 15px rgba(212,175,55,0.5)', // Only for dark theme title
-                    },
-                    boxShadow: {
-                        // Dark theme shadows
-                        'glow-soft-dark': '0 0 40px rgba(212,175,55,0.1)',
-                        'accent-glow-dark': '0 4px 20px rgba(197,61,19,0.3)',
-                        'purple-glow-dark': '0 4px 20px rgba(128, 0, 128, 0.3)',
-                        'docs-glow-dark': '0 4px 20px rgba(42,85,75,0.3)',
-                        // Light theme shadows (using Tailwind defaults often better, but can define here)
-                        'surface-light': '0 10px 15px -3px rgb(0 0 0 / 0.07), 0 4px 6px -4px rgb(0 0 0 / 0.07)',
-                        'button-light': '0 4px 14px 0 rgba(0, 118, 255, 0.39)', // Example for a blue button
+                        // 专业的深色系游戏配色：黑金风格
+                        'game-bg': '#0a0a0c',
+                        'game-panel': '#121214',
+                        'game-border': '#333333',
+                        'game-gold': '#d4af37',      // 主色调：王朝金
+                        'game-gold-dim': '#8a7022',
+                        'game-red': '#a61b1b',       // 强调色：战争红
+                        'game-text-main': '#e0e0e0',
+                        'game-text-sub': '#888888',
+                        
+                        // 浅色模式适配（保持硬朗）
+                        'light-bg': '#f0f2f5',
+                        'light-panel': '#ffffff',
+                        'light-border': '#cbd5e1',
+                        'light-accent': '#2563eb',
                     },
                     fontFamily: {
-                        'sans': ['Microsoft YaHei', 'system-ui', 'sans-serif'],
+                        'sans': ['Microsoft YaHei', 'SimHei', 'Impact', 'sans-serif'], // 强调黑体
+                        'serif': ['SimSun', 'serif'], // 用于衬托历史感
+                    },
+                    backgroundImage: {
+                        'grid-pattern': "linear-gradient(to right, #222 1px, transparent 1px), linear-gradient(to bottom, #222 1px, transparent 1px)",
+                        'grid-pattern-light': "linear-gradient(to right, #ddd 1px, transparent 1px), linear-gradient(to bottom, #ddd 1px, transparent 1px)",
+                    },
+                    boxShadow: {
+                        'hard': '4px 4px 0px rgba(0,0,0,0.5)', // 硬阴影
+                        'glow-gold': '0 0 15px rgba(212,175,55,0.3)',
                     },
                     animation: {
-                        /* MODIFIED: Changed pageFadeIn to use the new animation */
-                        'pageFadeIn': 'slide-in-elliptic-left-fwd 0.7s cubic-bezier(.55,.085,.68,.53) both',
-                        'headerSlide': 'headerSlide 1s ease forwards',
-                        'titleFadeIn': 'titleFadeIn 0.8s ease forwards 0.3s',
-                        'textFadeIn': 'textFadeIn 0.8s ease forwards 0.6s',
-                        'btnFadeIn': 'btnFadeIn 0.8s ease forwards 0.9s',
-                        'noticeSlide': 'noticeSlide 1s ease forwards 2s',
-                        'splashFade': 'splashFade 1.5s ease forwards',
-                        'splashScale': 'splashScale 1.5s ease',
-                        'docPulse': 'docPulse 2s ease-in-out infinite 1.5s',
-                        'iconSwing': 'iconSwing 2s ease-in-out infinite',
-                        'newBlink': 'newBlink 1.5s ease-in-out infinite',
+                        'fadeInUp': 'fadeInUp 0.8s ease-out forwards',
+                        'glitch': 'glitch 1s linear infinite',
+                        'border-march': 'borderMarch 4s linear infinite',
                     },
                     keyframes: {
-                        /* MODIFIED: Removed old pageFadeIn keyframe, it's now in the <style> tag */
-                        headerSlide: { to: { transform: 'translateY(0)' } },
-                        titleFadeIn: { from: { opacity: '0', transform: 'scale(0.9)' }, to: { opacity: '1', transform: 'scale(1)' } },
-                        textFadeIn: { from: { opacity: '0', transform: 'translateY(10px)' }, to: { opacity: '1', transform: 'translateY(0)' } },
-                        btnFadeIn: { from: { opacity: '0', transform: 'translateY(20px)' }, to: { opacity: '1', transform: 'translateY(0)' } },
-                        noticeSlide: { to: { transform: 'translateY(0)' } },
-                        splashFade: { '0%': { opacity: '0' }, '20%,80%': { opacity: '1' }, '100%': { opacity: '0', visibility: 'hidden' } },
-                        splashScale: { from: { transform: 'scale(0.9)' }, to: { transform: 'scale(1)' } },
-                        docPulse: {
-                            '0%, 100%': { transform: 'scale(1)'},
-                            '50%': { transform: 'scale(1.02)'},
-                        },
-                        iconSwing: { '0%, 100%': { transform: 'rotate(0deg)' }, '25%': { transform: 'rotate(5deg)' }, '75%': { transform: 'rotate(-5deg)' } },
-                        newBlink: { '0%, 100%': { opacity: '0.9', transform: 'rotate(10deg) scale(1)' }, '50%': { opacity: '1', transform: 'rotate(10deg) scale(1.1)' } }
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        }
                     }
                 }
-            },
-            plugins: [
-                function ({ addUtilities, theme }) {
-                  const newUtilities = {
-                    '.text-shadow-glow-dark': { // Specific for dark theme
-                      textShadow: theme('textShadow.glow-dark'),
-                    },
-                  }
-                  addUtilities(newUtilities, ['dark']) // Apply only in dark mode
-                }
-            ],
+            }
         }
     </script>
     <style>
-        :root {
-            /* CSS Variables for deep customization, defaults are for LIGHT theme */
-            --body-bg-radial-start: rgba(230, 235, 240, 0.6); /* Light, subtle */
-            --body-bg-radial-end: rgba(245, 248, 250, 0.8);   /* Light, subtle */
-            --body-bg-svg-fill: '%23A0AEC0';
-            --main-border-image-val: linear-gradient(160deg, #d4af37 10%, #fde68a 50%, #e5e7eb 90%) 1; /* Gold to light gray for light */
-            --particle-fill-val: '%23A0AEC0'; /* Slate-400 for light particles */
-            --splash-bg-from: #e2e8f0; /* slate-200 */
-            --splash-bg-to: #f1f5f9; /* slate-100 */
-            --new-badge-bg: #c53d13; /* brand-accent, consistent */
+        /* 核心：去圆角，硬朗风格 */
+        * {
+            border-radius: 0 !important; /* 强制直角 */
         }
 
-        .dark:root {
-            /* Dark theme overrides for CSS Variables */
-            --body-bg-radial-start: rgba(26,42,39,0.9);
-            --body-bg-radial-end: rgba(10,18,15,0.95);
-            --body-bg-svg-fill: '%2317352f';
-            --main-border-image-val: linear-gradient(160deg, #d4af37 20%, #1a2a27 60%, #3a2e1d 100%) 1;
-            --particle-fill-val: '%23d4af37'; /* Gold for dark particles */
-            --splash-bg-from: #1a2a27; /* brand-primary */
-            --splash-bg-to: #12201d;
-        }
-
-        html { -webkit-text-size-adjust: 100%; }
-        body { -webkit-tap-highlight-color: transparent; }
-
-        /* Dynamic background using CSS Variables */
         body {
-            background: 
-                radial-gradient(circle at 50% 50%, 
-                    var(--body-bg-radial-start) 0%,
-                    var(--body-bg-radial-end) 100%),
-                url('data:image/svg+xml,<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><text x="-10" y="60" font-size="30" fill="var(--body-bg-svg-fill)" transform="rotate(-45)">日</text></svg>');
-        }
-        .main-content-bordered { /* For the animated border */
-            border: 3px solid; /* Fallback */
-            border-image: var(--main-border-image-val);
-            animation: borderFlow 6s linear infinite;
-        }
-        @keyframes borderFlow { /* Animation remains, colors change via CSS var */
-            0% { border-image-slice: 1; }
-            50% { border-image-slice: 2; }
-            100% { border-image-slice: 1; }
+            overflow-x: hidden;
         }
 
-        .particles::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><circle cx="50" cy="50" r="1.2" fill="var(--particle-fill-val)"/></svg>');
-            animation: particleMove 20s linear infinite;
-            opacity: 0.3; /* Could also be a CSS var if needed */
-            z-index: -1; 
+        /* 动态背景网格 */
+        .bg-grid {
+            background-size: 40px 40px;
+            mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 40%, rgba(0,0,0,0));
+            -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 40%, rgba(0,0,0,0));
         }
-        @keyframes particleMove {
-            from { background-position: 0 0; }
-            to { background-position: 100px 100px; }
+
+        /* 游戏官网常用的文字特效 */
+        .text-gradient-gold {
+            background: linear-gradient(to bottom, #ffeebb, #d4af37, #8a7022);
+            -webkit-background-clip: text;
+            color: transparent;
+            text-shadow: 0 2px 10px rgba(212, 175, 55, 0.2);
+        }
+
+        /* 按钮硬切效果 */
+        .btn-game {
+            position: relative;
+            transition: all 0.2s;
+            clip-path: polygon(0 0, 100% 0, 100% 85%, 95% 100%, 0 100%); /* 缺角设计 */
         }
         
-        /* MODIFIED: Added new keyframes for page entry. This is a reversed version of the animation you provided. */
-        @-webkit-keyframes slide-in-elliptic-left-fwd{0%{-webkit-transform:translateX(-1000px) rotateY(-20deg) scale(6);transform:translateX(-1000px) rotateY(-20deg) scale(6);-webkit-transform-origin:200% 50%;transform-origin:200% 50%;opacity:0}100%{-webkit-transform:translateX(0) rotateY(0) scale(1);transform:translateX(0) rotateY(0) scale(1);-webkit-transform-origin:-500px 50%;transform-origin:-500px 50%;opacity:1}}
-        @keyframes slide-in-elliptic-left-fwd{0%{-webkit-transform:translateX(-1000px) rotateY(-20deg) scale(6);transform:translateX(-1000px) rotateY(-20deg) scale(6);-webkit-transform-origin:200% 50%;transform-origin:200% 50%;opacity:0}100%{-webkit-transform:translateX(0) rotateY(0) scale(1);transform:translateX(0) rotateY(0) scale(1);-webkit-transform-origin:-500px 50%;transform-origin:-500px 50%;opacity:1}}
-
-        .btn-shine::after { 
-            content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
-            background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.1) 50%, transparent 70%);
-            transform: rotate(45deg); transition: all 0.5s; pointer-events: none;
+        .btn-game::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: 0.5s;
         }
-        .btn-shine:hover::after { left: 150%; }
-
-        .btn-docs-new::before { 
-            content: 'NEW'; position: absolute; top: -8px; right: -8px;
-            background: var(--new-badge-bg); /* Use CSS var for badge bg */
-            color: white; font-size: 0.7rem; padding: 2px 8px; border-radius: 10px;
-            transform: rotate(10deg); animation: newBlink 1.5s ease-in-out infinite;
+        
+        .btn-game:hover::before {
+            left: 100%;
         }
+
+        .btn-game:active {
+            transform: translateY(2px);
+        }
+
+        /* 装饰性边框角标 */
+        .corner-box {
+            position: relative;
+            border: 1px solid var(--border-color, #333);
+        }
+        .corner-box::after, .corner-box::before {
+            content: '';
+            position: absolute;
+            width: 8px; height: 8px;
+            transition: all 0.3s;
+        }
+        .corner-box::before { top: -1px; left: -1px; border-top: 2px solid #d4af37; border-left: 2px solid #d4af37; }
+        .corner-box::after { bottom: -1px; right: -1px; border-bottom: 2px solid #d4af37; border-right: 2px solid #d4af37; }
+        
+        .corner-box:hover::before { width: 100%; height: 100%; opacity: 0.5; }
+        .corner-box:hover::after { width: 100%; height: 100%; opacity: 0.5; }
+
+        /* 滚动条样式 */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #0a0a0c; }
+        ::-webkit-scrollbar-thumb { background: #333; }
+        ::-webkit-scrollbar-thumb:hover { background: #d4af37; }
     </style>
 </head>
-<body class="font-sans bg-light-bg text-light-text-primary dark:bg-brand-primary dark:text-brand-text min-h-screen relative overflow-x-hidden opacity-0 animate-pageFadeIn">
+<body class="font-sans bg-light-bg text-gray-800 dark:bg-game-bg dark:text-game-text-main min-h-screen flex flex-col transition-colors duration-300">
 
-    <div class="fixed top-4 right-4 z-50 flex items-center space-x-3">
-        <button id="theme-toggle" type="button" class="p-2 rounded-md text-light-text-secondary hover:text-light-accent-primary dark:text-brand-subtext dark:hover:text-brand-secondary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-light-accent-primary dark:focus:ring-brand-secondary">
-            <i id="theme-icon-light" class="fas fa-sun text-lg"></i> <!-- Hidden by default in JS -->
-            <i id="theme-icon-dark" class="fas fa-moon text-lg"></i> <!-- Shown by default in JS -->
-        </button>
-        <div class="bg-light-surface/80 dark:bg-brand-bg-dark-translucent backdrop-blur-sm border border-light-border dark:border-brand-secondary rounded-[20px] px-2.5 py-1.5">
-            <select id="languageSelect" class="bg-transparent text-light-text-secondary dark:text-brand-secondary border-none outline-none cursor-pointer text-sm focus:ring-0">
-                <option value="zh">中文</option>
-                <option value="en">English</option>
-            </select>
-        </div>
+    <!-- 背景装饰层 -->
+    <div class="fixed inset-0 pointer-events-none z-0">
+        <div class="absolute inset-0 bg-grid-pattern-light dark:bg-grid-pattern opacity-[0.15] bg-grid"></div>
+        <!-- 顶部光效 -->
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-3xl h-64 bg-blue-500/10 dark:bg-game-gold/10 blur-[100px] rounded-full mix-blend-screen"></div>
     </div>
 
-    <div class="splash-screen fixed inset-0 z-[9999] flex items-center justify-center bg-black/80 dark:bg-black/95 opacity-0 animate-splashFade">
-        <!-- Splash content uses CSS vars for gradient -->
-        <div class="splash-content p-6 sm:p-8 rounded-lg text-center max-w-sm sm:max-w-md mx-4 animate-splashScale"
-             style="background: linear-gradient(45deg, var(--splash-bg-from), var(--splash-bg-to));">
-            <h3 data-i18n="splash.title" class="text-xl sm:text-2xl mb-3 sm:mb-4 font-semibold text-light-accent-primary dark:text-brand-secondary"></h3>
-            <p data-i18n="splash.content" class="leading-relaxed text-sm sm:text-base text-light-text-secondary dark:text-brand-subtext"></p>
-            <button onclick="this.parentElement.parentElement.style.display='none'" 
-                    class="mt-5 sm:mt-6 py-2 px-6 sm:px-8 bg-light-accent-cta dark:bg-brand-accent text-white rounded-full cursor-pointer hover:opacity-90 transition-opacity duration-200 text-sm sm:text-base"
-                    data-i18n="splash.button">
+    <!-- 模拟顶部导航栏 (增加官网感) -->
+    <nav class="fixed top-0 w-full z-50 bg-light-panel/90 dark:bg-game-panel/90 backdrop-blur border-b border-gray-200 dark:border-white/10 h-16 flex items-center justify-between px-4 lg:px-12">
+        <div class="flex items-center gap-4">
+            <div class="w-8 h-8 bg-black dark:bg-game-gold text-white dark:text-black flex items-center justify-center font-bold text-lg">
+                W
+            </div>
+            <span class="font-bold text-lg tracking-widest uppercase hidden sm:block" data-i18n="nav.brand">DYNASTY MOD</span>
+        </div>
+        
+        <div class="flex items-center gap-0 border-l border-gray-200 dark:border-white/10 pl-4">
+            <!-- 语言切换 (方块样式) -->
+            <select id="languageSelect" class="bg-transparent text-sm font-bold focus:outline-none cursor-pointer uppercase tracking-wide px-3 py-1 hover:text-blue-600 dark:hover:text-game-gold transition-colors">
+                <option value="zh">CN / 中文</option>
+                <option value="en">EN / English</option>
+            </select>
+            
+            <!-- 主题切换 (方块按钮) -->
+            <button id="theme-toggle" class="p-3 hover:bg-gray-200 dark:hover:bg-white/10 transition-colors">
+                <i class="fas fa-adjust"></i>
             </button>
         </div>
-    </div>
+    </nav>
 
-    <div class="particles relative min-h-screen">
-        <div class="container mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 py-12 sm:py-20 relative z-10">
-            <div class="main-content-bordered bg-light-surface/90 dark:bg-brand-bg-translucent backdrop-blur-sm shadow-surface-light dark:shadow-glow-soft-dark rounded-lg overflow-hidden">
-                <header class="text-center py-10 sm:py-16 px-4 sm:px-6 transform translate-y-[30px] animate-headerSlide">
-                    <h1 class="title text-3xl sm:text-4xl lg:text-5xl font-bold text-light-accent-primary dark:text-brand-secondary mb-4 sm:mb-6 tracking-wider dark:text-shadow-glow-dark animate-titleFadeIn" data-i18n="header.title"></h1>
-                    <p class="subtitle text-base sm:text-lg text-light-text-secondary dark:text-brand-subtext max-w-xl lg:max-w-2xl mx-auto leading-relaxed animate-textFadeIn" data-i18n="header.subtitle"></p>
-                </header>
-
-                <div class="button-group flex flex-col sm:flex-row flex-wrap items-center justify-center gap-6 sm:gap-8 py-10 sm:py-12 px-4">
-                    <!-- Download Button -->
-                    <button onclick="window.location.href='http://afdian.com/item/bcba6730e42a11efb4eb5254001e7c00'" 
-                            class="btn-shine relative overflow-hidden flex items-center justify-center gap-2 sm:gap-3 py-3 px-6 sm:py-4 sm:px-8 w-full max-w-[260px] sm:w-auto
-                                   bg-gradient-to-br from-light-accent-cta to-orange-500 text-white 
-                                   dark:from-brand-accent dark:to-brand-secondary 
-                                   rounded-full text-base sm:text-lg font-semibold cursor-pointer 
-                                   shadow-lg dark:shadow-accent-glow-dark 
-                                   hover:from-orange-500 hover:to-light-accent-cta dark:hover:from-brand-secondary dark:hover:to-brand-accent
-                                   transition-all duration-300 ease-in-out transform hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-light-accent-cta/70 dark:focus:ring-brand-secondary/70 animate-btnFadeIn"
-                            data-i18n="buttons.download">
-                        <i class="fas fa-download"></i>
-                    </button>
-                    <!-- Sponsor Button -->
-                    <button onclick="window.location.href='http://afdian.com/a/chunqiu_worldbox'" 
-                            class="btn-shine relative overflow-hidden flex items-center justify-center gap-2 sm:gap-3 py-3 px-6 sm:py-4 sm:px-8 w-full max-w-[260px] sm:w-auto
-                                   bg-gradient-to-br from-purple-600 to-purple-700 text-white 
-                                   dark:from-brand-purple-start dark:to-brand-purple-end 
-                                   rounded-full text-base sm:text-lg font-semibold cursor-pointer 
-                                   shadow-lg dark:shadow-purple-glow-dark
-                                   hover:from-purple-700 hover:to-purple-600 dark:hover:from-brand-purple-end dark:hover:to-brand-purple-start
-                                   transition-all duration-300 ease-in-out transform hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-purple-500/70 animate-btnFadeIn"
-                            data-i18n="buttons.sponsor">
-                        <i class="fas fa-hand-holding-heart"></i>
-                    </button>
-                    <!-- Docs Button -->
-                    <button onclick="window.location.href='https://docs.qq.com/aio/DQVVjVlpYUlZqQ2JI?p=Dxr1PWzEFxA9mQnJ6U0lES'" 
-                            class="btn-docs-new btn-shine relative overflow-hidden flex items-center justify-center gap-2 sm:gap-3 py-3 px-6 sm:py-4 sm:px-8 w-full max-w-[260px] sm:w-auto
-                                   bg-gradient-to-br from-light-docs-start to-light-docs-end text-white
-                                   dark:from-brand-docs-start dark:to-brand-docs-end dark:text-brand-secondary 
-                                   rounded-full text-base sm:text-lg font-semibold cursor-pointer 
-                                   shadow-lg dark:shadow-docs-glow-dark 
-                                   transition-all duration-300 ease-in-out 
-                                   focus:outline-none focus:ring-2 focus:ring-light-docs-start/70 dark:focus:ring-brand-secondary/70 
-                                   animate-btnFadeIn custom-doc-animation animate-docPulse" 
-                                   data-i18n="buttons.docs">
-                        <i class="fas fa-scroll animate-iconSwing"></i>
-                    </button>
-                </div>
-
-                <div class="copyright text-center py-6 sm:py-8 text-light-text-secondary dark:text-brand-subtext text-sm opacity-80 px-4">
-                    <span data-i18n="footer.copyright"></span><br>
-                    <span data-i18n="footer.disclaimer" class="text-xs"></span>
-                </div>
+    <!-- 弹窗公告 (硬核风格) -->
+    <div id="splash-screen" class="fixed inset-0 z-[9999] flex items-center justify-center bg-black/90 backdrop-blur-md transition-opacity duration-500">
+        <div class="relative bg-white dark:bg-game-panel w-full max-w-md p-1 border border-gray-300 dark:border-game-border shadow-2xl transform scale-100 animate-fadeInUp">
+            <!-- 内部容器 -->
+            <div class="border border-gray-200 dark:border-white/5 p-8 text-center relative overflow-hidden">
+                <!-- 装饰线条 -->
+                <div class="absolute top-0 left-0 w-full h-1 bg-game-red"></div>
+                
+                <h3 class="text-2xl font-bold mb-4 text-black dark:text-game-gold uppercase tracking-widest" data-i18n="splash.title">健康公告</h3>
+                <div class="w-12 h-1 bg-gray-200 dark:bg-white/10 mx-auto mb-6"></div>
+                <p class="text-sm leading-relaxed mb-8 text-gray-600 dark:text-gray-400" data-i18n="splash.content">Loading...</p>
+                
+                <button onclick="closeSplash()" 
+                        class="w-full py-3 bg-black dark:bg-game-border text-white hover:bg-game-red dark:hover:bg-game-gold dark:hover:text-black font-bold uppercase tracking-widest transition-colors duration-300 border border-transparent">
+                    <span data-i18n="splash.button">ENTER SITE</span> <i class="fas fa-chevron-right text-xs ml-2"></i>
+                </button>
             </div>
         </div>
     </div>
 
-    <div class="health-notice fixed bottom-0 left-0 right-0 bg-white/95 dark:bg-brand-bg-dark-translucent backdrop-blur-sm p-3 sm:p-4 text-center border-t-2 border-light-accent-cta dark:border-brand-accent z-[999] transform translate-y-full animate-noticeSlide">
-        <span class="text-light-accent-primary dark:text-brand-secondary text-lg">⚖️</span> 
-        <span data-i18n="notice.message" class="text-sm sm:text-base text-light-text-primary dark:text-brand-text"></span>
-        <button onclick="this.parentElement.style.display='none'" 
-                class="ml-2 sm:ml-4 py-1 px-2 sm:px-3 bg-transparent border border-light-accent-primary dark:border-brand-secondary text-light-accent-primary dark:text-brand-secondary rounded-2xl cursor-pointer hover:bg-light-accent-primary/10 dark:hover:bg-brand-secondary/10 transition-colors duration-200 text-xs sm:text-sm focus:outline-none focus:ring-1 focus:ring-light-accent-primary dark:focus:ring-brand-secondary"
-                data-i18n="notice.close">
-        </button>
-    </div>
+    <!-- 主内容区 -->
+    <main class="relative z-10 flex-grow flex flex-col items-center justify-center pt-24 pb-12 px-4">
+        
+        <div class="w-full max-w-6xl mx-auto grid lg:grid-cols-12 gap-12 items-center">
+            
+            <!-- 左侧：文字信息 -->
+            <div class="lg:col-span-7 text-center lg:text-left space-y-8 animate-fadeInUp">
+                <!-- 版本标签 -->
+                <div class="inline-flex items-center border border-black dark:border-game-gold px-3 py-1 bg-transparent">
+                    <span class="w-2 h-2 bg-game-red mr-2 animate-pulse"></span>
+                    <span class="text-xs font-bold uppercase tracking-widest" data-i18n="hero.version">LATEST VERSION 2.3.1</span>
+                </div>
+
+                <h1 class="text-5xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight leading-none">
+                    <span class="block text-black dark:text-white mb-2" data-i18n="header.title_1">王朝模组</span>
+                    <span class="block text-blue-700 dark:text-gradient-gold text-4xl sm:text-5xl lg:text-6xl mt-2 font-serif" data-i18n="header.title_2">春秋 · 战国</span>
+                </h1>
+
+                <p class="text-lg text-gray-600 dark:text-gray-400 leading-relaxed max-w-2xl mx-auto lg:mx-0 border-l-4 border-gray-300 dark:border-game-border pl-6" data-i18n="header.subtitle">
+                    还原真实的历史演义。从氏族兴衰到大一统帝国，体验前所未有的世界盒子策略深度。
+                </p>
+
+                <!-- 按钮组 -->
+                <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-4">
+                    <!-- 下载按钮 (主要) -->
+                    <a href="http://afdian.com/item/bcba6730e42a11efb4eb5254001e7c00" target="_blank"
+                       class="btn-game group relative px-8 py-4 bg-blue-600 dark:bg-game-gold text-white dark:text-black font-bold text-lg uppercase tracking-widest shadow-hard hover:-translate-y-1 hover:shadow-lg flex items-center justify-center gap-3">
+                        <i class="fas fa-download"></i>
+                        <span data-i18n="buttons.download">立即下载</span>
+                    </a>
+
+                    <!-- 赞助按钮 (次要) -->
+                    <a href="http://afdian.com/a/chunqiu_worldbox" target="_blank"
+                       class="btn-game group relative px-8 py-4 bg-white dark:bg-transparent border-2 border-black dark:border-white/30 text-black dark:text-white font-bold text-lg uppercase tracking-widest hover:bg-black hover:text-white dark:hover:bg-white/10 flex items-center justify-center gap-3">
+                        <i class="fas fa-heart text-red-500"></i>
+                        <span data-i18n="buttons.sponsor">赞助支持</span>
+                    </a>
+                </div>
+                
+                <!-- 文档链接 -->
+                <div class="pt-2">
+                    <a href="https://docs.qq.com/aio/DQVVjVlpYUlZqQ2JI?p=Dxr1PWzEFxA9mQnJ6U0lES" target="_blank" 
+                       class="inline-flex items-center text-sm font-bold text-gray-500 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors border-b border-dashed border-gray-500 hover:border-solid">
+                        <i class="fas fa-book-open mr-2"></i>
+                        <span data-i18n="buttons.docs">查阅模组百科全书</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- 右侧：装饰性区块 (模拟游戏内面板) -->
+            <div class="lg:col-span-5 relative hidden lg:block animate-fadeInUp" style="animation-delay: 0.2s;">
+                <div class="corner-box p-1 bg-white/50 dark:bg-black/40 backdrop-blur-sm border border-gray-300 dark:border-white/10 w-full aspect-[4/5] flex flex-col">
+                    <!-- 模拟头部 -->
+                    <div class="h-10 bg-black dark:bg-white/10 flex items-center px-4 justify-between">
+                        <span class="text-white text-xs font-mono">SYSTEM_LOG</span>
+                        <div class="flex gap-1">
+                            <div class="w-2 h-2 bg-red-500"></div>
+                            <div class="w-2 h-2 bg-yellow-500"></div>
+                            <div class="w-2 h-2 bg-green-500"></div>
+                        </div>
+                    </div>
+                    <!-- 模拟内容 -->
+                    <div class="flex-1 p-6 font-mono text-xs text-gray-600 dark:text-game-text-sub space-y-3 overflow-hidden relative">
+                        <div class="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-transparent via-transparent to-white dark:to-black/80 pointer-events-none z-10"></div>
+                        <p>> Initializing Dynasty Core...</p>
+                        <p class="text-blue-600 dark:text-game-gold">> [SUCCESS] History Engine Loaded.</p>
+                        <p>> Loading "Mandate of Heaven" system...</p>
+                        <p>> Generating 300+ Historical Figures...</p>
+                        <p>> Optimizing War AI logic...</p>
+                        <p class="opacity-50">> ...</p>
+                        <div class="mt-8 border border-dashed border-gray-400 dark:border-white/20 p-4">
+                            <p class="text-center uppercase font-bold mb-2 opacity-70">Feature Highlight</p>
+                            <div class="grid grid-cols-2 gap-2 text-center">
+                                <div class="bg-gray-200 dark:bg-white/5 p-2">禅让制</div>
+                                <div class="bg-gray-200 dark:bg-white/5 p-2">庙号系统</div>
+                                <div class="bg-gray-200 dark:bg-white/5 p-2">世家大族</div>
+                                <div class="bg-gray-200 dark:bg-white/5 p-2">国策树</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 装饰元素 -->
+                <div class="absolute -bottom-4 -right-4 w-24 h-24 border-b-4 border-r-4 border-blue-600 dark:border-game-gold opacity-50"></div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- 底部 Footer (紧贴底部，官方感) -->
+    <footer class="bg-white dark:bg-black border-t border-gray-200 dark:border-white/10 py-8 mt-auto relative z-20">
+        <div class="container mx-auto px-4 text-center">
+            <div class="flex justify-center space-x-6 mb-6">
+                <a href="#" class="text-2xl text-gray-400 hover:text-black dark:hover:text-white transition-colors"><i class="fab fa-qq"></i></a>
+                <a href="#" class="text-2xl text-gray-400 hover:text-black dark:hover:text-white transition-colors"><i class="fab fa-discord"></i></a>
+                <a href="#" class="text-2xl text-gray-400 hover:text-black dark:hover:text-white transition-colors"><i class="fab fa-bilibili"></i></a>
+            </div>
+            <p class="text-sm text-gray-500 dark:text-gray-500 uppercase tracking-wider">
+                <span data-i18n="footer.copyright">COPYRIGHT © 2024 DARI</span> 
+                <span class="mx-2">|</span> 
+                <span data-i18n="footer.disclaimer">NOT AFFILIATED WITH WORLDBOX</span>
+            </p>
+        </div>
+        <!-- 强制底部健康公告条 -->
+        <div class="mt-8 bg-gray-100 dark:bg-[#050505] py-3 text-center border-t border-gray-200 dark:border-white/5">
+            <p class="text-xs text-gray-400 scale-90 origin-center" data-i18n="notice.message">
+                抵制不良游戏，拒绝盗版游戏。注意自我保护，谨防受骗上当。适度游戏益脑，沉迷游戏伤身。合理安排时间，享受健康生活。
+            </p>
+        </div>
+    </footer>
 
     <script>
-        const themeToggleButton = document.getElementById('theme-toggle');
-        const themeIconLight = document.getElementById('theme-icon-light');
-        const themeIconDark = document.getElementById('theme-icon-dark');
-        const htmlElement = document.documentElement;
-
-        function applyTheme(theme) {
-            if (theme === 'dark') {
-                htmlElement.classList.add('dark');
-                themeIconLight.style.display = 'inline-block';
-                themeIconDark.style.display = 'none';
-            } else {
-                htmlElement.classList.remove('dark');
-                themeIconLight.style.display = 'none';
-                themeIconDark.style.display = 'inline-block';
-            }
-            localStorage.setItem('theme', theme);
-        }
-
-        themeToggleButton.addEventListener('click', () => {
-            const currentTheme = htmlElement.classList.contains('dark') ? 'dark' : 'light';
-            applyTheme(currentTheme === 'dark' ? 'light' : 'dark');
-        });
-
-        // Initialize theme
-        const preferredTheme = localStorage.getItem('theme') || 
-                               (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-        applyTheme(preferredTheme); // Apply initial theme
-
-        // Doc button animation handling (example, could be more sophisticated)
-        const btnDocs = document.querySelector('.custom-doc-animation'); // Class for easier selection
-        if (btnDocs) {
-            btnDocs.addEventListener('mouseover', function() {
-                this.classList.remove('animate-docPulse');
-                // You might want a specific hover animation class if 'docHover' was more complex
-                // For now, just removing pulse might be enough or use Tailwind's hover:scale-105 etc.
-            });
-            btnDocs.addEventListener('mouseout', function() {
-                this.classList.add('animate-docPulse');
-            });
-        }
-        
-        document.querySelectorAll('.btn-shine, .btn-docs-new').forEach(btn => {
-            btn.addEventListener('touchstart', (e) => {
-                btn.style.transform = 'scale(0.95)';
-            }, { passive: true });
-            btn.addEventListener('touchend', () => {
-                btn.style.transform = 'scale(1)';
-            });
-        });
-        
+        // 语言包
         const translations = {
             zh: {
-                "title": "世界盒子王朝模组官网 | WorldBox AncientWarfare Mod",
-                "splash.title": "⚠️ 健康游戏提示",
-                "splash.content": "适度游戏益脑，沉迷游戏伤身<br>合理安排时间，享受健康生活",
-                "splash.button": "朕知道了",
-                "header.title": "世界盒子·王朝模组",
-                "header.subtitle": "新春特别版震撼上线！体验全新王朝模组<br>解锁上古神话与史诗的全新玩法",
-                "buttons.download": "立即下载 (v2.3.1)",
-                "buttons.sponsor": "赞助作者",
-                "buttons.docs": "模组文档·新人必读",
-                "footer.copyright": "🔒模组作者@大日",
-                "footer.disclaimer": "本模组与WorldBox官方无关",
-                "notice.message": "健康游戏提示：建议每60分钟休息5-10分钟，合理安排游戏时间",
-                "notice.close": "关闭"
+                "title": "世界盒子王朝模组官网 | WorldBox Dynasty Mod",
+                "nav.brand": "王朝模组 · 官方站",
+                "splash.title": "⚠️ 适龄提示",
+                "splash.content": "本模组仅供学习交流，请支持WorldBox正版游戏。<br>适度游戏益脑，沉迷游戏伤身。<br>合理安排时间，享受健康生活。",
+                "splash.button": "我已阅读并进入",
+                "hero.version": "最新版本 v2.3.1",
+                "header.title_1": "世界盒子 · 王朝模组",
+                "header.title_2": "重铸历史荣光",
+                "header.subtitle": "全新机制：禅让制、族谱、天命系统、内阁国策。不仅是看海，更是体验一段文明的兴衰史。",
+                "buttons.download": "立即下载客户端",
+                "buttons.sponsor": "赞助开发者",
+                "buttons.docs": "新手必读：模组百科全书",
+                "footer.copyright": "模组作者 @大日",
+                "footer.disclaimer": "本模组与 WorldBox 官方无关",
+                "notice.message": "抵制不良游戏，拒绝盗版游戏。注意自我保护，谨防受骗上当。适度游戏益脑，沉迷游戏伤身。合理安排时间，享受健康生活。"
             },
             en: {
-                "title": "WorldBox Dynasty Mod Official | AncientWarfare Mod",
-                "splash.title": "⚠️ Game Health Reminder",
-                "splash.content": "Play in moderation, avoid addiction<br>Balance your time, enjoy healthy life",
-                "splash.button": "I Understand",
-                "header.title": "WorldBox Dynasty Mod",
-                "header.subtitle": "New Spring Edition Released! Experience the all-new Dynasty Mod<br>Unlock mythical and epic gameplay features",
-                "buttons.download": "Download Now (v2.3.1)",
-                "buttons.sponsor": "Sponsor Author",
-                "buttons.docs": "Documentation·Must Read",
-                "footer.copyright": "🔒Mod Author@Dari",
-                "footer.disclaimer": "This mod is not affiliated with WorldBox official",
-                "notice.message": "Health Reminder: Take 5-10 minutes break every 60 minutes",
-                "notice.close": "Close"
+                "title": "WorldBox Dynasty Mod Official",
+                "nav.brand": "DYNASTY MOD OFFICIAL",
+                "splash.title": "⚠️ NOTICE",
+                "splash.content": "This mod is for educational purposes. Please support the official WorldBox game.<br>Play in moderation and enjoy a healthy life.",
+                "splash.button": "ENTER SITE",
+                "hero.version": "LATEST VERSION v2.3.1",
+                "header.title_1": "WORLDBOX MOD",
+                "header.title_2": "DYNASTY & HISTORY",
+                "header.subtitle": "New Mechanics: Zen Abdication, Genealogy, Mandate of Heaven, Cabinet Policies. Not just watching, but experiencing the rise and fall of civilization.",
+                "buttons.download": "DOWNLOAD NOW",
+                "buttons.sponsor": "SUPPORT DEV",
+                "buttons.docs": "READ DOCUMENTATION",
+                "footer.copyright": "AUTHOR @DARI",
+                "footer.disclaimer": "NOT AFFILIATED WITH WORLDBOX OFFICIAL",
+                "notice.message": "Health Warning: Play in moderation. Avoid addiction. Balance your time properly."
             }
         };
 
-        let currentLang = localStorage.getItem('lang') || (navigator.language.slice(0,2) === 'zh' ? 'zh' : 'en');
-        document.getElementById('languageSelect').value = currentLang;
+        // 逻辑控制
+        const htmlEl = document.documentElement;
+        const themeBtn = document.getElementById('theme-toggle');
+        const langSelect = document.getElementById('languageSelect');
+        const splash = document.getElementById('splash-screen');
 
-        function updateContent() {
-            document.querySelectorAll('[data-i18n]').forEach(element => {
-                const key = element.getAttribute('data-i18n');
-                const translation = translations[currentLang]?.[key] || translations['en']?.[key]; 
-                if (translation) {
-                    if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
-                        element.placeholder = translation;
-                    } else if (element.tagName === 'TITLE') {
-                        document.title = translation;
-                    }
-                    else {
-                        element.innerHTML = translation;
-                    }
-                }
-            });
-            document.documentElement.lang = currentLang === 'zh' ? 'zh-CN' : 'en';
+        // 初始化主题
+        function initTheme() {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                htmlEl.classList.add('dark');
+            } else {
+                htmlEl.classList.remove('dark');
+            }
         }
 
-        updateContent();
+        // 切换主题
+        themeBtn.addEventListener('click', () => {
+            htmlEl.classList.toggle('dark');
+            localStorage.setItem('theme', htmlEl.classList.contains('dark') ? 'dark' : 'light');
+        });
 
-        document.getElementById('languageSelect').addEventListener('change', (e) => {
+        // 关闭弹窗
+        function closeSplash() {
+            splash.style.opacity = '0';
+            setTimeout(() => splash.style.display = 'none', 500);
+        }
+
+        // 语言切换
+        let currentLang = localStorage.getItem('lang') || 'zh';
+        langSelect.value = currentLang;
+
+        function updateLang() {
+            const t = translations[currentLang];
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if(t[key]) el.innerHTML = t[key];
+            });
+            document.title = t['title'];
+        }
+
+        langSelect.addEventListener('change', (e) => {
             currentLang = e.target.value;
             localStorage.setItem('lang', currentLang);
-            updateContent();
+            updateLang();
         });
+
+        // 运行初始化
+        initTheme();
+        updateLang();
+
     </script>
 </body>
 </html>
