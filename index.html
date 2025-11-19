@@ -6,6 +6,10 @@
     <title>世界盒子王朝模组 - 官方网站 | WorldBox Dynasty Mod</title>
     <meta name="description" content="世界盒子春秋mod王朝模组官网 - 体验宏大的历史策略模拟">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- 唯一增加的外部资源：引入书法字体 "Ma Shan Zheng" 专门用于Logo，不影响其他 -->
+    <link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&display=swap" rel="stylesheet">
+
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -34,12 +38,10 @@
         * { border-radius: 0 !important; } /* 强制直角 */
 
         /* --- 背景处理 (关键点) --- */
-        /* 注意：这里使用了 Unsplash 的图片作为背景，实际使用时请替换为你模组的精美截图或宣传图 */
         .hero-bg {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            /* 下面这张图是秦军/战场的占位图 */
-            background-image: url('https://images.unsplash.com/photo-1519074069444-1ba4fff66d16?q=80&w=2574&auto=format&fit=crop'); 
+            background-image: url('https://p1.hippopx.com/preview/800/75/627/china-mosaic-forbidden-city-dragon.jpg'); 
             background-size: cover;
             background-position: center;
             z-index: -2;
@@ -52,7 +54,7 @@
             100% { transform: scale(1.2) translate(-20px, -10px); }
         }
 
-        /* 暗色遮罩，让文字更清晰，同时制造“史诗感” */
+        /* 暗色遮罩 */
         .overlay-gradient {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -61,7 +63,7 @@
             z-index: -1;
         }
 
-        /* --- 装饰性粒子 (模拟火星/灰烬) --- */
+        /* --- 装饰性粒子 --- */
         .particle {
             position: absolute;
             background: #ffcc00;
@@ -84,33 +86,7 @@
             filter: drop-shadow(0 0 2px rgba(255,215,0,0.3));
         }
 
-        /* --- 科技/古风结合的边框 --- */
-        .tech-border {
-            position: relative;
-            border: 1px solid rgba(240, 201, 103, 0.3);
-            background: rgba(10, 10, 12, 0.85);
-            backdrop-filter: blur(10px);
-            clip-path: polygon(
-                0 0, 
-                100% 0, 
-                100% calc(100% - 20px), 
-                calc(100% - 20px) 100%, 
-                0 100%
-            ); /* 右下切角 */
-        }
-        
-        /* 边框的高光线条 */
-        .tech-border::after {
-            content: '';
-            position: absolute;
-            bottom: 0; right: 0;
-            width: 20px; height: 2px;
-            background: #f0c967;
-            transform: rotate(-45deg);
-            transform-origin: right bottom;
-        }
-
-        /* --- 按钮样式：国内网游常见的“大按钮” --- */
+        /* --- 按钮样式 --- */
         .btn-main {
             background: linear-gradient(90deg, #8a0000 0%, #b31b1b 50%, #8a0000 100%);
             position: relative;
@@ -164,7 +140,6 @@
         }
         .nav-link:hover::after { width: 100%; }
 
-        /* 右侧下载栏 (类似王者荣耀/原神官网的侧边栏) */
         .side-panel {
             background: linear-gradient(to bottom, rgba(20,20,20,0.95), rgba(10,10,10,0.98));
             border-left: 2px solid #333;
@@ -182,17 +157,23 @@
 
     <!-- 2. 顶部导航栏 -->
     <nav class="fixed top-0 w-full h-20 z-50 bg-gradient-to-b from-black/90 to-transparent flex items-center justify-between px-8 lg:px-16 border-b border-white/10 backdrop-blur-sm">
-        <!-- LOGO区域 -->
-        <div class="flex items-center gap-4">
-            
-            <div class="w-10 h-10 bg-gradient-to-br from-gold-main to-gold-dark flex items-center justify-center border border-white/20 shadow-[0_0_15px_rgba(240,201,103,0.5)]">
-                <span class="font-bold text-black text-xl">王</span>
-            </div>
-            <div class="flex flex-col">
-                <span class="text-xl font-bold tracking-widest text-gold-main" style="font-family: 'SimHei'">王朝模组</span>
-                <span class="text-xs text-gray-400 tracking-[0.2em] uppercase">Ancient Warfare</span>
+        
+        <!-- ================= LOGO 修改区域 ================= -->
+        <!-- 去掉了那个很丑的方块，只保留纯文字，使用了书法字体，并加大了字号 -->
+        <div class="flex flex-col justify-center cursor-default select-none">
+            <a href="#" class="block group">
+                <span class="text-3xl md:text-4xl font-bold tracking-widest text-transparent bg-clip-text bg-gradient-to-b from-[#fff5d6] via-[#f0c967] to-[#b8860b] drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)] group-hover:brightness-125 transition-all" 
+                      style="font-family: 'Ma Shan Zheng', 'STKaiti', 'KaiTi', serif;">
+                    王朝模组
+                </span>
+            </a>
+            <div class="flex items-center gap-2 opacity-70 mt-[-2px]">
+                <div class="h-[1px] flex-1 bg-gradient-to-r from-transparent via-gray-400 to-transparent"></div>
+                <span class="text-[10px] text-gray-400 tracking-[0.4em] uppercase font-sans">Dynasty Mod</span>
+                <div class="h-[1px] flex-1 bg-gradient-to-r from-transparent via-gray-400 to-transparent"></div>
             </div>
         </div>
+        <!-- ================= LOGO 修改结束 ================= -->
 
         <!-- 导航菜单 -->
         <div class="hidden md:flex items-center gap-10 text-sm font-bold uppercase tracking-wider">
@@ -204,7 +185,7 @@
 
         <!-- 语言/登录 -->
         <div class="flex items-center gap-4">
-            <div class="text-xs text-gray-500">VERSION 2.3.1</div>
+            <div class="text-xs text-gray-500 font-mono">VERSION 2.3.1</div>
         </div>
     </nav>
 
@@ -222,7 +203,7 @@
                     <span class="text-gold-main font-bold tracking-[0.3em] text-sm shadow-black drop-shadow-lg">沉浸式历史模拟体验</span>
                 </div>
 
-                <!-- 超大主标题 (使用了图片填充效果或渐变) -->
+                <!-- 超大主标题 -->
                 <h1 class="text-6xl md:text-8xl font-extrabold leading-tight tracking-tighter text-gold-gradient animate-fade-in-up" style="font-family: 'Microsoft YaHei', sans-serif; filter: drop-shadow(0 10px 20px rgba(0,0,0,0.8));">
                     天命<br>
                     <span class="text-white/90 text-5xl md:text-7xl">所归</span>
@@ -234,7 +215,7 @@
                     <span class="text-sm text-gray-400 mt-2 block">Dynasty Mod: The Ultimate Historical Overhaul for WorldBox.</span>
                 </p>
 
-                <!-- 视频播放按钮 (假) -->
+                <!-- 视频播放按钮 -->
                 <div class="flex items-center gap-4 mt-8 cursor-pointer group w-fit">
                     <div class="w-16 h-16 border-2 border-gold-main flex items-center justify-center group-hover:bg-gold-main/20 transition-all">
                         <i class="fas fa-play text-2xl text-gold-main pl-1"></i>
@@ -246,10 +227,8 @@
                 </div>
             </div>
 
-            
+            <!-- 右侧预留 -->
             <div class="lg:col-span-4 hidden lg:flex justify-center items-center relative h-full">
-                <!-- 假装这里有一个霸气的人物立绘 -->
-                <!-- <img src="your-character.png" class="absolute bottom-0 max-h-[90vh] drop-shadow-[0_0_30px_rgba(0,0,0,0.8)] animate-breathe"> -->
             </div>
 
         </div>
@@ -281,7 +260,6 @@
             <!-- 扫码区域 -->
             <div class="flex gap-3 items-center bg-black/40 p-2">
                 <div class="w-16 h-16 bg-white p-1">
-                    <!-- 这里放二维码图片 -->
                     <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://afdian.com/a/chunqiu_worldbox" alt="QR" class="w-full h-full object-cover">
                 </div>
                 <div class="text-xs text-gray-400">
@@ -292,7 +270,7 @@
         </div>
     </div>
 
-    <!-- 移动端底部下载栏 (仅在手机显示) -->
+    <!-- 移动端底部下载栏 -->
     <div class="fixed bottom-0 w-full bg-black/90 border-t border-gold-main p-4 z-50 lg:hidden flex items-center justify-between gap-4 backdrop-blur-md">
         <div class="flex flex-col">
             <span class="text-gold-main font-bold">王朝模组 v2.3.1</span>
@@ -303,18 +281,17 @@
         </a>
     </div>
 
-    <!-- 5. 底部资讯条 (模拟滚动新闻) -->
+    <!-- 5. 底部资讯条 -->
     <div class="absolute bottom-0 left-0 w-full lg:w-[calc(100%-16rem)] h-12 bg-gradient-to-r from-black via-black/80 to-transparent z-30 flex items-center px-8 border-t border-white/5">
         <div class="flex items-center gap-4 text-sm overflow-hidden">
             <span class="text-gold-main font-bold shrink-0"><i class="fas fa-bullhorn mr-2"></i>最新公告:</span>
             <div class="flex gap-8 animate-float" style="animation-duration: 20s; animation-direction: normal;">
                 <span class="text-gray-300 hover:text-white cursor-pointer">[新闻] 2.3.1版本 "天命所归" 正式发布！修复已知BUG。</span>
-                <span class="text-gray-300 hover:text-white cursor-pointer">[活动] 模组摄影大赛开启，赢取定制称号。</span>
+                <span class="text-gray-300 hover:text-white cursor-pointer">[活动] 摄影大赛开启，赢取定制称号。</span>
             </div>
         </div>
     </div>
 
-    <!-- 脚本：生成简单的火星粒子 -->
     <script>
         const particleContainer = document.getElementById('particles');
         const particleCount = 30;
@@ -325,20 +302,16 @@
             p.style.left = Math.random() * 100 + 'vw';
             p.style.animationDuration = (Math.random() * 5 + 5) + 's';
             p.style.animationDelay = (Math.random() * 5) + 's';
-            // 随机大小
             const size = Math.random() * 4 + 1;
             p.style.width = size + 'px';
             p.style.height = size + 'px';
             particleContainer.appendChild(p);
         }
 
-        // 添加交互：鼠标移动时背景轻微移动（视差效果）
         document.addEventListener('mousemove', (e) => {
             const x = e.clientX / window.innerWidth;
             const y = e.clientY / window.innerHeight;
-            
             const bg = document.querySelector('.hero-bg');
-            // 抵消一部分CSS动画
             bg.style.transform = `scale(1.1) translate(${-x * 20}px, ${-y * 20}px)`;
         });
     </script>
